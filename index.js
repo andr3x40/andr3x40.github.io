@@ -1,10 +1,15 @@
-let div;
+let header;
 
 document.addEventListener("DOMContentLoaded", () => {
-    div = document.getElementById("a-div");
+    header = document.getElementById("header");
 })
 
 window.addEventListener("load", () => {
-    console.log("This function is executed once the page is fully loaded");
-    div.innerHTML = "Test";
+    const headerText = "WORK IN PROGRESS";
+    for (let i = 0; i < headerText.length; i++) {
+        setTimeout(function() {
+            s = headerText.substring(0, i + 1);
+            header.innerHTML = s;
+        }, i * 70);
+    }
 });

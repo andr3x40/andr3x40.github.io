@@ -1,3 +1,15 @@
-#a-div {
-    color: blue;
+html {
+    background-color: #000021;
+}
+
+body {
+    font-family: "Space Mono";
+    color: white;
+    padding-left: 25px;
+}
+
+#header {
+    color: rgb(22, 22, 220);
+    font-weight: 900;
+    font-size: 50px;
 }
