@@ -1,15 +1,16 @@
-html {
-    background-color: #000021;
+#page-header {
+    margin-top: 100px;
+    margin-bottom: 40px;
+    top: 80px;
+    width: 100%;
 }
 
-body {
-    font-family: "Space Mono";
-    color: white;
-    padding-left: 25px;
+#main-section {
+    margin: 0px 50px 0px 50px;
 }
 
-#header {
-    color: rgb(22, 22, 220);
-    font-weight: 900;
-    font-size: 50px;
+#page-header h1 {
+    font-size: 48px;
+    margin: 10px;
+    font-style: italic;
 }

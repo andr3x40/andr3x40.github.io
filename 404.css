@@ -1,0 +1,30 @@
+html {
+    background-color: #210000;
+}
+
+#page-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 100px;
+    margin-bottom: 40px;
+    top: 80px;
+    width: 100%;
+    color: rgb(220, 22, 22);
+}
+
+#main-section {
+    margin: 0px 50px 0px 50px;
+}
+
+#page-header h1 {
+    font-size: 64px;
+    margin: 10px;
+    font-style: italic;
+}
+
+#page-header p {
+    font-size: 48px;
+    margin-left: 25px;
+    font-style: italic;
+}

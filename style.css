@@ -1,0 +1,52 @@
+html {
+    background-color: #000021;
+    height: 100%;
+}
+
+body {
+    font-family: "Space Mono";
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#navbar {
+    background-color: rgb(22, 22, 220);
+    display: flex;
+    padding: 10px;
+    gap: 20px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+#footer {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 14px;
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    margin-bottom: 0px;
+    background-color: black;
+}
+
+#navbar a {
+    color: white;
+    text-decoration: none;
+    font-style: italic;
+}
+#navbar a:hover {
+    color: hsl(240, 82%, 90%);
+    text-decoration: none;
+    font-style: italic;
+}
+
+.align-center {
+    text-align: center;
+    justify-content: center;
+}
