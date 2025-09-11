@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+
+$navbar-height: 50px;
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $navbar-height;
+    z-index: 1000;
+}
+
+main {
+    flex: 1;
+    margin-top: $navbar_height;
+    padding: 1rem;
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+app-footer {
+    height: 50px;
+}
