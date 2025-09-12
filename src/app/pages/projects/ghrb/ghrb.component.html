@@ -84,10 +84,11 @@
                             } 
                         </div>
                         <div class="flex flex-row justify-between md:items-center flex-1 gap-6">
-                            <div class="flex flex-col justify-between items-start gap-16">
+                            <div class="flex flex-col justify-between items-start gap-10">
                                 <div>
-                                    <div class="text-lg font-bold text-surface-900 dark:text-surface-0">{{ item.artist }} - {{ item.title }}</div>
-                                    <span class="font-medium text-secondary text-m">{{ item.album }} ({{ item.year }}) - {{ item.genre }}</span>
+                                    <div class="text-lg font-bold text-surface-900 dark:text-surface-0">{{ item.title }}</div>
+                                    <div class="font-medium text-secondary text-m mb-2">{{ item.artist }}</div>
+                                    <div class="font-light text-secondary text-m">{{ item.album }} ({{ item.year }}) - {{ item.genre }}</div>
                                 </div>
                                 <div>
                                     <p-buttongroup>
@@ -100,19 +101,19 @@
                                     </p-buttongroup>
                                 </div>
                             </div>
-                            <div class="flex flex-col md:items-end gap-2 text-m font-bold">
+                            <div class="flex flex-col md:items-end gap-1 text-m font-bold">
                                 @for (variant of orderByDifficulty(item.variants, true); track variant) {
                                     <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
                                     @if (variant.difficulty === 'Easy') {
-                                        <span class="text-sky-300 dark:test-sky-700">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                        <span class="text-sky-600 dark:text-sky-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
                                     } @else if (variant.difficulty === 'Medium') {
-                                        <span class="text-emerald-300 dark:test-emerald-700">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                        <span class="text-emerald-600 dark:text-emerald-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
                                     } @else if (variant.difficulty === 'Hard') {
-                                        <span class="text-amber-300 dark:test-amber-700">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                        <span class="text-amber-600 dark:text-amber-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
                                     } @else if (variant.difficulty === 'Expert') {
-                                        <span class="text-red-300 dark:test-red-700">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                        <span class="text-red-600 dark:text-red-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
                                     } @else {
-                                        <span class="text-surface-300 dark:test-surface-700">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                        <span class="text-surface-600 dark:text-surface-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
                                     }
                                 }
                             </div>

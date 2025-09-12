@@ -17,6 +17,7 @@ export class Chart {
         output.id = chart.id;
         output.title = chart.title;
         output.artist = chart.artist;
+        output.album = chart.album;
         output.year = chart.year;
         output.genre = chart.genre;
         output.releaseDate = chart.releaseDate;
