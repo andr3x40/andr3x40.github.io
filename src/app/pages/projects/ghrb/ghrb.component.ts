@@ -17,7 +17,7 @@ import { IconField } from 'primeng/iconfield';
     selector: 'app-ghrb',
     templateUrl: './ghrb.component.html',
     styleUrl: './ghrb.component.scss',
-    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, InputIcon, IconField],
+    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule],
 })
 export class GhrbComponent {
 
