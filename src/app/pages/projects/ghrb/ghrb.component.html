@@ -7,6 +7,115 @@
     Just another way for me to share the music I like.
 </section>
 <p-divider></p-divider>
-<section class="main-section">
-    insert here the list of charts
-</section>
+<p-dataview #dv [value]="items">
+    <ng-template #list let-items>
+        <div class="grid grid-cols-12 gap-4 grid-nogutter">
+            @for (item of items; track item) {
+                <div class="col-span-6 border-1 border-surface-800 rounded-xl m-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4">
+                        <div class="md:w-40 relative">
+                            @if (item.image === undefined) {
+                                <img
+                                    class="chart-album-art block xl:block mx-auto rounded-border w-full"
+                                    src="../../../../assets/placeholder.jpg"
+                                    [alt]="item.album"
+                                />
+                            } @else {
+                                <img
+                                    class="chart-album-art block xl:block mx-auto rounded-border w-full"
+                                    [src]="item.image"
+                                    [alt]="item.album"
+                                />
+                            }
+                            <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
+                            @if (getAbsoluteDifficulty(item.variants) === 'Beginner') {
+                                <p-tag
+                                    [value]="getAbsoluteDifficulty(item.variants)"
+                                    class="absolute dark:!bg-surface-900 dark:!text-sky-300"
+                                    [style.right.px]="8"
+                                    [style.bottom.px]="4"
+                                />
+                            } @else if (getAbsoluteDifficulty(item.variants) === 'Intermediate') {
+                                <p-tag
+                                    [value]="getAbsoluteDifficulty(item.variants)"
+                                    class="absolute dark:!bg-surface-900 dark:!text-emerald-300"
+                                    [style.right.px]="8"
+                                    [style.bottom.px]="4"
+                                />
+                            } @else if (getAbsoluteDifficulty(item.variants) === 'Advanced') {
+                                <p-tag
+                                    [value]="getAbsoluteDifficulty(item.variants)"
+                                    class="absolute dark:!bg-surface-900 dark:!text-amber-300"
+                                    [style.right.px]="8"
+                                    [style.bottom.px]="4"
+                                />
+                            } @else if (getAbsoluteDifficulty(item.variants) === 'Expert') {
+                                <p-tag
+                                    [value]="getAbsoluteDifficulty(item.variants)"
+                                    class="absolute dark:!bg-surface-900 dark:!text-red-300"
+                                    [style.right.px]="8"
+                                    [style.bottom.px]="4"
+                                />
+                            } @else if (getAbsoluteDifficulty(item.variants) === 'Grandmaster') {
+                                <p-tag
+                                    [value]="getAbsoluteDifficulty(item.variants)"
+                                    class="absolute dark:!bg-surface-900 dark:!text-violet-300"
+                                    [style.right.px]="8"
+                                    [style.bottom.px]="4"
+                                />
+                            } @else if (getAbsoluteDifficulty(item.variants) === 'Super GM') {
+                                <p-tag
+                                    [value]="getAbsoluteDifficulty(item.variants)"
+                                    class="absolute dark:!bg-surface-900 dark:!text-indigo-300"
+                                    [style.right.px]="8"
+                                    [style.bottom.px]="4"
+                                />
+                            } @else if (getAbsoluteDifficulty(item.variants) === 'None') {
+                                <p-tag
+                                    [value]="getAbsoluteDifficulty(item.variants)"
+                                    class="absolute dark:!bg-surface-900 dark:!text-neutral-300"
+                                    [style.right.px]="8"
+                                    [style.bottom.px]="4"
+                                />
+                            } 
+                        </div>
+                        <div class="flex flex-row justify-between md:items-center flex-1 gap-6">
+                            <div class="flex flex-col justify-between items-start gap-10">
+                                <div>
+                                    <div class="text-lg font-bold text-surface-900 dark:text-surface-0">{{ item.artist }} - {{ item.title }}</div>
+                                    <span class="font-medium text-secondary text-m">{{ item.album }} ({{ item.year }}) - {{ item.genre }}</span>
+                                </div>
+                                <div>
+                                    <p-buttongroup>
+                                        <p-button>
+                                            <a href="{{ item.downloadLink }}" class="font-medium">
+                                                Download
+                                            </a>
+                                        </p-button>
+                                        <p-button label="Info" severity="secondary" [outlined]="true"/>
+                                    </p-buttongroup>
+                                </div>
+                            </div>
+                            <div class="flex flex-col md:items-end">
+                                @for (variant of orderByDifficulty(item.variants, true); track variant) {
+                                    <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
+                                    @if (variant.difficulty === 'Easy') {
+                                        <span class="text-m font-medium text-sky-300 dark:test-sky-700">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                    } @else if (variant.difficulty === 'Medium') {
+                                        <span class="text-m font-medium text-emerald-300 dark:test-emerald-700">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                    } @else if (variant.difficulty === 'Hard') {
+                                        <span class="text-m font-medium text-amber-300 dark:test-amber-700">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                    } @else if (variant.difficulty === 'Expert') {
+                                        <span class="text-m font-medium text-red-300 dark:test-red-700">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                    } @else {
+                                        <span class="text-m font-medium text-surface-300 dark:test-surface-700">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </ng-template>
+</p-dataview>

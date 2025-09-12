@@ -27,7 +27,7 @@ export class ProjectsComponent {
             {
                 header: "Project R:\\GHRB",
                 text: `This is not related to coding, but it's a collection of charts for Guitar Hero and Rock Band clone games, hence the name "GHRB".`,
-                link: "projects"
+                link: "ghrb"
             },
             {
                 header: "FNF PoldHub",

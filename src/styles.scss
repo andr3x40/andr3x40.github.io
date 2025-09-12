@@ -1,5 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "tailwindcss";
+@plugin "tailwindcss-primeui";
+
+@theme {
+    --font-sans: "Inter";
+    --font-serif: "Inter";
+    --font-mono: "Space Mono";
+}
+
 $navbar-height: 50px;
 
 html, body {
