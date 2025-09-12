@@ -7,17 +7,33 @@ import { Chart, Variant } from '../../../model/ghrb';
 import { Divider } from "primeng/divider";
 import { SectionTitleComponent } from "../../../fragments/section/section-title/section-title.component";
 import { ButtonGroupModule } from "primeng/buttongroup";
-import { max } from 'rxjs';
+import { SelectButton } from 'primeng/selectbutton';
+import { FormsModule } from '@angular/forms';
+
+import { InputIcon } from 'primeng/inputicon';
+import { IconField } from 'primeng/iconfield';
 
 @Component({
     selector: 'app-ghrb',
     templateUrl: './ghrb.component.html',
     styleUrl: './ghrb.component.scss',
-    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule],
+    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, InputIcon, IconField],
 })
 export class GhrbComponent {
 
     public items!: Chart[]
+    public chartFilter: string = "";
+    public gamemodeFilter: string = "5 Fret Lead Guitar";
+    public gamemodeOptions: any[] = [
+        { label: '5 Fret Lead Guitar', value: '5 Fret Lead Guitar' },
+        { label: '5 Fret Bass Guitar', value: '5 Fret Bass Guitar' },
+        { label: '5 Fret Rhythm Guitar', value: '5 Fret Rhythm Guitar' },
+        { label: '6 Fret Lead Guitar', value: '6 Fret Lead Guitar' },
+        { label: '6 Fret Bass Guitar', value: '6 Fret Bass Guitar' },
+        { label: '6 Fret Rhythm Guitar', value: '6 Fret Rhythm Guitar' },
+        { label: 'Drums', value: 'Drums' },
+        { label: 'Keyboard', value: 'Keyboard' },
+    ];
 
     constructor() { }
 
@@ -63,21 +79,6 @@ export class GhrbComponent {
         ]
     }
 
-    getDifficulty(variant: Variant) {
-        switch (variant.difficulty) {
-            case 'Expert':
-                return 'danger';
-            case 'Hard':
-                return 'warn';
-            case 'Medium':
-                return 'success';
-            case 'Easy':
-                return 'info';
-            default:
-                return null;
-        }
-    }
-
     getMaxDifficulty(variants: Variant[]): number {
         let maxDiff: number = 0;
         for (let variant of variants) {
@@ -99,7 +100,7 @@ export class GhrbComponent {
         } else if (maxDiff >= 13 && maxDiff <= 15) {
             return "Grandmaster"
         } else if (maxDiff >= 16) {
-            return "Super GM";
+            return "Super Grandmaster";
         } else return "None";
     }
 
@@ -119,6 +120,19 @@ export class GhrbComponent {
             let bDiff = this.getDifficultyN(b);
             return decrescent ? aDiff - bDiff : bDiff - aDiff;
         })
+    }
+
+    getFilteredItems(): Chart[] {
+        let output: Chart[] = [];
+        for (let chart of this.items) {
+            let artistTitle: string = chart.artist + " - " + chart.title;
+            if (chart.variants !== undefined && chart.variants.find(x => x.gamemode === this.gamemodeFilter) && artistTitle.toLowerCase().includes(this.chartFilter.toLowerCase())) {
+                let c: Chart = Chart.cloneWithoutVariants(chart)
+                c.variants = chart.variants.filter(x => x.gamemode === this.gamemodeFilter)
+                output.push(c)
+            }
+        }
+        return output;
     }
 
 }

@@ -6,13 +6,13 @@
     <p-divider></p-divider>
     <p-panel>
         <ng-template #header>
-            <div class="panel-header-container">
-                <span class="panel-header">
+            <div>
+                <span class="text-3xl font-black text-blue-400">
                     @if (item.link !== undefined) {
-                        <a [routerLink]="item.link">{{item.header}}</a>
+                        <a class="hover:text-blue-300" [routerLink]="item.link">{{item.header}}</a>
                     }
                     @else if (item.externalLink !== undefined) {
-                        <a href="{{item.externalLink}}">{{item.header}}</a>
+                        <a class="hover:text-blue-300" href="{{item.externalLink}}">{{item.header}}</a>
                     }
                     @else {
                         {{item.header}}
