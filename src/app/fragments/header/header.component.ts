@@ -36,14 +36,14 @@ export class HeaderComponent {
                 items: [
                     {
                         label: 'Flamy',
-                        routerLink: 'flamy'
+                        routerLink: 'projects/flamy'
                     },
                     {
                         label: 'Project R',
                         items: [
                             {
                                 label: 'R:/GHRB',
-                                routerLink: 'pjr/ghrb',
+                                routerLink: 'projects/ghrb',
                             }
                         ]
                     }

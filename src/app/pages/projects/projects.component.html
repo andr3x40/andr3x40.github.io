@@ -1,6 +1,6 @@
 <app-section-title
-    title="andr3x40's Lab"
-    description="A personal website of an Italian guy who likes to create things"
+    title="My Projects"
+    description="Everything I worked on"
 ></app-section-title>
 @for (item of items; track item) {
     <p-divider></p-divider>
@@ -8,11 +8,14 @@
         <ng-template #header>
             <div class="panel-header-container">
                 <span class="panel-header">
-                    @if (item.link === undefined) {
-                        {{item.header}}
+                    @if (item.link !== undefined) {
+                        <a [routerLink]="item.link">{{item.header}}</a>
+                    }
+                    @else if (item.externalLink !== undefined) {
+                        <a href="{{item.externalLink}}">{{item.header}}</a>
                     }
                     @else {
-                        <a [routerLink]="item.link">{{item.header}}</a>
+                        {{item.header}}
                     }
                 </span>
             </div>
