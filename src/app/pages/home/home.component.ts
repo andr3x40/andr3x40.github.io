@@ -1,21 +1,36 @@
 import { Component } from '@angular/core';
-import { SectionTitleComponent } from "../../fragments/section/section-title/section-title.component";
 import { Divider } from 'primeng/divider';
 import { PanelModule } from 'primeng/panel';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { PanelItem } from '../../model/items';
+import { CarouselModule } from 'primeng/carousel';
+import { CardModule } from 'primeng/card';
+import { Button, ButtonModule } from 'primeng/button';
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [SectionTitleComponent, Divider, PanelModule, CommonModule, RouterLink],
+    imports: [Divider, PanelModule, CommonModule, RouterLink, CarouselModule, CardModule, Button, ButtonModule],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 
-    items: PanelItem[] | undefined;
+    items!: any[];
+    
+    splashText!: string;
+    private splashTexts: string[] = [
+       "Yet Another Personal Website",
+       "A website of some dude who likes to create things",
+       "I like Minecraft splashes, how could you tell?",
+       "smots gaming",
+       "Imagine the nerves",
+       "YOUR TAKING TOO LONG",
+       "This is a long splash text I wrote with the only purpose of testing this splash system and to make sure the text is correctly displayed on the website",
+       "me when the me when when the me when the when uhhhhhhhhhhhhhhhhh"
+    ];
+
+    private splashAnimationTimeouts: number[] = [];
 
     constructor(private router: Router) { }
 
@@ -23,22 +38,42 @@ export class HomeComponent {
         this.items = [
             {
                 header: "~$ whoami",
-                text: `I'm a 22 y/o Italian guy who likes to create things. That's how I describe myself in the quickest way possible.
-                This website is a way for me to showcase my projects and hobbies.`
+                link: "whoami"
             },
             {
                 header: "~$ projects",
-                text: `There's some stuff where I'm mediocre, like art, and other stuff where I'm somewhat good, like coding. And there's a good chance a project of mine is related to computers and stuff.
-                (this website is not good because it lacks a proper backend, but let's not talk about that)`,
                 link: "projects"
             },
             {
                 header: "~$ blog",
-                text: `I'm somewhat active on some social media. Mostly on microblogging ones.
-                And since my thoughts are scattered around different platforms, I can easily group them all here.`,
                 link: "blog"
             },
-        ]
+        ];
+        this.loadSplashText();
+    }
+
+    loadSplashText() {
+        // clear the previous timeouts
+        for (let timeout of this.splashAnimationTimeouts) {
+            window.clearTimeout(timeout);
+        }
+        this.splashAnimationTimeouts = [];
+        // get the index of a splash
+        let splashIndex = Math.floor(Math.random() * this.splashTexts.length);
+        // animate the splash text
+        let text = this.splashTexts[splashIndex];
+        for (let i = 0; i < text.length; i++) {
+            this.splashAnimationTimeouts.push(
+                window.setTimeout(() => {
+                    this.splashText = text.substring(0, i + 1) + "_";
+                }, i * 40)
+            );
+        }
+        this.splashAnimationTimeouts.push(
+            window.setTimeout(() => {
+                this.splashText = text;
+            }, (text.length - 1) * 40 + 1)
+        );
     }
 
 }

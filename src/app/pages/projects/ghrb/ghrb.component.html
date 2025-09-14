@@ -1,126 +1,38 @@
 <app-section-title
     title="Project R:\GHRB"
-    description="A collection of charts for Guitar Hero and Rock Band clone games"
+    description="Another way for me to share the music I like"
 ></app-section-title>
-<p-divider></p-divider>
+<p-divider/>
 <section class="main-section">
-    Just another way for me to share the music I like.
+    This project is not related to coding, but to music and videogames. I started doing this in 2020 out of boredom and loved it, so I kept going.<br>
+    Here's quality content for Guitar Hero and Rock Band clone games, such as Clone Hero, YARG or Fret Smasher.
 </section>
 <p-divider></p-divider>
-<div class="card flex justify-between mb-2">
-    <input class="bg-surface-900 border-2 border-surface-800 rounded-lg m-1 px-4 w-1/4" type="text" pInputText [(ngModel)]="chartFilter" placeholder="Search"/>
-    <p-selectbutton [options]="gamemodeOptions" [(ngModel)]="gamemodeFilter" optionLabel="label" optionValue="value" class="bg-surface-900"/>
-</div>
-<p-dataview #dv [value]="getFilteredItems()" [rows]="10" [paginator]="true">
-    <ng-template #list let-items>
-        <div class="grid grid-cols-12 gap-4 grid-nogutter">
-            @for (item of items; track item) {
-                <div class="col-span-6 border-1 border-surface-800 rounded-xl m-3">
-                    <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4">
-                        <div class="md:w-40 relative">
-                            @if (item.image === undefined) {
-                                <img
-                                    class="block xl:block mx-auto rounded-border w-full"
-                                    src="../../../../assets/placeholder.jpg"
-                                    [alt]="item.album"
-                                />
-                            } @else {
-                                <img
-                                    class="block xl:block mx-auto rounded-border w-full"
-                                    [src]="item.image"
-                                    [alt]="item.album"
-                                />
-                            }
-                            <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
-                            @if (getAbsoluteDifficulty(item.variants) === 'Beginner') {
-                                <p-tag
-                                    [value]="getAbsoluteDifficulty(item.variants)"
-                                    class="absolute dark:!bg-surface-900 dark:!text-sky-300"
-                                    [style.right.px]="4"
-                                    [style.bottom.px]="4"
-                                />
-                            } @else if (getAbsoluteDifficulty(item.variants) === 'Intermediate') {
-                                <p-tag
-                                    [value]="getAbsoluteDifficulty(item.variants)"
-                                    class="absolute dark:!bg-surface-900 dark:!text-emerald-300"
-                                    [style.right.px]="4"
-                                    [style.bottom.px]="4"
-                                />
-                            } @else if (getAbsoluteDifficulty(item.variants) === 'Advanced') {
-                                <p-tag
-                                    [value]="getAbsoluteDifficulty(item.variants)"
-                                    class="absolute dark:!bg-surface-900 dark:!text-yellow-300"
-                                    [style.right.px]="4"
-                                    [style.bottom.px]="4"
-                                />
-                            } @else if (getAbsoluteDifficulty(item.variants) === 'Expert') {
-                                <p-tag
-                                    [value]="getAbsoluteDifficulty(item.variants)"
-                                    class="absolute dark:!bg-surface-900 dark:!text-red-300"
-                                    [style.right.px]="4"
-                                    [style.bottom.px]="4"
-                                />
-                            } @else if (getAbsoluteDifficulty(item.variants) === 'Grandmaster') {
-                                <p-tag
-                                    [value]="getAbsoluteDifficulty(item.variants)"
-                                    class="absolute dark:!bg-surface-900 dark:!text-violet-300"
-                                    [style.right.px]="4"
-                                    [style.bottom.px]="4"
-                                />
-                            } @else if (getAbsoluteDifficulty(item.variants) === 'Super Grandmaster') {
-                                <p-tag
-                                    [value]="getAbsoluteDifficulty(item.variants)"
-                                    class="absolute dark:!bg-surface-900 dark:!text-indigo-300"
-                                    [style.right.px]="4"
-                                    [style.bottom.px]="4"
-                                />
-                            } @else if (getAbsoluteDifficulty(item.variants) === 'None') {
-                                <p-tag
-                                    [value]="getAbsoluteDifficulty(item.variants)"
-                                    class="absolute dark:!bg-surface-900 dark:!text-neutral-300"
-                                    [style.right.px]="4"
-                                    [style.bottom.px]="4"
-                                />
-                            } 
-                        </div>
-                        <div class="flex flex-row justify-between md:items-center flex-1 gap-6">
-                            <div class="flex flex-col justify-between items-start gap-10">
-                                <div>
-                                    <div class="text-lg font-bold text-surface-900 dark:text-surface-0">{{ item.title }}</div>
-                                    <div class="font-medium text-secondary text-m mb-2">{{ item.artist }}</div>
-                                    <div class="font-light text-secondary text-m">{{ item.album }} ({{ item.year }}) - {{ item.genre }}</div>
-                                </div>
-                                <div>
-                                    <p-buttongroup>
-                                        <p-button>
-                                            <a href="{{ item.downloadLink }}" class="font-medium">
-                                                Download
-                                            </a>
-                                        </p-button>
-                                        <p-button label="Info" severity="secondary" [outlined]="true"/>
-                                    </p-buttongroup>
-                                </div>
-                            </div>
-                            <div class="flex flex-col md:items-end gap-1 text-m font-bold">
-                                @for (variant of orderByDifficulty(item.variants, true); track variant) {
-                                    <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
-                                    @if (variant.difficulty === 'Easy') {
-                                        <span class="text-sky-600 dark:text-sky-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
-                                    } @else if (variant.difficulty === 'Medium') {
-                                        <span class="text-emerald-600 dark:text-emerald-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
-                                    } @else if (variant.difficulty === 'Hard') {
-                                        <span class="text-amber-600 dark:text-amber-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
-                                    } @else if (variant.difficulty === 'Expert') {
-                                        <span class="text-red-600 dark:text-red-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
-                                    } @else {
-                                        <span class="text-surface-600 dark:text-surface-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
-                                    }
-                                }
-                            </div>
-                        </div>
-                    </div>
+<section class="flex flex-row justify-center gap-4">
+    @for (item of items; track item) {
+        <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+            <ng-template #header>
+                <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+            </ng-template>
+            <ng-template #title>
+                <span class="font-black text-2xl">{{ item.header }}</span>
+            </ng-template>
+            <p class="text">
+                {{ item.text }}
+            </p>
+            <ng-template #footer>
+                <div class="flex gap-4 mt-1">
+                    @if (item.link !== undefined) {
+                        <p-button label="View" class="w-full" styleClass="w-full" [routerLink]="item.link"/>
+                    } @else if (item.externalLink !== undefined) {
+                        <p-button>
+                            <a href="{{ item.externalLink }}" class="w-full">View</a>
+                        </p-button>
+                    } @else {
+                        <p-button label="View" class="w-full" styleClass="w-full" [routerLink]="item.link" disabled/>
+                    }
                 </div>
-            }
-        </div>
-    </ng-template>
-</p-dataview>
+            </ng-template>
+        </p-card>
+    }
+</section>

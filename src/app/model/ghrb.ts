@@ -5,11 +5,14 @@ export class Chart {
     public album?: string;
     public year?: string;
     public genre?: string;
-    public variants?: Variant[];
+    public variants!: Variant[];
     public releaseDate?: string;
-    public downloadLink!: string;
+    public downloadLink?: string;
     public image?: string;
     public source?: string;
+    public description?: string;
+
+    public youtubeLink?: string;
 
     public static cloneWithoutVariants(chart: Chart): Chart {
         let output: Chart = new Chart();
@@ -24,6 +27,8 @@ export class Chart {
         output.downloadLink = chart.downloadLink;
         output.image = chart.image;
         output.source = chart.source;
+        output.description = chart.description;
+        output.youtubeLink = chart.youtubeLink;
 
         return output;
     }

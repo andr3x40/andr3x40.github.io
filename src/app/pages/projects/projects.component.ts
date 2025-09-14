@@ -13,7 +13,7 @@ import { PanelItem } from '../../model/items';
 })
 export class ProjectsComponent {
 
-  items: PanelItem[] | undefined;
+    items: PanelItem[] | undefined;
 
     constructor(private router: Router) { }
 

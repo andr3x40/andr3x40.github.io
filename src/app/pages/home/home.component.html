@@ -1,24 +1,22 @@
-<app-section-title
-    title="andr3x40's Lab"
-    description="A personal website of an Italian guy who likes to create things"
-></app-section-title>
-@for (item of items; track item) {
-    <p-divider></p-divider>
-    <p-panel>
-        <ng-template #header>
-            <div>
-                <span class="text-3xl font-black text-blue-400">
-                    @if (item.link === undefined) {
-                        {{item.header}}
-                    }
-                    @else {
-                        <a class="hover:text-blue-300" [routerLink]="item.link">{{item.header}}</a>
-                    }
-                </span>
-            </div>
-        </ng-template>
-        <p class="m-0 panel-text">
-            {{item.text}}
-        </p>
-    </p-panel>
-}
+<div class="main-container justify-center">
+    <div class="flex flex-row items-center gap-2 h-60 mt-60 mb-4">
+        <h1 class="text-6xl font-black w-1/2 text-right font-mono">
+            andr3x40's Lab
+        </h1>
+        <p-divider layout="vertical"></p-divider>
+        <div class="w-1/2">
+            <h2 class="splash-text text-xl font-medium text-left font-mono pr-32" (click)="loadSplashText()">
+                {{ splashText }}
+            </h2>
+        </div>
+    </div>
+    <div class="flex flex-row justify-center gap-2 px-64">
+        @for (item of items; track item.header) {
+            <p-button [rounded]="true" [routerLink]="item.link" variant="outlined">
+                <div class="w-60 font-black text-2xl p-2 font-mono">
+                    {{ item.header }}
+                </div>
+            </p-button>
+        }
+    </div>
+</div>
