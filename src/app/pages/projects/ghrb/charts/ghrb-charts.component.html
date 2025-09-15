@@ -107,13 +107,13 @@
                             <div class="flex flex-col md:items-end gap-1 text-m font-bold">
                                 @for (variant of orderByDifficulty(item.variants, true); track variant) {
                                     <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
-                                    @if (variant.difficulty === 'Easy') {
+                                    @if (variant.difficultyCode === 1) {
                                         <span class="text-sky-600 dark:text-sky-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
-                                    } @else if (variant.difficulty === 'Medium') {
+                                    } @else if (variant.difficultyCode === 2) {
                                         <span class="text-emerald-600 dark:text-emerald-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
-                                    } @else if (variant.difficulty === 'Hard') {
+                                    } @else if (variant.difficultyCode === 3) {
                                         <span class="text-amber-600 dark:text-amber-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
-                                    } @else if (variant.difficulty === 'Expert') {
+                                    } @else if (variant.difficultyCode === 4) {
                                         <span class="text-red-600 dark:text-red-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
                                     } @else {
                                         <span class="text-surface-600 dark:text-surface-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
@@ -190,16 +190,16 @@
                         </div>
                     </div>
                     <p-divider layout="vertical" class="h-30"/>
-                    <div class="flex flex-col items-start font-light w-1/2">
+                    <div class="flex flex-col items-start font-medium w-1/2">
                         @for (variant of sameGamemodeVariants.variants; track variant) {
                         <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
-                            @if (variant.difficulty === 'Easy') {
+                            @if (variant.difficultyCode === 1) {
                                 <span class="text-sky-600 dark:text-sky-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
-                            } @else if (variant.difficulty === 'Medium') {
+                            } @else if (variant.difficultyCode === 2) {
                                 <span class="text-emerald-600 dark:text-emerald-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
-                            } @else if (variant.difficulty === 'Hard') {
+                            } @else if (variant.difficultyCode === 3) {
                                 <span class="text-amber-600 dark:text-amber-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
-                            } @else if (variant.difficulty === 'Expert') {
+                            } @else if (variant.difficultyCode === 4) {
                                 <span class="text-red-600 dark:text-red-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
                             } @else {
                                 <span class="text-surface-600 dark:text-surface-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
