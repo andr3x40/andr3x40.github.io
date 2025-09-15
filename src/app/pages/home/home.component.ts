@@ -30,15 +30,26 @@ export class HomeComponent {
     
     splashText!: string;
     private splashTexts: string[] = [
-       "Yet Another Personal Website",
-       "A website of some dude who likes to create things",
-       "I like Minecraft splashes, how could you tell?",
-       "smots gaming",
-       "Imagine the nerves...",
-       "YOUR TAKING TOO LONG",
-       "This is a long splash text I wrote with the only purpose of testing this splash system and to make sure the text is correctly displayed on the website",
-       "me when the me when when the me when the when uhhhhhhhhhhhhhhhhh",
-       "SHAW!"
+        "Yet Another Personal Website",
+        "A website of some dude who likes to create things",
+        "I like Minecraft splashes, how could you tell?",
+        "Slow ride, take it easy",
+        "Imagine the nerves...",
+        "smots gaming",
+        "Be proud of your death count!",
+        "YOUR TAKING TOO LONG",
+        "He's groovy and NEVER glooby!",
+        "Despite everything, it's still you.",
+        "This is a long splash text I wrote with the only purpose of testing this splash system and to make sure the text is correctly displayed on the website",
+        "me when the me when when the me when the when uhhhhhhhhhhhhhhhhh",
+        "SHAW!",
+        "oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah",
+        "g",
+        "Do you have any games on your phone?",
+        "norris sc*pato",
+        "Must be the water.",
+        "Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy?-",
+        "Crazy? I was crazy once. They put me in a club. A stripped club. In the stripped club. Straight up \"jorking it\". And by \"it\", haha, well. Let's justr say. My Vaporeon. Vaporeon? Did you know that in terms of-"
     ];
 
     private splashAnimationTimeouts: number[] = [];
