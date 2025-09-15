@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 @plugin "tailwindcss-primeui";
+@import "primeicons/primeicons.css";
 
 @theme {
     --font-sans: "Inter";

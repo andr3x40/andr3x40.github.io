@@ -7,16 +7,26 @@ import { CarouselModule } from 'primeng/carousel';
 import { CardModule } from 'primeng/card';
 import { Button, ButtonModule } from 'primeng/button';
 
+import { SiThreadsIcon, SiInstagramIcon, SiGithubIcon, SiBlueskyIcon } from '@semantic-icons/simple-icons';
+import { TooltipModule } from 'primeng/tooltip';
+
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [Divider, PanelModule, CommonModule, RouterLink, CarouselModule, CardModule, Button, ButtonModule],
+    imports: [Divider, PanelModule, CommonModule, RouterLink, CarouselModule, CardModule, Button, ButtonModule, SiThreadsIcon, SiInstagramIcon, SiGithubIcon, SiBlueskyIcon, TooltipModule],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 
     items!: any[];
+    links!: any[];
+
+    iconMap: any = {
+        threads: SiThreadsIcon,
+        github: SiGithubIcon,
+        instagram: SiInstagramIcon
+    }
     
     splashText!: string;
     private splashTexts: string[] = [
@@ -24,10 +34,11 @@ export class HomeComponent {
        "A website of some dude who likes to create things",
        "I like Minecraft splashes, how could you tell?",
        "smots gaming",
-       "Imagine the nerves",
+       "Imagine the nerves...",
        "YOUR TAKING TOO LONG",
        "This is a long splash text I wrote with the only purpose of testing this splash system and to make sure the text is correctly displayed on the website",
-       "me when the me when when the me when the when uhhhhhhhhhhhhhhhhh"
+       "me when the me when when the me when the when uhhhhhhhhhhhhhhhhh",
+       "SHAW!"
     ];
 
     private splashAnimationTimeouts: number[] = [];
@@ -49,6 +60,16 @@ export class HomeComponent {
                 link: "blog"
             },
         ];
+        this.links = [
+            {
+                icon: "threads",
+                url: "https://www.threads.com/@andr3x40",
+            },
+            {
+                icon: "bluesky",
+                url: "https://bsky.app/profile/andr3x40.bsky.social",
+            }
+        ]
         this.loadSplashText();
     }
 

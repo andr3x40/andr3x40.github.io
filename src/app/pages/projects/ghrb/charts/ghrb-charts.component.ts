@@ -36,6 +36,37 @@ export class GhrbChartsComponent {
         { label: 'Keyboard', value: 'Keyboard' },
     ];
 
+    public absoluteGamemodes: AbsoluteDifficulty[] = [
+        {
+            name: "None",
+            tip: "No challenge involved. It's a freebie."
+        },
+        {
+            name: "Beginner",
+            tip: "Simple patterns, simple rhythm. Recommended for new players."
+        },
+        {
+            name: "Intermediate",
+            tip: "Typical rhythms, but patterns that can be tricky. A challenge for new players who want to step up their game."
+        },
+        {
+            name: "Advanced",
+            tip: "Fast and tricky. Suited best for seasoned players."
+        },
+        {
+            name: "Expert",
+            tip: "Crazy fast patterns and tricky rhythms. A proper challenge for expert players."
+        },
+        {
+            name: "Grandmaster",
+            tip: "Insanely fast, technical patterns. For who has mastered the game."
+        },
+        {
+            name: "Super Grandmaster",
+            tip: "Calling these insane is an understatement. Not recommended for anybody other than top players."
+        }
+    ]
+
     public standardDifficulties: any[] = ["Easy", "Medium", "Hard", "Expert"];
 
     public infoDialogVisible: boolean = false;
@@ -63,24 +94,28 @@ export class GhrbChartsComponent {
                     {
                         charter: "andr3x40",
                         difficulty: "Expert",
+                        difficultyCode: 4,
                         intensity: 5,
                         gamemode: "5 Fret Lead Guitar"
                     },
                     {
                         charter: "andr3x40",
                         difficulty: "Hard",
+                        difficultyCode: 3,
                         intensity: 3,
                         gamemode: "5 Fret Lead Guitar"
                     },
                     {
                         charter: "andr3x40",
                         difficulty: "Medium",
+                        difficultyCode: 2,
                         intensity: 2,
                         gamemode: "5 Fret Lead Guitar"
                     },
                     {
                         charter: "andr3x40",
                         difficulty: "Easy",
+                        difficultyCode: 1,
                         intensity: 1,
                         gamemode: "5 Fret Lead Guitar"
                     }
@@ -97,31 +132,29 @@ export class GhrbChartsComponent {
                 variants: [
                     {
                         charter: "andr3x40",
-                        difficulty: "Expert+",
-                        intensity: 14,
-                        gamemode: "5 Fret Lead Guitar"
-                    },
-                    {
-                        charter: "andr3x40",
                         difficulty: "Expert",
+                        difficultyCode: 4,
                         intensity: 11,
                         gamemode: "5 Fret Lead Guitar"
                     },
                     {
                         charter: "andr3x40",
                         difficulty: "Hard",
+                        difficultyCode: 3,
                         intensity: 9,
                         gamemode: "5 Fret Lead Guitar"
                     },
                     {
                         charter: "andr3x40",
                         difficulty: "Medium",
+                        difficultyCode: 2,
                         intensity: 7,
                         gamemode: "5 Fret Lead Guitar"
                     },
                     {
                         charter: "andr3x40",
                         difficulty: "Easy",
+                        difficultyCode: 1,
                         intensity: 4,
                         gamemode: "5 Fret Lead Guitar"
                     }
@@ -129,33 +162,73 @@ export class GhrbChartsComponent {
             },
             {
                 id: 3,
-                title: "Test Chart 3",
-                artist: "Test",
-                album: "Test",
-                year: "2025",
-                genre: "Test",
+                title: "Sottosegretari alla Presidenza della Repubblica del True Metal",
+                artist: "Nanowar of Steel ft. Gli Atroci",
+                album: "Sottosegretari alla Presidenza della Repubblica del True Metal",
+                year: "2021",
+                genre: "Power Metal",
+                description: `This title is so long it goes off screen in Clone Hero.`,
                 variants: [
                     {
                         charter: "andr3x40",
                         difficulty: "Expert",
-                        intensity: 14,
+                        difficultyCode: 4,
+                        intensity: 9,
                         gamemode: "5 Fret Lead Guitar"
+                    },
+                    {
+                        charter: "andr3x40",
+                        difficulty: "Expert",
+                        difficultyCode: 4,
+                        intensity: 9,
+                        gamemode: "6 Fret Lead Guitar"
                     }
                 ]
             },
             {
                 id: 4,
-                title: "Test Chart 4",
-                artist: "Test",
-                album: "Test",
-                year: "2025",
-                genre: "Test",
+                title: "Parallel Universe Shifter",
+                artist: "Camellia",
+                album: "Parallel Universe Shifter",
+                year: "2023",
+                genre: "Full Flavor",
+                source: "CEL3RITAS",
+                description: `This song was made as the Grand Finals Tiebreaker for the 2023 osu!mania 4K World Cup. Its map (ranked, Expert+) is currently rated at around 8.5 Stars, but other ranked Expert+ charts out there reach a difficulty of 9.7 Stars. All I can say is, this chart is probably 50 times harder than GHX's Through the Fire and Flames, while having only 4436 notes. Good luck.`,
                 variants: [
                     {
                         charter: "andr3x40",
                         difficulty: "Expert",
-                        intensity: 1,
+                        difficultyCode: 4,
+                        intensity: 16,
                         gamemode: "5 Fret Lead Guitar"
+                    },
+                    {
+                        charter: "andr3x40",
+                        difficulty: "Hard",
+                        difficultyCode: 3,
+                        intensity: 12,
+                        gamemode: "5 Fret Lead Guitar"
+                    },
+                    {
+                        charter: "andr3x40",
+                        difficulty: "Medium",
+                        difficultyCode: 2,
+                        intensity: 8,
+                        gamemode: "5 Fret Lead Guitar"
+                    },
+                    {
+                        charter: "andr3x40",
+                        difficulty: "Easy",
+                        difficultyCode: 1,
+                        intensity: 5,
+                        gamemode: "5 Fret Lead Guitar"
+                    },
+                    {
+                        charter: "andr3x40",
+                        difficulty: "Expert+",
+                        difficultyCode: 4,
+                        intensity: 19,
+                        gamemode: "5 Fret Rhythm Guitar"
                     }
                 ]
             },
@@ -170,6 +243,7 @@ export class GhrbChartsComponent {
                     {
                         charter: "andr3x40",
                         difficulty: "Expert",
+                        difficultyCode: 4,
                         intensity: 1,
                         gamemode: "5 Fret Lead Guitar"
                     }
@@ -186,6 +260,7 @@ export class GhrbChartsComponent {
                     {
                         charter: "andr3x40",
                         difficulty: "Expert",
+                        difficultyCode: 4,
                         intensity: 1,
                         gamemode: "5 Fret Lead Guitar"
                     }
@@ -202,6 +277,7 @@ export class GhrbChartsComponent {
                     {
                         charter: "andr3x40",
                         difficulty: "Expert",
+                        difficultyCode: 4,
                         intensity: 1,
                         gamemode: "5 Fret Lead Guitar"
                     }
@@ -218,6 +294,7 @@ export class GhrbChartsComponent {
                     {
                         charter: "andr3x40",
                         difficulty: "Expert",
+                        difficultyCode: 4,
                         intensity: 1,
                         gamemode: "5 Fret Lead Guitar"
                     }
@@ -234,6 +311,7 @@ export class GhrbChartsComponent {
                     {
                         charter: "andr3x40",
                         difficulty: "Expert",
+                        difficultyCode: 4,
                         intensity: 1,
                         gamemode: "5 Fret Lead Guitar"
                     }
@@ -250,6 +328,7 @@ export class GhrbChartsComponent {
                     {
                         charter: "andr3x40",
                         difficulty: "Expert",
+                        difficultyCode: 4,
                         intensity: 1,
                         gamemode: "5 Fret Lead Guitar"
                     }
@@ -266,6 +345,7 @@ export class GhrbChartsComponent {
                     {
                         charter: "andr3x40",
                         difficulty: "Expert",
+                        difficultyCode: 4,
                         intensity: 1,
                         gamemode: "5 Fret Lead Guitar"
                     }
@@ -282,6 +362,7 @@ export class GhrbChartsComponent {
                     {
                         charter: "andr3x40",
                         difficulty: "Expert",
+                        difficultyCode: 4,
                         intensity: 1,
                         gamemode: "5 Fret Lead Guitar"
                     }
@@ -301,44 +382,36 @@ export class GhrbChartsComponent {
     getMaxDifficulty(variants: Variant[]): number {
         let maxDiff: number = 0;
         for (let variant of variants) {
-            if (this.standardDifficulties.includes(variant.difficulty)) {
-                maxDiff = Math.max(maxDiff, variant.intensity === undefined ? 0 : variant.intensity);
-            }
+            maxDiff = Math.max(maxDiff, variant.intensity === undefined ? 0 : variant.intensity);
         }
         return maxDiff;
     }
 
-    getAbsoluteDifficulty(variants: Variant[]): string {
+    getAbsoluteDifficulty(variants: Variant[]): AbsoluteDifficulty {
         let maxDiff: number = this.getMaxDifficulty(variants);
+        let output: AbsoluteDifficulty | undefined;
         if (maxDiff >= 1 && maxDiff <= 3) {
-            return "Beginner";
+            output = this.absoluteGamemodes.find(x => x.name === "Beginner");
         } else if (maxDiff >= 4 && maxDiff <= 6) {
-            return "Intermediate";
+            output = this.absoluteGamemodes.find(x => x.name === "Intermediate");
         } else if (maxDiff >= 7 && maxDiff <= 9) {
-            return "Advanced";
+            output = this.absoluteGamemodes.find(x => x.name === "Advanced");
         } else if (maxDiff >= 10 && maxDiff <= 12) {
-            return "Expert";
+            output = this.absoluteGamemodes.find(x => x.name === "Expert");
         } else if (maxDiff >= 13 && maxDiff <= 15) {
-            return "Grandmaster"
+            output = this.absoluteGamemodes.find(x => x.name === "Grandmaster");
         } else if (maxDiff >= 16) {
-            return "Super Grandmaster";
-        } else return "None";
-    }
-
-    private getDifficultyN(variant: Variant): number {
-        switch (variant.difficulty) {
-            case 'Easy': return 1;
-            case 'Medium': return 2;
-            case 'Hard': return 3;
-            case 'Expert': return 4;
-            default: return 5;
+            output = this.absoluteGamemodes.find(x => x.name === "Super Grandmaster");
+        } else {
+            output = this.absoluteGamemodes.find(x => x.name === "None");
         }
+        return output !== undefined ? output : {name: "Undefined", tip: "Undefined"}
     }
 
     orderByDifficulty(variants: Variant[], decrescent: boolean) {
         return variants.sort((a, b) => {
-            let aDiff = this.getDifficultyN(a);
-            let bDiff = this.getDifficultyN(b);
+            let aDiff = a.difficultyCode;
+            let bDiff = b.difficultyCode;
             return decrescent ? aDiff - bDiff : bDiff - aDiff;
         })
     }
@@ -405,6 +478,13 @@ class GamemodeVariantList {
     get length() {
         return this.variants.length;
     }
+
+}
+
+class AbsoluteDifficulty {
+
+    public name!: string;
+    public tip!: string;
 
 }
 

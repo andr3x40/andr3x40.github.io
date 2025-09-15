@@ -5,6 +5,7 @@ import { FlamyComponent } from './pages/projects/flamy/flamy.component';
 import { GhrbChartsComponent } from './pages/projects/ghrb/charts/ghrb-charts.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { GhrbComponent } from './pages/projects/ghrb/ghrb.component';
+import { WhoamiComponent } from './pages/whoami/whoami.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -13,4 +14,5 @@ export const routes: Routes = [
     {path: 'projects/flamy', component: FlamyComponent},
     {path: 'projects/ghrb', component: GhrbComponent},
     {path: 'projects/ghrb/charts', component: GhrbChartsComponent},
+    {path: 'whoami', component: WhoamiComponent}
 ];

@@ -5,12 +5,12 @@
         </h1>
         <p-divider layout="vertical"></p-divider>
         <div class="w-1/2">
-            <h2 class="splash-text text-xl font-medium text-left font-mono pr-32" (click)="loadSplashText()">
+            <h2 class="splash-text text-xl font-medium text-left font-mono pr-32" (click)="loadSplashText()" pTooltip="Click me!" tooltipPosition="left">
                 {{ splashText }}
             </h2>
         </div>
     </div>
-    <div class="flex flex-row justify-center gap-2 px-64">
+    <div class="flex flex-row justify-center gap-2 px-64 mb-4">
         @for (item of items; track item.header) {
             <p-button [rounded]="true" [routerLink]="item.link" variant="outlined">
                 <div class="w-60 font-black text-2xl p-2 font-mono">
@@ -19,4 +19,27 @@
             </p-button>
         }
     </div>
+    <div class="flex flex-row justify-center gap-2 px-64">
+        <a href="https://www.threads.com/@andr3x40">
+            <p-button [rounded]="true" [outlined]="true">
+                <svg class="size-6 fill-[var(--p-primary-color)]" si-threads-icon></svg>
+            </p-button>
+        </a>
+        <a href="https://bsky.app/profile/andr3x40.bsky.social">
+            <p-button [rounded]="true" [outlined]="true">
+                <svg class="size-6 fill-[var(--p-primary-color)]" si-bluesky-icon></svg>
+            </p-button>
+        </a>
+        <a href="https://instagram.com/andr3x40">
+            <p-button [rounded]="true" [outlined]="true">
+                <svg class="size-6 fill-[var(--p-primary-color)]" si-instagram-icon></svg>
+            </p-button>
+        </a>
+        <a href="https://github.com/andr3x40">
+            <p-button [rounded]="true" [outlined]="true">
+                <svg class="size-6 fill-[var(--p-primary-color)]" si-github-icon></svg>
+            </p-button>
+        </a>
+    </div>
 </div>
+

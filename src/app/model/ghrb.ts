@@ -46,4 +46,5 @@ export class Variant {
     public gamemode?: string;
     public difficulty?: string;
     public intensity?: number;
+    public difficultyCode!: number;
 }

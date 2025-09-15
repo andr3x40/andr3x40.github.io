@@ -2,26 +2,41 @@
     title="My Projects"
     description="Everything I'm working or have worked on"
 ></app-section-title>
-@for (item of items; track item) {
-    <p-divider></p-divider>
-    <p-panel>
-        <ng-template #header>
-            <div>
-                <span class="text-3xl font-black text-blue-400">
-                    @if (item.link !== undefined) {
-                        <a class="hover:text-blue-300" [routerLink]="item.link">{{item.header}}</a>
-                    }
-                    @else if (item.externalLink !== undefined) {
-                        <a class="hover:text-blue-300" href="{{item.externalLink}}">{{item.header}}</a>
-                    }
-                    @else {
-                        {{item.header}}
-                    }
-                </span>
-            </div>
-        </ng-template>
-        <p class="m-0 panel-text">
-            {{item.text}}
-        </p>
-    </p-panel>
-}
+<p-divider></p-divider>
+<div class="flex flex-col px-96 gap-3">
+    @for (item of items; track item) {
+        @if (item.link !== undefined) {
+            <a [routerLink]="item.link">
+                <p-card class="border-2 border-surface-900 hover:border-surface-600">
+                    <ng-template #title>
+                        <span class="font-black text-2xl">{{ item.header }}</span>
+                    </ng-template>
+                    <p class="panel-text">
+                        {{ item.text }}
+                    </p>
+                </p-card>
+            </a>
+        } @else if (item.externalLink !== undefined) {
+            <a [href]="item.externalLink">
+                <p-card class="border-2 border-surface-900 hover:border-surface-600">
+                    <ng-template #title>
+                        <span class="font-black text-2xl">{{ item.header }}</span>
+                    </ng-template>
+                    <p class="panel-text">
+                        {{ item.text }}
+                    </p>
+                </p-card>
+            </a>
+        } @else {
+            <p-card class="border-2 border-surface-900">
+                <ng-template #title>
+                    <span class="font-black text-2xl">{{ item.header }}</span>
+                </ng-template>
+                <p class="panel-text">
+                    {{ item.text }}
+                </p>
+            </p-card>
+        }
+    }
+</div>
+

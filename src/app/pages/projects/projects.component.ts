@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { SectionTitleComponent } from "../../fragments/section/section-title/section-title.component";
 import { Divider } from "primeng/divider";
-import { Panel } from "primeng/panel";
 import { Router, RouterLink } from '@angular/router';
 import { PanelItem } from '../../model/items';
+import { Card } from "primeng/card";
 
 @Component({
   selector: 'app-projects',
-  imports: [SectionTitleComponent, Divider, Panel, RouterLink],
+  imports: [SectionTitleComponent, Divider, RouterLink, Card],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
 })
