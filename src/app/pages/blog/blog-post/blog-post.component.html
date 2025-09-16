@@ -1,0 +1,23 @@
+<div class="flex flex-col m-0 px-96 mt-32">
+    <h2 class="text-4xl font-black">{{ this.post.title }}</h2>
+    <div class="flex items-center gap-3 my-2">
+        <div class="flex items-center gap-2">
+            <p-avatar image="../../assets/mylogo.png" shape="circle" />
+            <span class="font-bold">{{ this.post.author }}</span>
+        </div>
+        <span class="font-light text-surface-400 pr-1" [pTooltip]="dateTooltip" tooltipPosition="right">{{ post.getTimeElapsed() }}</span>
+        <ng-template #dateTooltip>
+            <span class="text-small">{{ post.getFormattedTime() }}</span>
+        </ng-template>
+        @for (tag of post.tags; track tag) {
+            <p-tag class="text-xs" value="{{ tag }}" [rounded]="true"/>
+        }
+    </div>
+    <p class="m-0 my-8">
+        {{ post.content }}
+    </p>
+    <p-divider/>
+    <div class="flex gap-2 justify-between text-surface-600 text-xs">
+        mhhh... what to put here...
+    </div>
+</div>

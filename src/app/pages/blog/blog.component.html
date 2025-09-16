@@ -1,8 +1,45 @@
 <app-section-title
     title="The Blog"
-    description="or rather a crossfeed of all my socials because this website has no backend"
+    description="Welcome to my very serious place where I get very serious"
 ></app-section-title>
 <p-divider></p-divider>
 <section class="main-section">
-    I need to get the feed here
+    I had to create a place where to write a lot, and I needed a blog for that. Luckily, this website is multipurpose.
 </section>
+<p-divider></p-divider>
+<div class="flex flex-col justify-center px-64 gap-4">
+    @for (post of posts; track post.id) {
+        <p-panel [dt]="panelStyle">
+            <ng-template #header>
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-2">
+                        <p-avatar image="../../assets/mylogo.png" shape="circle" />
+                        <span class="font-bold">{{ post.author }}</span>
+                    </div>
+                    <span class="font-light text-surface-400 pr-1" [pTooltip]="dateTooltip" tooltipPosition="right">{{ post.getTimeElapsed() }}</span>
+                    <ng-template #dateTooltip>
+                        <span class="text-small">{{ post.getFormattedTime() }}</span>
+                    </ng-template>
+                </div>
+            </ng-template>
+            <div class="flex flex-col m-0 gap-3">
+                <h2 class="text-xl font-bold">{{ post.title }}</h2>
+                <p class="m-0">
+                    {{ post.content }}
+                </p>
+            </div>
+            <ng-template #footer>
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center gap-2">
+                        <p-button icon="pi pi-arrow-circle-right" rounded text label="Read more" [routerLink]="post.id.toString()"></p-button>
+                    </div>
+                    <div class="flex gap-2">
+                        @for (tag of post.tags; track tag) {
+                            <p-tag class="text-xs" value="{{ tag }}" [rounded]="true"/>
+                        }
+                    </div>
+                </div>
+            </ng-template>
+        </p-panel>
+    }
+</div>

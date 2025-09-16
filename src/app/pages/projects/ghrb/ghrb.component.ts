@@ -27,14 +27,11 @@ export class GhrbComponent {
             },
             {
                 header: "Bundles",
-                text: `If you don't want to look for specific charts, try downloading a bunch of them at once.`,
-                link: "bundles"
+                text: `If you don't want to look for specific charts, try downloading a bunch of them at once.`
             },
             {
                 header: "Setlists",
-                text: `Like bundles, but more organized.
-                Charts are divided in tiers, based on their difficulty or theme.`,
-                link: "setlists"
+                text: `Groups of charts divided in tiers, based on their difficulty or theme.`
             }
         ]
     }

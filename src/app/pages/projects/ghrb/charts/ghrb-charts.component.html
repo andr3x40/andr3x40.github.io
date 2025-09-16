@@ -10,11 +10,11 @@
 </div>
 <!-- dataview -->
 <div class="px-64">
-    <p-dataview #dv [value]="getFilteredItems()" [rows]="10" [paginator]="true">
+    <p-dataview #dv [value]="getFilteredItems()" [rows]="10" [paginator]="true" [dt]="dataviewStyle">
         <ng-template #list let-items>
             <div class="grid grid-cols-12 grid-nogutter">
                 @for (item of items; track item.id) {
-                    <div class="col-span-12 border-1 border-surface-800 rounded-xl m-1">
+                    <div class="col-span-12 border-1 border-surface-800 bg-surface-900 rounded-xl m-1">
                         <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4">
                             <div class="md:w-40 relative">
                                 @if (item.image === undefined) {

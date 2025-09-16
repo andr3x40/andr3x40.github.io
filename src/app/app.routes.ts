@@ -6,10 +6,12 @@ import { GhrbChartsComponent } from './pages/projects/ghrb/charts/ghrb-charts.co
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { GhrbComponent } from './pages/projects/ghrb/ghrb.component';
 import { WhoamiComponent } from './pages/whoami/whoami.component';
+import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'blog', component: BlogComponent},
+    {path: 'blog/:id', component: BlogPostComponent},
     {path: 'projects', component: ProjectsComponent},
     {path: 'projects/flamy', component: FlamyComponent},
     {path: 'projects/ghrb', component: GhrbComponent},

@@ -24,12 +24,8 @@
                 <div class="flex gap-4 mt-1">
                     @if (item.link !== undefined) {
                         <p-button label="View" class="w-full" styleClass="w-full" [routerLink]="item.link"/>
-                    } @else if (item.externalLink !== undefined) {
-                        <p-button>
-                            <a href="{{ item.externalLink }}" class="w-full">View</a>
-                        </p-button>
                     } @else {
-                        <p-button label="View" class="w-full" styleClass="w-full" [routerLink]="item.link" disabled/>
+                        <p-button label="WIP" severity="secondary" class="w-full" styleClass="w-full" [disabled]="true"/>
                     }
                 </div>
             </ng-template>

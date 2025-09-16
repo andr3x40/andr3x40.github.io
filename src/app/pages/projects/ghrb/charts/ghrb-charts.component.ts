@@ -12,14 +12,32 @@ import { FormsModule } from '@angular/forms';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { DialogModule, Dialog } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
     selector: 'app-ghrb-charts',
     templateUrl: './ghrb-charts.component.html',
     styleUrl: './ghrb-charts.component.scss',
-    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, ToggleButtonModule, DialogModule, Dialog, TooltipModule],
+    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, ToggleButtonModule, DialogModule, Dialog, TooltipModule, PaginatorModule],
 })
 export class GhrbChartsComponent {
+
+    public dataviewStyle = {
+        dark: {
+            root: {
+                background: '{surface.950}',
+            },
+            header: {
+                background: '{surface.950}',
+            },
+            content: {
+                background: '{surface.950}',
+            },
+            footer: {
+                background: '{surface.950}',
+            }
+        }
+    }
 
     public items!: Chart[]
     public chartFilter: string = "";
