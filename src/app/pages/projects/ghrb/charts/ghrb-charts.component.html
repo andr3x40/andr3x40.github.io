@@ -10,7 +10,7 @@
 </div>
 <!-- dataview -->
 <div class="px-64">
-    <p-dataview #dv [value]="getFilteredItems()" [rows]="10" [paginator]="true" [dt]="dataviewStyle">
+    <p-dataview #dv [value]="getFilteredItems()" [rows]="10" [paginator]="true">
         <ng-template #list let-items>
             <div class="grid grid-cols-12 grid-nogutter">
                 @for (item of items; track item.id) {
@@ -165,7 +165,8 @@
                             {{ sameGamemodeVariants.gamemode }}
                         </p>
                         <div class="flex flex-row items-center gap-2">
-                            <span class="pi pi-question-circle" style="font-size: 0.85rem; color: var(--p-surface-500)" [pTooltip]="gamemodeTooltip" tooltipPosition="left"></span>
+                            <span class="pi pi-question-circle" style="font-size: 0.85rem; color: var(--p-surface-500)"
+                            [pTooltip]="gamemodeTooltip" tooltipPosition="left"></span>
                             <ng-template #gamemodeTooltip>
                                 <div class="w-full flex flex-col items-center text-sm">
                                     <span>{{ getAbsoluteDifficulty(sameGamemodeVariants.variants).tip }}</span>

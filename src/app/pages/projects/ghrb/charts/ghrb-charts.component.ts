@@ -22,23 +22,6 @@ import { PaginatorModule } from 'primeng/paginator';
 })
 export class GhrbChartsComponent {
 
-    public dataviewStyle = {
-        dark: {
-            root: {
-                background: '{surface.950}',
-            },
-            header: {
-                background: '{surface.950}',
-            },
-            content: {
-                background: '{surface.950}',
-            },
-            footer: {
-                background: '{surface.950}',
-            }
-        }
-    }
-
     public items!: Chart[]
     public chartFilter: string = "";
     public releasedFilter: boolean = true;

@@ -19,14 +19,6 @@ import { RouterLink } from '@angular/router';
 })
 export class BlogComponent {
 
-    panelStyle = {
-        dark: {
-            root: {
-                borderRadius: '16px'
-            }
-        }
-    }
-
     posts: Post[] = [
         new Post(1,
             "Blog Post Title",

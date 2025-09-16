@@ -9,7 +9,7 @@ import { Button } from "primeng/button";
 
 @Component({
     selector: 'app-blog-post',
-    imports: [Avatar, Tooltip, Divider, Tag, Button, RouterLink],
+    imports: [Avatar, Tooltip, Divider, Tag],
     templateUrl: './blog-post.component.html',
     styleUrl: './blog-post.component.scss'
 })
