@@ -1,5 +1,25 @@
-<div class="header-container">
-    <div class="card">
-        <p-menubar [model]="items"/>
+<div class="header-container p-3">
+    <div class="card font-mono">
+        <p-menubar [model]="items" [dt]="navbar">
+            <ng-template #start>
+                <p-button class="m-0 p-0 font-black" [rounded]="true" variant="text" [dt]="navbarButton" [routerLink]="'/'">
+                    andr3x40's Lab
+                </p-button>
+                <p-divider layout="vertical"></p-divider>
+            </ng-template>
+            <ng-template #item let-item let-root="root">
+                <a class="p-menubar-item-link flex items-center" [routerLink]="item.routerLink">
+                    <div class="flex items-center px-2 gap-2">
+                        <span>{{ item.label }}</span>
+                        @if (item.badge > 0) {
+                            <span class="text-primary-400">({{ item.badge }})</span>
+                        }
+                        @if (item.items) {
+                            <i [ngClass]="['ml-auto pi', root ? 'pi-angle-down' : 'pi-angle-right']"></i>
+                        }
+                    </div>
+                </a>
+            </ng-template>
+        </p-menubar>
     </div>
 </div>

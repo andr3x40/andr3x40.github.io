@@ -1,9 +1,5 @@
 .header-container {
-    width: calc(100% - var(--p-scrollbar-width, 0px));
-    z-index: 9000;
     backdrop-filter: blur(8px);
-    padding: 10px 20px 10px 20px;
-    height: 100%;
 }
 
 .card {

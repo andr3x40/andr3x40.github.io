@@ -14,11 +14,16 @@ import { DialogModule, Dialog } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { PaginatorModule } from 'primeng/paginator';
 
+import { SiSpotifyIcon } from '@semantic-icons/simple-icons';
+import { SiYoutubeIcon } from '@semantic-icons/simple-icons';
+import { SiSoundcloudIcon } from '@semantic-icons/simple-icons';
+import { SiBandcampIcon } from '@semantic-icons/simple-icons';
+
 @Component({
     selector: 'app-ghrb-charts',
     templateUrl: './ghrb-charts.component.html',
     styleUrl: './ghrb-charts.component.scss',
-    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, ToggleButtonModule, DialogModule, Dialog, TooltipModule, PaginatorModule],
+    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, ToggleButtonModule, DialogModule, Dialog, TooltipModule, PaginatorModule, SiSpotifyIcon, SiYoutubeIcon, SiSoundcloudIcon, SiBandcampIcon],
 })
 export class GhrbChartsComponent {
 

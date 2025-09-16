@@ -212,22 +212,31 @@
         </div>
         <p-divider/>
         <div class="flex justify-between items-center gap-2">
-            @if (itemSelected.downloadLink === undefined) {
-                <p-button label="Coming Soon" severity="contrast" disabled="true"/>
-            } @else {
-                <p-buttongroup>
+            <div class="flex flex-row items-center gap-2">
+                @if (itemSelected.downloadLink === undefined) {
+                    <p-button label="Coming Soon" severity="contrast" disabled="true"/>
+                } @else {
                     <p-button>
                         <a href="{{ itemSelected.downloadLink }}" class="font-medium">
                             Download
                         </a>
                     </p-button>
-                    <p-button severity="secondary">
-                        <a href="{{ itemSelected.youtubeLink }}" class="font-medium">
-                            Listen on YouTube
-                        </a>
+                }
+                <p-buttongroup>
+                    <p-button severity="secondary" [outlined]="true" [disabled]="itemSelected.spotifyLink === undefined">
+                        <svg class="size-6 fill-[var(--p-surface-500)]" si-spotify-icon></svg>
+                    </p-button>
+                    <p-button severity="secondary" [outlined]="true" [disabled]="itemSelected.youtubeLink === undefined">
+                        <svg class="size-6 fill-[var(--p-surface-500)]" si-youtube-icon></svg>
+                    </p-button>
+                    <p-button severity="secondary" [outlined]="true" [disabled]="itemSelected.soundcloudLink === undefined">
+                        <svg class="size-6 fill-[var(--p-surface-500)]" si-soundcloud-icon></svg>
+                    </p-button>
+                    <p-button severity="secondary" [outlined]="true" [disabled]="itemSelected.bandcampLink === undefined">
+                        <svg class="size-6 fill-[var(--p-surface-500)]" si-bandcamp-icon></svg>
                     </p-button>
                 </p-buttongroup>
-            }
+            </div>
             <div class="flex flex-col items-end">
                 <p class="font-light text-sm">
                     {{ itemSelected.releaseDate !== undefined ? "Chart Released " + itemSelected.releaseDate : "" }}

@@ -7,15 +7,58 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { Divider } from "primeng/divider";
 
 @Component({
     selector: 'app-header',
-    imports: [Menubar, BadgeModule, AvatarModule, InputTextModule, CommonModule, ButtonModule],
+    imports: [Menubar, BadgeModule, AvatarModule, InputTextModule, CommonModule, ButtonModule, Divider, RouterLink],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+
+    navbar = {
+        root: {
+            borderRadius: '40px',
+            padding: '8px'
+        },
+        baseItem: {
+            borderRadius: '40px',
+            padding: '3px',
+        },
+        item: {
+            borderRadius: '40px',
+            padding: '3px',
+        },
+        submenu: {
+            borderRadius: '24px',
+            padding: '8px',
+            gap: '5px',
+        },
+        dark: {
+            item: {
+                focusBackground: '{surface.800}',
+                activeBackground: '{primary.950}',
+            }
+        }
+    }
+
+    navbarButton = {
+        root: {
+            paddingX: '8px',
+            paddingY: '3px'
+        },
+        dark: {
+            text: {
+                primary: {
+                    hoverBackground: '{surface.800}',
+                    activeBackground: '{primary.950}',
+                    color: '{surface.0}'
+                }
+            }
+        }
+    }
 
     items: MenuItem[] | undefined;
 
@@ -24,18 +67,17 @@ export class HeaderComponent {
     ngOnInit() {
         this.items = [
             {
-                label: 'Home',
-                routerLink: '/'
-            },
-            {
                 label: 'Blog',
+                badge: '2',
                 routerLink: '/blog',
             },
             {
                 label: 'Projects',
+                badge: '1',
                 items: [
                     {
                         label: 'Flamy',
+                        badge: '1',
                         routerLink: 'projects/flamy'
                     },
                     {

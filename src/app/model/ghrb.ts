@@ -13,6 +13,9 @@ export class Chart {
     public description?: string;
 
     public youtubeLink?: string;
+    public spotifyLink?: string;
+    public soundcloudLink?: string;
+    public bandcampLink?: string;
 
     public static cloneWithoutVariants(chart: Chart): Chart {
         let output: Chart = new Chart();
@@ -28,7 +31,10 @@ export class Chart {
         output.image = chart.image;
         output.source = chart.source;
         output.description = chart.description;
+        output.spotifyLink = chart.spotifyLink;
         output.youtubeLink = chart.youtubeLink;
+        output.soundcloudLink = chart.soundcloudLink;
+        output.bandcampLink = chart.bandcampLink;
 
         return output;
     }
