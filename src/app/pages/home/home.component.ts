@@ -9,6 +9,7 @@ import { Button, ButtonModule } from 'primeng/button';
 
 import { SiThreadsIcon, SiInstagramIcon, SiGithubIcon, SiBlueskyIcon } from '@semantic-icons/simple-icons';
 import { TooltipModule } from 'primeng/tooltip';
+import { Splash, SplashList, SplashSpecialRules } from '../../model/splash';
 
 @Component({
     selector: 'app-home',
@@ -29,30 +30,7 @@ export class HomeComponent {
     }
     
     splashText!: string;
-    private splashTexts: string[] = [
-        "Yet Another Personal Website",
-        "A website of some dude who likes to create things",
-        "This is a long splash text I wrote with the only purpose of testing this splash system and to make sure the text is correctly displayed on the website",
-        "I like Minecraft splashes, how could you tell?",
-        "Slow ride, take it easy",
-        "Imagine the nerves...",
-        "smots gaming",
-        "Be proud of your death count!",
-        "YOUR TAKING TOO LONG",
-        "He's groovy and NEVER glooby!",
-        "Despite everything, it's still you.",
-        "SHAW!",
-        "Sale balatrito?",
-        "Balatro Balatrez está jugando a Balatro",
-        "me when the me when when the me when the when uhhhhhhhhhhhhhhhhh",
-        "oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah",
-        "g",
-        "Do you have any games on your phone?",
-        "norris sc*pato",
-        "Must be the water.",
-        "Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy?-",
-        "Crazy? I was crazy once. They put me in a club. A stripped club. In the stripped club. Straight up \"jorking it\". And by \"it\", haha, well. Let's justr say. My Vaporeon. Vaporeon? Did you know that in terms of-",
-    ];
+    private splashList!: SplashList;
 
     private splashAnimationTimeouts: number[] = [];
 
@@ -83,6 +61,31 @@ export class HomeComponent {
                 url: "https://bsky.app/profile/andr3x40.bsky.social",
             }
         ]
+        let splashes: Splash[] = [
+            new Splash("Yet Another Personal Website", 1),
+            new Splash("A website of some dude who likes to create things", 1),
+            new Splash("This is a long splash text I wrote with the only purpose of testing this splash system and to make sure the text is correctly displayed on the website", 1),
+            new Splash("I like Minecraft splashes, how could you tell?", 1),
+            new Splash("Slow ride, take it easy", 1),
+            new Splash("Imagine the nerves...", 1),
+            new Splash("smots gaming", 1),
+            new Splash("Be proud of your death count!", 1),
+            new Splash("YOUR TAKING TOO LONG", 1),
+            new Splash("He's groovy and NEVER glooby!", 1),
+            new Splash("Despite everything, it's still you.", 1),
+            new Splash("SHAW!", 1),
+            new Splash("Sale balatrito?", 1),
+            new Splash("Balatro Balatrez está jugando a Balatro", 1),
+            new Splash("me when the me when when the me when the when uhhhhhhhhhhhhhhhhh", 1),
+            new Splash("oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah", 1),
+            new Splash("g", 1),
+            new Splash("Do you have any games on your phone?", 1),
+            new Splash("norris sc*pato", 1),
+            new Splash("Must be the water.", 1),
+            new Splash("Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy?-", 1),
+            new Splash("Crazy? I was crazy once. They put me in a club. A stripped club. In the stripped club. Straight up \"jorking it\". And by \"it\", haha, well. Let's justr say. My Vaporeon. Vaporeon? Did you know that in terms of-", 1),
+        ]
+        this.splashList = new SplashList(splashes);
         this.loadSplashText();
     }
 
@@ -92,10 +95,7 @@ export class HomeComponent {
             window.clearTimeout(timeout);
         }
         this.splashAnimationTimeouts = [];
-        // get the index of a splash
-        let splashIndex = Math.floor(Math.random() * this.splashTexts.length);
-        // animate the splash text
-        let text = this.splashTexts[splashIndex];
+        let text = this.splashList.roll();
         for (let i = 0; i < text.length; i++) {
             this.splashAnimationTimeouts.push(
                 window.setTimeout(() => {
