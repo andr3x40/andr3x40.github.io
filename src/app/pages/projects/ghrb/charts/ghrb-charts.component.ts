@@ -18,16 +18,20 @@ import { SiSpotifyIcon } from '@semantic-icons/simple-icons';
 import { SiYoutubeIcon } from '@semantic-icons/simple-icons';
 import { SiSoundcloudIcon } from '@semantic-icons/simple-icons';
 import { SiBandcampIcon } from '@semantic-icons/simple-icons';
+import { GhrbService } from '../../../../services/ghrb.service';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
     selector: 'app-ghrb-charts',
     templateUrl: './ghrb-charts.component.html',
     styleUrl: './ghrb-charts.component.scss',
-    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, ToggleButtonModule, DialogModule, Dialog, TooltipModule, PaginatorModule, SiSpotifyIcon, SiYoutubeIcon, SiSoundcloudIcon, SiBandcampIcon],
+    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, ToggleButtonModule, DialogModule, Dialog, TooltipModule, PaginatorModule, SiSpotifyIcon, SiYoutubeIcon, SiSoundcloudIcon, SiBandcampIcon, SkeletonModule],
 })
 export class GhrbChartsComponent {
 
-    public items!: Chart[]
+    public items!: Chart[];
+    public placeholders: number[] = [0, 1, 2];
+
     public chartFilter: string = "";
     public releasedFilter: boolean = true;
     public gamemodeFilter: string = "5 Fret Lead Guitar";
@@ -76,182 +80,14 @@ export class GhrbChartsComponent {
     public standardDifficulties: any[] = ["Easy", "Medium", "Hard", "Expert"];
 
     public infoDialogVisible: boolean = false;
-    public itemSelected: Chart = {
-        id: 0, public: true,
-        track: {id: 0},
-        variants: []
-    }
+    public itemSelected!: Chart;
 
-    constructor() { }
+    constructor(public service: GhrbService) { }
 
-    ngOnInit() {
-        this.items = [
-            {
-                id: 1, public: true,
-                track: {
-                    id: 1,
-                    title: "Never Gonna Give You Up",
-                    artist: "Rick Astley",
-                    album: "Album",
-                    year: "1986",
-                    genre: "Pop"
-                },
-                downloadLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-                youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-                releaseDate: "15/11/2029",
-                description: `Send this to your friends to make them happy!`,
-                variants: [
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 5,
-                        gamemode: "5 Fret Lead Guitar"
-                    },
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Hard",
-                        difficultyCode: 3,
-                        intensity: 3,
-                        gamemode: "5 Fret Lead Guitar"
-                    },
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Medium",
-                        difficultyCode: 2,
-                        intensity: 2,
-                        gamemode: "5 Fret Lead Guitar"
-                    },
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Easy",
-                        difficultyCode: 1,
-                        intensity: 1,
-                        gamemode: "5 Fret Lead Guitar"
-                    }
-                ]
-            },
-            {
-                id: 2, public: true,
-                track: {
-                    id: 2,
-                    title: "Through the Fire and Flames",
-                    artist: "DragonForce",
-                    album: "Inhuman Rampage",
-                    year: "2006",
-                    genre: "Power Metal",
-                },
-                description: `Probably the most famous song of DragonForce, it was featured in Guitar Hero III as a bonus track. It became really popular due to its absurd difficulty in that game.`,
-                variants: [
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 11,
-                        gamemode: "5 Fret Lead Guitar"
-                    },
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Hard",
-                        difficultyCode: 3,
-                        intensity: 9,
-                        gamemode: "5 Fret Lead Guitar"
-                    },
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Medium",
-                        difficultyCode: 2,
-                        intensity: 7,
-                        gamemode: "5 Fret Lead Guitar"
-                    },
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Easy",
-                        difficultyCode: 1,
-                        intensity: 4,
-                        gamemode: "5 Fret Lead Guitar"
-                    }
-                ]
-            },
-            {
-                id: 3, public: true,
-                track: {
-                    id: 3,
-                    title: "Sottosegretari alla Presidenza della Repubblica del True Metal",
-                    artist: "Nanowar of Steel ft. Gli Atroci",
-                    album: "Sottosegretari alla Presidenza della Repubblica del True Metal",
-                    year: "2021",
-                    genre: "Power Metal",
-                },
-                description: `This title is so long it goes off screen in Clone Hero.`,
-                variants: [
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 9,
-                        gamemode: "5 Fret Lead Guitar"
-                    },
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 9,
-                        gamemode: "6 Fret Lead Guitar"
-                    }
-                ]
-            },
-            {
-                id: 4, public: false,
-                track: {
-                    id: 4,
-                    title: "Parallel Universe Shifter",
-                    artist: "Camellia",
-                    album: "Parallel Universe Shifter",
-                    year: "2023",
-                    genre: "Full Flavor",
-                },
-                source: "CEL3RITAS",
-                description: `This song was made as the Grand Finals Tiebreaker for the 2023 osu!mania 4K World Cup. Its map (ranked, Expert+) is currently rated at around 8.5 Stars, but other ranked Expert+ charts out there reach a difficulty of 9.7 Stars. All I can say is, this chart is probably 50 times harder than GHX's Through the Fire and Flames, while having only 4436 notes. Good luck.`,
-                variants: [
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 16,
-                        gamemode: "5 Fret Lead Guitar"
-                    },
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Hard",
-                        difficultyCode: 3,
-                        intensity: 12,
-                        gamemode: "5 Fret Lead Guitar"
-                    },
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Medium",
-                        difficultyCode: 2,
-                        intensity: 8,
-                        gamemode: "5 Fret Lead Guitar"
-                    },
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Easy",
-                        difficultyCode: 1,
-                        intensity: 5,
-                        gamemode: "5 Fret Lead Guitar"
-                    },
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert+",
-                        difficultyCode: 4,
-                        intensity: 19,
-                        gamemode: "5 Fret Rhythm Guitar"
-                    }
-                ]
-            }
-        ]
+    async ngOnInit() {
+        setTimeout(async () => {
+            this.items = await this.service.getAllCharts();
+        }, 100);
     }
 
     showChartInfo(chartID: number) {
@@ -259,6 +95,7 @@ export class GhrbChartsComponent {
         if (chart !== undefined) {
             this.infoDialogVisible = true;
             this.itemSelected = chart;
+            console.log(this.itemSelected);
         }
     }
 

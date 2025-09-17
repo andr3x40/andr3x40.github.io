@@ -7,15 +7,23 @@ export class Post {
     public author!: string;
     public time!: string;
 
-    public tags!: string[];
+    public tags!: string;
 
-    public constructor(id: number, title?: string, content?: string, author?: string, time?: string, tags?: string[]) {
+    public constructor(id: number, title?: string, content?: string, author?: string, time?: string, tags?: string) {
         this.id = id;
         this.title = title !== undefined ? title : "New Post";
         this.content = content !== undefined ? content : "";
         this.author = author !== undefined ? author : "Unknown Author";
         this.time = time !== undefined ? time : "1970-01-01T00:00:00";
-        this.tags = tags !== undefined ? tags : [];
+        this.tags = tags !== undefined ? tags : "";
+    }
+
+    public static clone(post: Post): Post {
+        return new Post(post.id, post.title, post.content, post.author, post.time, post.tags);
+    }
+
+    public getFormattedTags(): string[] {
+        return this.tags.split(',');
     }
 
     public getFormattedTime() {

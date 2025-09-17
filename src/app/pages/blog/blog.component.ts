@@ -10,30 +10,26 @@ import { TagModule } from 'primeng/tag';
 import { Tooltip } from "primeng/tooltip";
 import { Post } from '../../model/blog';
 import { RouterLink } from '@angular/router';
+import { BlogService } from '../../services/blog.service';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
     selector: 'app-blog',
-    imports: [SectionTitleComponent, Divider, FieldsetModule, Avatar, PanelModule, ButtonModule, MenuModule, TagModule, Tooltip, RouterLink],
+    imports: [SectionTitleComponent, Divider, FieldsetModule, Avatar, PanelModule, ButtonModule, MenuModule, TagModule, Tooltip, RouterLink, SkeletonModule],
     templateUrl: './blog.component.html',
     styleUrl: './blog.component.scss'
 })
 export class BlogComponent {
 
-    posts: Post[] = [
-        new Post(1,
-            "Blog Post Title",
-            `Blog Post Text`,
-            "andr3x40",
-            "2025-09-16T15:15:00",
-            ["Test", "Test 2"]
-        ),
-        new Post(2,
-            "Blog Post Title",
-            `Blog Post Text`,
-            "andr3x40",
-            "2025-09-14T14:15:00",
-            ["Test"]
-        )
-    ]
+    public posts!: Post[];
+    public placeholders: number[] = [0, 1, 2];
+
+    constructor(public service: BlogService) { }
+
+    async ngOnInit() {
+        setTimeout(async () => {
+            this.posts = await this.service.getAllPosts();
+        }, 100);
+    }
 
 }
