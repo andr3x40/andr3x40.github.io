@@ -3,7 +3,7 @@ import { DataView } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 import { Tag } from 'primeng/tag';
 import { CommonModule } from '@angular/common';
-import { Chart, Variant } from '../../../../model/ghrb';
+import { Track, Chart, Variant } from '../../../../model/ghrb';
 import { Divider } from "primeng/divider";
 import { SectionTitleComponent } from "../../../../fragments/section/section-title/section-title.component";
 import { ButtonGroupModule } from "primeng/buttongroup";
@@ -77,7 +77,8 @@ export class GhrbChartsComponent {
 
     public infoDialogVisible: boolean = false;
     public itemSelected: Chart = {
-        id: 0,
+        id: 0, public: true,
+        track: {id: 0},
         variants: []
     }
 
@@ -86,12 +87,15 @@ export class GhrbChartsComponent {
     ngOnInit() {
         this.items = [
             {
-                id: 1,
-                title: "Never Gonna Give You Up",
-                artist: "Rick Astley",
-                album: "Album",
-                year: "1986",
-                genre: "Pop",
+                id: 1, public: true,
+                track: {
+                    id: 1,
+                    title: "Never Gonna Give You Up",
+                    artist: "Rick Astley",
+                    album: "Album",
+                    year: "1986",
+                    genre: "Pop"
+                },
                 downloadLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
                 youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
                 releaseDate: "15/11/2029",
@@ -128,12 +132,15 @@ export class GhrbChartsComponent {
                 ]
             },
             {
-                id: 2,
-                title: "Through the Fire and Flames",
-                artist: "DragonForce",
-                album: "Inhuman Rampage",
-                year: "2006",
-                genre: "Power Metal",
+                id: 2, public: true,
+                track: {
+                    id: 2,
+                    title: "Through the Fire and Flames",
+                    artist: "DragonForce",
+                    album: "Inhuman Rampage",
+                    year: "2006",
+                    genre: "Power Metal",
+                },
                 description: `Probably the most famous song of DragonForce, it was featured in Guitar Hero III as a bonus track. It became really popular due to its absurd difficulty in that game.`,
                 variants: [
                     {
@@ -167,12 +174,15 @@ export class GhrbChartsComponent {
                 ]
             },
             {
-                id: 3,
-                title: "Sottosegretari alla Presidenza della Repubblica del True Metal",
-                artist: "Nanowar of Steel ft. Gli Atroci",
-                album: "Sottosegretari alla Presidenza della Repubblica del True Metal",
-                year: "2021",
-                genre: "Power Metal",
+                id: 3, public: true,
+                track: {
+                    id: 3,
+                    title: "Sottosegretari alla Presidenza della Repubblica del True Metal",
+                    artist: "Nanowar of Steel ft. Gli Atroci",
+                    album: "Sottosegretari alla Presidenza della Repubblica del True Metal",
+                    year: "2021",
+                    genre: "Power Metal",
+                },
                 description: `This title is so long it goes off screen in Clone Hero.`,
                 variants: [
                     {
@@ -192,12 +202,15 @@ export class GhrbChartsComponent {
                 ]
             },
             {
-                id: 4,
-                title: "Parallel Universe Shifter",
-                artist: "Camellia",
-                album: "Parallel Universe Shifter",
-                year: "2023",
-                genre: "Full Flavor",
+                id: 4, public: false,
+                track: {
+                    id: 4,
+                    title: "Parallel Universe Shifter",
+                    artist: "Camellia",
+                    album: "Parallel Universe Shifter",
+                    year: "2023",
+                    genre: "Full Flavor",
+                },
                 source: "CEL3RITAS",
                 description: `This song was made as the Grand Finals Tiebreaker for the 2023 osu!mania 4K World Cup. Its map (ranked, Expert+) is currently rated at around 8.5 Stars, but other ranked Expert+ charts out there reach a difficulty of 9.7 Stars. All I can say is, this chart is probably 50 times harder than GHX's Through the Fire and Flames, while having only 4436 notes. Good luck.`,
                 variants: [
@@ -235,142 +248,6 @@ export class GhrbChartsComponent {
                         difficultyCode: 4,
                         intensity: 19,
                         gamemode: "5 Fret Rhythm Guitar"
-                    }
-                ]
-            },
-            {
-                id: 5,
-                title: "Test Chart 5",
-                artist: "Test",
-                album: "Test",
-                year: "2025",
-                genre: "Test",
-                variants: [
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 1,
-                        gamemode: "5 Fret Lead Guitar"
-                    }
-                ]
-            },
-            {
-                id: 6,
-                title: "Test Chart 6",
-                artist: "Test",
-                album: "Test",
-                year: "2025",
-                genre: "Test",
-                variants: [
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 1,
-                        gamemode: "5 Fret Lead Guitar"
-                    }
-                ]
-            },
-            {
-                id: 7,
-                title: "Test Chart 7",
-                artist: "Test",
-                album: "Test",
-                year: "2025",
-                genre: "Test",
-                variants: [
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 1,
-                        gamemode: "5 Fret Lead Guitar"
-                    }
-                ]
-            },
-            {
-                id: 8,
-                title: "Test Chart 8",
-                artist: "Test",
-                album: "Test",
-                year: "2025",
-                genre: "Test",
-                variants: [
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 1,
-                        gamemode: "5 Fret Lead Guitar"
-                    }
-                ]
-            },
-            {
-                id: 9,
-                title: "Test Chart 9",
-                artist: "Test",
-                album: "Test",
-                year: "2025",
-                genre: "Test",
-                variants: [
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 1,
-                        gamemode: "5 Fret Lead Guitar"
-                    }
-                ]
-            },
-            {
-                id: 10,
-                title: "Test Chart 10",
-                artist: "Test",
-                album: "Test",
-                year: "2025",
-                genre: "Test",
-                variants: [
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 1,
-                        gamemode: "5 Fret Lead Guitar"
-                    }
-                ]
-            },
-            {
-                id: 11,
-                title: "Test Chart 11",
-                artist: "Test",
-                album: "Test",
-                year: "2025",
-                genre: "Test",
-                variants: [
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 1,
-                        gamemode: "5 Fret Lead Guitar"
-                    }
-                ]
-            },
-            {
-                id: 12,
-                title: "Test Chart 12",
-                artist: "Test",
-                album: "Test",
-                year: "2025",
-                genre: "Test",
-                variants: [
-                    {
-                        charter: "andr3x40",
-                        difficulty: "Expert",
-                        difficultyCode: 4,
-                        intensity: 1,
-                        gamemode: "5 Fret Lead Guitar"
                     }
                 ]
             }
@@ -424,7 +301,7 @@ export class GhrbChartsComponent {
 
     private matchesFilter(chart: Chart) {
         if (chart.variants === undefined) return false;
-        let artistTitle: string = chart.artist + " - " + chart.title;
+        let artistTitle: string = chart.track.artist + " - " + chart.track.title;
         let filter = chart.variants.find(x => x.gamemode === this.gamemodeFilter)
             && artistTitle.toLowerCase().includes(this.chartFilter.toLowerCase())
         if (this.releasedFilter) return filter && chart.downloadLink !== undefined

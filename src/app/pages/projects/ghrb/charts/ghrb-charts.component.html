@@ -17,17 +17,17 @@
                     <div class="col-span-12 border-1 border-surface-800 bg-surface-900 rounded-xl m-1">
                         <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4">
                             <div class="md:w-40 relative">
-                                @if (item.image === undefined) {
+                                @if (item.track.albumLink === undefined) {
                                     <img
                                     class="block xl:block mx-auto rounded-border w-full"
                                     src="../../../../assets/placeholder.jpg"
-                                    [alt]="item.album"
+                                    [alt]="item.track.album"
                                     />
                                 } @else {
                                     <img
                                     class="block xl:block mx-auto rounded-border w-full"
-                                    [src]="item.image"
-                                    [alt]="item.album"
+                                    [src]="item.track.albumLink"
+                                    [alt]="item.track.album"
                                     />
                             }
                             <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
@@ -85,9 +85,9 @@
                         <div class="flex flex-row justify-between md:items-center flex-1 gap-6">
                             <div class="flex flex-col justify-between items-start gap-10">
                                 <div>
-                                    <span class="text-lg font-bold text-surface-900 dark:text-surface-0 text-clip">{{ item.title }}</span>
-                                    <div class="font-medium text-secondary text-m mb-2">{{ item.artist }}</div>
-                                    <div class="font-light text-secondary text-m">{{ item.album }} ({{ item.year }}) - {{ item.genre }}</div>
+                                    <span class="text-lg font-bold text-surface-900 dark:text-surface-0 text-clip">{{ item.track.title }}</span>
+                                    <div class="font-medium text-secondary text-m mb-2">{{ item.track.artist }}</div>
+                                    <div class="font-light text-secondary text-m">{{ item.track.album }} ({{ item.track.year }}) - {{ item.track.genre }}</div>
                                 </div>
                                 <div>
                                     <p-buttongroup>
@@ -132,24 +132,24 @@
 <div class="card flex justify-center">
     <p-dialog header="Chart Info" [modal]="true" [(visible)]="infoDialogVisible" [style]="{ width: '50rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
         <div class="flex flex-row gap-4 items-center">
-            @if (itemSelected.image === undefined) {
+            @if (itemSelected.track.albumLink === undefined) {
                 <img
                     class="block xl:block mx-auto rounded-border w-1/6"
                     src="../../../../assets/placeholder.jpg"
-                    [alt]="itemSelected.album"
+                    [alt]="itemSelected.track.album"
                 />
             } @else {
                 <img
                     class="block xl:block mx-auto rounded-border w-1/6"
-                    [src]="itemSelected.image"
-                    [alt]="itemSelected.album"
+                    [src]="itemSelected.track.albumLink"
+                    [alt]="itemSelected.track.album"
                 />
             }
             <div class="flex flex-col w-5/6">
                 <div>
-                    <div class="text-xl font-bold text-surface-900 dark:text-surface-0">{{ itemSelected.title }}</div>
-                    <div class="font-lg text-secondary text-m mb-2">{{ itemSelected.artist }}</div>
-                    <div class="font-light text-secondary text-m mb-2">{{ itemSelected.album }} ({{ itemSelected.year }}) - {{ itemSelected.genre }}</div>
+                    <div class="text-xl font-bold text-surface-900 dark:text-surface-0">{{ itemSelected.track.title }}</div>
+                    <div class="font-lg text-secondary text-m mb-2">{{ itemSelected.track.artist }}</div>
+                    <div class="font-light text-secondary text-m mb-2">{{ itemSelected.track.album }} ({{ itemSelected.track.year }}) - {{ itemSelected.track.genre }}</div>
                     <div class="font-light text-secondary text-m">From {{ itemSelected.source !== undefined ? itemSelected.source : "Unknown Source" }}</div>
                 </div>
             </div>

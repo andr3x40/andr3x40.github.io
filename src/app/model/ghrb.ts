@@ -1,14 +1,22 @@
-export class Chart {
+export class Track {
     public id!: number;
     public title?: string;
     public artist?: string;
     public album?: string;
+    public albumLink?: string;
     public year?: string;
     public genre?: string;
+    public length?: number;
+    public minimumBpm?: number;
+    public maximumBpm?: number;
+}
+
+export class Chart {
+    public id!: number;
+    public track!: Track;
     public variants!: Variant[];
     public releaseDate?: string;
     public downloadLink?: string;
-    public image?: string;
     public source?: string;
     public description?: string;
 
@@ -17,18 +25,16 @@ export class Chart {
     public soundcloudLink?: string;
     public bandcampLink?: string;
 
+    public public!: boolean;
+    public tags?: string[];
+
     public static cloneWithoutVariants(chart: Chart): Chart {
         let output: Chart = new Chart();
 
         output.id = chart.id;
-        output.title = chart.title;
-        output.artist = chart.artist;
-        output.album = chart.album;
-        output.year = chart.year;
-        output.genre = chart.genre;
+        output.track = chart.track;
         output.releaseDate = chart.releaseDate;
         output.downloadLink = chart.downloadLink;
-        output.image = chart.image;
         output.source = chart.source;
         output.description = chart.description;
         output.spotifyLink = chart.spotifyLink;
@@ -53,4 +59,6 @@ export class Variant {
     public difficulty?: string;
     public intensity?: number;
     public difficultyCode!: number;
+
+    public tags?: string[];
 }
