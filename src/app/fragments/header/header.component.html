@@ -20,6 +20,13 @@
                     </div>
                 </a>
             </ng-template>
+            <ng-template #end>
+                <div class="flex items-center gap-2">
+                    <p-button class="m-0 p-0 font-black" [rounded]="true" variant="text" [dt]="navbarButton" [routerLink]="'/login'">
+                        Login
+                    </p-button>
+                </div>
+            </ng-template>
         </p-menubar>
     </div>
 </div>

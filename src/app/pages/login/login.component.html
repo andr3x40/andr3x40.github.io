@@ -1,0 +1,28 @@
+<app-section-title
+    class="font-mono" title="LOGIN"
+></app-section-title>
+<p-divider/>
+<div class="flex flex-col items-center gap-2 my-16">
+    <p-button [rounded]="true">
+        <svg class="size-6 my-1 fill-[var(--p-surface-900)]" si-google-icon></svg>
+        <div class="w-60 font-black text-xl">
+            Login with Google
+        </div>
+    </p-button>
+    <p-button [rounded]="true">
+        <svg class="size-6 my-1 fill-[var(--p-surface-900)]" si-github-icon></svg>
+        <div class="w-60 font-black text-xl">
+            Login with GitHub
+        </div>
+    </p-button>
+</div>
+<div class="flex flex-col items-center text-center my-16">
+    <span>
+        By creating an account, you automatically agree to the <a class="text-primary hover:underline" [routerLink]="'/legal/terms'">Terms and Conditions</a> and the <a class="text-primary hover:underline" [routerLink]="'/legal/privacy'">Privacy Policy</a> of this website.
+    </span>
+</div>
+<div class="flex flex-col items-center text-center my-16">
+    <span>
+        Also, <strong>you don't need an account to navigate the website</strong>.<br>Accounts could have extra features in the future, but right now it's only useful for administrators.
+    </span>
+</div>

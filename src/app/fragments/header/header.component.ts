@@ -68,16 +68,13 @@ export class HeaderComponent {
         this.items = [
             {
                 label: 'Blog',
-                badge: '2',
                 routerLink: '/blog',
             },
             {
                 label: 'Projects',
-                badge: '1',
                 items: [
                     {
                         label: 'Flamy',
-                        badge: '1',
                         routerLink: 'projects/flamy'
                     },
                     {

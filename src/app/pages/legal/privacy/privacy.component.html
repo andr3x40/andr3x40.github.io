@@ -1,0 +1,64 @@
+<app-section-title
+    title="Privacy Policy"
+    description="or how I treat your data"
+></app-section-title>
+<p-divider/>
+<div class="text-center flex flex-col gap-3">
+    <p>
+        Since you can do an account, I feel like I need to explain some privacy-related stuff...<br>
+        Well, I'll need to improvise as a lawyer and write a lot of things. I'll leave you a TL;DR on the right for every section so you don't need to decipher what I may write.
+    </p>
+    <p>
+        Last update: <b>5/10/2025</b>
+    </p>
+</div>
+<p-divider/>
+<div class="flex flex-col gap-3 px-96">
+    <p-card [dt]="paragraph">
+        <ng-template #title>1. Your Data</ng-template>
+        <ng-template #subtitle>"I'm getting sick of making accounts for every single thing" - a wise man</ng-template>
+        <div class="flex flex-row">
+            <div class="w-2/3">
+                The login process is made using OAuth2 authentication. In order to ensure a secure login and give
+                the right access permissions, this website only stores the username and e-mail of the account used to log in.
+                Other personal data may be collected through the login process, but the system doesn't save them in any way.
+            </div>
+            <p-divider layout="vertical" />
+            <div class="w-1/3">
+                <i>TL;DR: I only store the username and e-mail of the account you use to log in. Really, I don't care about who you are.</i>
+            </div>
+        </div>
+    </p-card>
+    <p-card [dt]="paragraph">
+        <ng-template #title>2. Other Data</ng-template>
+        <ng-template #subtitle>What you see in this website is stored in a database</ng-template>
+        <div class="flex flex-row">
+            <div class="w-2/3">
+                The website stores data that is limited, as per September 2025, to:
+                <ul class="list-disc pl-7 pt-2">
+                    <li>Blog posts (title, text, time of creation, author...)</li>
+                    <li>Rhythm game charts (track title, artist, ...)</li>
+                    <li>Splash texts in the home page</li>
+                </ul>
+            </div>
+            <p-divider layout="vertical" />
+            <div class="w-1/3">
+                <i>TL;DR: The website only stores the website things and nothing else.</i>
+            </div>
+        </div>
+    </p-card>
+    <p-card [dt]="paragraph">
+        <ng-template #title>3. Data Sharing</ng-template>
+        <ng-template #subtitle>Who gets this data</ng-template>
+        <div class="flex flex-row">
+            <div class="w-2/3">
+                No personal information is shared through a public REST API or with third-parties.<br>
+                Also, generic data such as blog posts are not shared in any way.
+            </div>
+            <p-divider layout="vertical" />
+            <div class="w-1/3">
+                <i>TL;DR: No data is shared publicly or with third-parties.</i>
+            </div>
+        </div>
+    </p-card>
+</div>

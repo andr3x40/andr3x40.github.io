@@ -1,0 +1,66 @@
+<app-section-title
+    title="Terms and Conditions"
+    description="or how I can delete your account at any given time"
+></app-section-title>
+<p-divider/>
+<div class="text-center flex flex-col gap-3">
+    <p>
+        Since you can do an account, I feel like I need to explain what you can or you can't do with it...<br>
+        Well, I'll need to improvise as a lawyer and write a lot of things. I'll leave you a TL;DR on the right for every section so you don't need to decipher what I may write.
+    </p>
+    <p>
+        Last update: <b>5/10/2025</b>
+    </p>
+</div>
+<p-divider/>
+<div class="flex flex-col gap-3 px-96">
+    <p-card [dt]="paragraph">
+        <ng-template #title>1. Your account</ng-template>
+        <ng-template #subtitle>How can you create one</ng-template>
+        <div class="flex flex-row">
+            <div class="w-2/3">
+                You can create an account by logging in using your Google or GitHub account. You are responsible for the security of your account and to make sure you and you only use said account. You also agree you're the owner of the account you're using to log in.<br>
+                If your account gets breached in some way, reach out immediately to me.<br>
+                You also agree you won't sell this account and that you won't create more than one account.
+            </div>
+            <p-divider layout="vertical" />
+            <div class="w-1/3">
+                <i>TL;DR: You can create an account using Google or GitHub. You login with your account and you keep this account yours and yours only. You can only have one account.</i>
+            </div>
+        </div>
+    </p-card>
+    <p-card [dt]="paragraph">
+        <ng-template #title>2. Account Usage</ng-template>
+        <ng-template #subtitle>How you can use your account</ng-template>
+        <div class="flex flex-row">
+            <div class="w-2/3">
+                With an account, you may be able to publish, change or remove content in the website.
+                First, you agree to <b>not post and show hateful conduct of any kind</b> through the services provided. This is not allowed in any way and includes, but is not limited to:
+                <ul class="list-disc pl-7 py-2">
+                    <li>Discrimination by race, religion, ethnicity, sexual orientation, gender identity</li>
+                    <li>Promotion of hate groups</li>
+                </ul>
+                Second, you agree to <b>not advertise yourself</b> randomly through posts or links. It may be allowed under certain circumstances, for example when other people so happen to talk about what you do. In that case, it's not "advertising" but "talking about it".<br>
+                Third, <b>no political propaganda</b>. This place is not supposed to be an echo chamber and I don't want it to become an echo chamber.
+            </div>
+            <p-divider layout="vertical" />
+            <div class="w-1/3">
+                <i>TL;DR: Be nice, don't advertise yourself at random and don't do political propaganda.</i>
+            </div>
+        </div>
+    </p-card>
+    <p-card [dt]="paragraph">
+        <ng-template #title>3. Termination</ng-template>
+        <ng-template #subtitle>How you can lose your account</ng-template>
+        <div class="flex flex-row">
+            <div class="w-2/3">
+                By breaking the conditions in Paragraph 2, the owner (me) can warn, suspend or terminate your account at any time. When your account is suspended, you will lose access to your account until the suspension is lifted. If the suspension is permanent, the account will be terminated after 30 days and its data permanently deleted.<br>
+                For any suspension, you have the right to appeal the decision. If the appeal is accepted, the account will be restored as soon as possible (expect at least a day of waiting, I'm slow). If it's rejected, you have only wasted your time.
+            </div>
+            <p-divider layout="vertical" />
+            <div class="w-1/3">
+                <i>TL;DR: If you mess up (see Paragraph 2 for how to mess up), you can get warned, banned temporarily or permanently. The account is deleted 30 days after a permanent ban is issued. You have the right to appeal.</i>
+            </div>
+        </div>
+    </p-card>
+</div>
