@@ -3,13 +3,13 @@
 ></app-section-title>
 <p-divider/>
 <div class="flex flex-col items-center gap-2 my-16">
-    <p-button [rounded]="true">
+    <p-button disabled [rounded]="true">
         <svg class="size-6 my-1 fill-[var(--p-surface-900)]" si-google-icon></svg>
         <div class="w-60 font-black text-xl">
             Login with Google
         </div>
     </p-button>
-    <p-button [rounded]="true">
+    <p-button [rounded]="true" (click)="login('github')">
         <svg class="size-6 my-1 fill-[var(--p-surface-900)]" si-github-icon></svg>
         <div class="w-60 font-black text-xl">
             Login with GitHub

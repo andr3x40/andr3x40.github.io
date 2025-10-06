@@ -21,11 +21,22 @@
                 </a>
             </ng-template>
             <ng-template #end>
-                <div class="flex items-center gap-2">
-                    <p-button class="m-0 p-0 font-black" [rounded]="true" variant="text" [dt]="navbarButton" [routerLink]="'/login'">
-                        Login
-                    </p-button>
-                </div>
+                @if (this.user === undefined) {
+                    <p-skeleton height="2rem" width="5rem" borderRadius="16px" />
+                } @else if (this.user === null) {
+                    <div class="flex items-center gap-2">
+                        <p-button class="m-0 p-0 font-black" [rounded]="true" variant="text" [dt]="navbarButton" [routerLink]="'/login'">
+                            Login
+                        </p-button>
+                    </div>
+                }
+                @else {
+                    <div class="flex items-center gap-2">
+                        <p-button class="m-0 p-0 font-black" [rounded]="true" variant="text" [dt]="navbarButton" [routerLink]="'/home'">
+                            {{ this.user.name }}
+                        </p-button>
+                    </div>
+                }
             </ng-template>
         </p-menubar>
     </div>

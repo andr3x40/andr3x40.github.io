@@ -9,14 +9,18 @@ import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { Router, RouterLink } from '@angular/router';
 import { Divider } from "primeng/divider";
+import { AuthService, UserDetails } from '../../services/auth.service';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
     selector: 'app-header',
-    imports: [Menubar, BadgeModule, AvatarModule, InputTextModule, CommonModule, ButtonModule, Divider, RouterLink],
+    imports: [Menubar, BadgeModule, AvatarModule, InputTextModule, CommonModule, ButtonModule, Divider, RouterLink, SkeletonModule],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+
+    public user!: UserDetails | null;
 
     navbar = {
         root: {
@@ -62,7 +66,7 @@ export class HeaderComponent {
 
     items: MenuItem[] | undefined;
 
-    constructor(private router: Router) {}
+    constructor(private router: Router, private auth: AuthService) {}
 
     ngOnInit() {
         this.items = [
@@ -100,6 +104,16 @@ export class HeaderComponent {
                     }
                 ]
             }
-        ]
+        ],
+        // check the session
+        this.auth.getUserDetails().subscribe({
+            next: (user: UserDetails) => {
+                this.user = user;
+            },
+            error: (err) => {
+                this.user = null;
+            }
+        });
+        
     }
 }

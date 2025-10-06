@@ -10,6 +10,7 @@ import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TermsComponent } from './pages/legal/terms/terms.component';
 import { PrivacyComponent } from './pages/legal/privacy/privacy.component';
+import { LoginSuccessComponent } from './pages/login/loginsuccess.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -24,4 +25,7 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'legal/terms', component: TermsComponent},
     {path: 'legal/privacy', component: PrivacyComponent},
+
+    {path: 'login/success', component: LoginSuccessComponent },
+    {path: 'login/error', component: LoginComponent}
 ];
