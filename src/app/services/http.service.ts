@@ -17,7 +17,7 @@ export class HttpService {
    * @returns a promise that resolves to the raw HTTP response
    */
   public async getRequest<T>(url: string): Promise<HttpResponse<T>> {
-    let response: Observable<HttpResponse<T>> = this.http.get<T>(url, {observe: 'response'});
+    let response: Observable<HttpResponse<T>> = this.http.get<T>(url, {observe: 'response', withCredentials: true});
     let result: HttpResponse<T> = await lastValueFrom(response);
     return result;
   }
@@ -31,7 +31,7 @@ export class HttpService {
    * @returns a promise that resolves to the raw HTTP response
    */
   public async postRequest<T>(url: string, body: any): Promise<HttpResponse<T>> {
-    let response: Observable<HttpResponse<T>> = this.http.post<T>(url, body, {observe: 'response'});
+    let response: Observable<HttpResponse<T>> = this.http.post<T>(url, body, {observe: 'response', withCredentials: true});
     let result: HttpResponse<T> = await lastValueFrom(response);
     return result;
   }
@@ -44,7 +44,7 @@ export class HttpService {
    * @returns a promise that resolves to the raw HTTP response
    */
   public async deleteRequest<T>(url: string): Promise<HttpResponse<T>> {
-    let response: Observable<HttpResponse<T>> = this.http.delete<T>(url, {observe: 'response'});
+    let response: Observable<HttpResponse<T>> = this.http.delete<T>(url, {observe: 'response', withCredentials: true});
     let result: HttpResponse<T> = await lastValueFrom(response);
     return result;
   }

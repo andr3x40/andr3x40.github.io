@@ -23,17 +23,27 @@
             <ng-template #end>
                 @if (this.user === undefined) {
                     <p-skeleton height="2rem" width="5rem" borderRadius="16px" />
-                } @else if (this.user === null) {
+                } @else if (this.user === null || !this.user.authenticated) {
                     <div class="flex items-center gap-2">
                         <p-button class="m-0 p-0 font-black" [rounded]="true" variant="text" [dt]="navbarButton" [routerLink]="'/login'">
                             Login
                         </p-button>
                     </div>
-                }
-                @else {
+                } @else {
                     <div class="flex items-center gap-2">
-                        <p-button class="m-0 p-0 font-black" [rounded]="true" variant="text" [dt]="navbarButton" [routerLink]="'/home'">
-                            {{ this.user.name }}
+                        @if (this.admin) {
+                            <p-button class="m-0 p-0 font-black" [rounded]="true" variant="text" [dt]="navbarButton" [routerLink]="'/dashboard'">
+                                <i class="pi pi-shield text-primary-300" pButtonIcon></i>
+                                <span class="text-primary-300">{{ this.user.name }}</span>
+                            </p-button>
+                        } @else {
+                            <p-button class="m-0 p-0 font-black" [rounded]="true" variant="text" [dt]="navbarButton" [routerLink]="'/dashboard'">
+                                <i class="pi pi-user"></i>
+                                {{ this.user.name }}
+                            </p-button>
+                        }
+                        <p-button class="m-0 p-0 font-black" [rounded]="true" variant="text" [dt]="navbarButton" (click)="logout()">
+                            Logout
                         </p-button>
                     </div>
                 }

@@ -21,6 +21,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 export class HeaderComponent {
 
     public user!: UserDetails | null;
+    public admin: boolean = false;
 
     navbar = {
         root: {
@@ -68,7 +69,7 @@ export class HeaderComponent {
 
     constructor(private router: Router, private auth: AuthService) {}
 
-    ngOnInit() {
+    async ngOnInit() {
         this.items = [
             {
                 label: 'Blog',
@@ -104,16 +105,16 @@ export class HeaderComponent {
                     }
                 ]
             }
-        ],
+        ];
         // check the session
-        this.auth.getUserDetails().subscribe({
-            next: (user: UserDetails) => {
-                this.user = user;
-            },
-            error: (err) => {
-                this.user = null;
-            }
-        });
-        
+        this.user = await this.auth.getUserDetails();
+        this.admin = await this.auth.isAdminUser();
     }
+
+    logout() {
+        // force the window to change URL for now
+        // TODO find a better solution
+        window.location.href = `http://localhost:8080/logout`;
+    }
+
 }

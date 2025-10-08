@@ -11,6 +11,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { TermsComponent } from './pages/legal/terms/terms.component';
 import { PrivacyComponent } from './pages/legal/privacy/privacy.component';
 import { LoginSuccessComponent } from './pages/login/loginsuccess.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { authGuard } from './services/guard/auth.guard';
+import { FourOhFourComponent } from './pages/404/404.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -26,6 +29,10 @@ export const routes: Routes = [
     {path: 'legal/terms', component: TermsComponent},
     {path: 'legal/privacy', component: PrivacyComponent},
 
-    {path: 'login/success', component: LoginSuccessComponent },
-    {path: 'login/error', component: LoginComponent}
+    {path: 'login/success', component: LoginSuccessComponent},
+
+    {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
+
+    // add 404 page
+    {path: '**', component: FourOhFourComponent}
 ];
