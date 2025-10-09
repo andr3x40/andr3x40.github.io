@@ -6,4 +6,11 @@
     <div class="py-4 flex flex-col gap-3">
         <span class="font-mono font-black text-2xl">Welcome back, {{ this.user !== null ? this.user.name : "Unknown User" }}</span>
     </div>
+    @if (this.admin) {
+        <p-button [rounded]="true" [routerLink]="['/admin/console']" severity="danger">
+            <div class="w-60 font-black text-xl">
+                Open Admin Console
+            </div>
+        </p-button>
+    }
 </div>

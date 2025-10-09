@@ -14,6 +14,8 @@ import { LoginSuccessComponent } from './pages/login/loginsuccess.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authGuard } from './services/guard/auth.guard';
 import { FourOhFourComponent } from './pages/404/404.component';
+import { adminGuard } from './services/guard/admin.guard';
+import { AdminConsoleComponent } from './pages/admin/admin-console/admin-console.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -32,6 +34,11 @@ export const routes: Routes = [
     {path: 'login/success', component: LoginSuccessComponent},
 
     {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
+
+    // admin pages
+    {path: 'admin', canActivateChild: [adminGuard], children: [
+        {path: 'console', component: AdminConsoleComponent}
+    ]},
 
     // add 404 page
     {path: '**', component: FourOhFourComponent}
