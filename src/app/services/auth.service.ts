@@ -1,14 +1,17 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 
 export interface UserDetails {
   authenticated: boolean;
-  name: string;
-  email: string;
-  login: string;
-  id: string;
+  name?: string;
+  email?: string;
+  login?: string;
+  id?: string;
+}
+
+export interface AuthSession {
+  details: UserDetails;
+  admin: boolean;
 }
 
 @Injectable({
@@ -21,6 +24,19 @@ export class AuthService {
   
   constructor(private http: HttpService) { }
   
+  /**
+   * Gets the details of the entire session of an authenticated user.
+   * @returns a promise for an object contaning the session
+   */
+  async getUserSession(): Promise<AuthSession> {
+    let details: UserDetails | null = await this.getUserDetails();
+    let admin: boolean = await this.isAdminUser();
+    return {
+      details: details ?? {authenticated: false, },
+      admin: admin
+    };
+  }
+
   /**
    * Gets the details of the authenticated user.
    * @returns an Observable with the details of the user

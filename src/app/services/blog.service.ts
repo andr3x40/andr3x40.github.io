@@ -8,6 +8,7 @@ import { Post } from '../model/blog';
 export class BlogService {
 
     private postUrl: string = 'http://localhost:8080/api/blog/posts'
+    private postAdminUrl: string = 'http://localhost:8080/api/admin/blog/posts'
 
     constructor(private http: HttpService) { }
 
@@ -16,7 +17,8 @@ export class BlogService {
      * @returns a promise that resolves to an array of Post objects, or an empty array if the response is null or does not contain the expected data.
      */
     public async getAllPosts(): Promise<Post[]> {
-        const collection: Post[] | null = await this.http.getRequestBody<Post[]>(this.postUrl);
+        // get posts ordered by date
+        const collection: Post[] | null = await this.http.getRequestBody<Post[]>(this.postUrl + "?orderByDate=true");
         if (collection === null) return [];
         let output: Post[] = [];
         for (let c of collection) {
@@ -45,6 +47,14 @@ export class BlogService {
         let p: Post | null = await this.getPost(id);
         let output: boolean = (p !== null);
         return output;
+    }
+
+    public async savePost(post: Post) {
+        this.http.postRequestBody<Post>(this.postAdminUrl, post);
+    }
+
+    public async deletePost(id: number) {
+        this.http.deleteRequestBody<Post>(this.postAdminUrl + '/' + id);
     }
 
 }

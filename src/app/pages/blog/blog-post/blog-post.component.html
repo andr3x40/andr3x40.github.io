@@ -16,14 +16,12 @@
                 }
             }
         </div>
-        <p class="m-0 my-8">
-            {{ this.post !== null ? this.post.content : `There's no post here.` }}
-        </p>
+        <div class="post-content m-0 my-8" [innerHTML]="this.post !== null ? (this.post.content | markdownRenderer) : `There's no post here.`"></div>
         <p-divider/>
         <div class="flex gap-2 justify-between text-surface-600 text-xs">
             @if (this.post !== null) {
-                <p-button icon="pi pi-arrow-circle-left" rounded text label="Previous Post" (click)="goToPreviousPost()" [disabled]="!previousPostAvailable"></p-button>
-                <p-button icon="pi pi-arrow-circle-right" rounded text label="Next Post" (click)="goToNextPost()" [disabled]="!nextPostAvailable"></p-button>
+                <p-button icon="pi pi-arrow-circle-left" rounded text label="Previous Post" (click)="goToPreviousPost()" [disabled]="this.previousPostId === undefined || this.previousPostId === null"></p-button>
+                <p-button icon="pi pi-arrow-circle-right" rounded text label="Next Post" (click)="goToNextPost()" [disabled]="this.nextPostId === undefined || this.nextPostId === null"></p-button>
             }
         </div>
     } @else {

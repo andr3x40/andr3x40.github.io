@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Post } from '../../../model/blog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Avatar } from "primeng/avatar";
@@ -9,11 +9,14 @@ import { BlogService } from '../../../services/blog.service';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ButtonModule } from 'primeng/button';
 
+import { MarkdownRendererPipe } from '../../../pipes/markdown-renderer.pipe';
+
 @Component({
     selector: 'app-blog-post',
-    imports: [Avatar, Tooltip, Divider, Tag, SkeletonModule, ButtonModule],
+    imports: [Avatar, Tooltip, Divider, Tag, SkeletonModule, ButtonModule, MarkdownRendererPipe],
     templateUrl: './blog-post.component.html',
-    styleUrl: './blog-post.component.scss'
+    styleUrl: './blog-post.component.scss',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA], // suppress warnings for custom blocks
 })
 export class BlogPostComponent {
 
@@ -22,31 +25,37 @@ export class BlogPostComponent {
 
     public post!: Post | null;
 
-    public nextPostAvailable!: boolean;
-    public previousPostAvailable!: boolean;
+    public nextPostId!: number | null | undefined;
+    public previousPostId!: number | null | undefined;
 
-    constructor(private route: ActivatedRoute, private router: Router, public service: BlogService) {
-        this.route.params.subscribe(p => this.id = parseInt(p['id'])); // aaand it's not parsing on its own. i hate javascript.
-    }
+    constructor(private route: ActivatedRoute, private router: Router, public service: BlogService) { }
 
     async ngOnInit() {
+        this.route.params.subscribe(p => this.id = parseInt(p['id'])); // aaand it's not parsing on its own. i hate javascript.
         setTimeout(async () => {
-            this.nextPostAvailable = await this.service.existsPost(this.id + 1);
-            this.previousPostAvailable = await this.service.existsPost(this.id - 1);
+            let allPosts: Post[] | null = await this.service.getAllPosts();
             this.post = await this.service.getPost(this.id);
+            if (this.post !== null) {
+                // now, dear javascript, pray tell
+                // why the FUCK this works and allPosts.indexOf(this.post) DOESN'T???
+                let index: number = allPosts.findIndex(x => x.id === this.id);
+                // get the ID of the next and previous post
+                // posts are ordered by date, from newest to oldest
+                // the previous post is the next one in the list and the next post is the previous one
+                this.previousPostId = index === allPosts.length - 1 ? undefined : allPosts.at(index + 1)?.id;
+                this.nextPostId = index === 0 ? undefined : allPosts.at(index - 1)?.id;
+            }
         }, 100);
     }
 
     async goToNextPost() {
-        this.id++;
         await this.router.navigate(['/blog']);
-        this.router.navigate(['/blog', this.id]);
+        this.router.navigate(['/blog', this.nextPostId]);
     }
 
     async goToPreviousPost() {
-        this.id--;
         await this.router.navigate(['/blog']);
-        this.router.navigate(['/blog', this.id]);
+        this.router.navigate(['/blog', this.previousPostId]);
     }
 
 }

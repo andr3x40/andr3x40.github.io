@@ -1,21 +1,21 @@
 export class Post {
 
-    public id!: number;
-    public title!: string;
-    public content!: string;
+    public id!: number | null;
+    public title?: string;
+    public content?: string;
 
-    public author!: string;
-    public time!: string;
+    public author?: string;
+    public time?: string;
 
-    public tags!: string;
+    public tags?: string;
 
-    public constructor(id: number, title?: string, content?: string, author?: string, time?: string, tags?: string) {
+    public constructor(id: number | null, title?: string, content?: string, author?: string, time?: string, tags?: string) {
         this.id = id;
-        this.title = title !== undefined ? title : "New Post";
-        this.content = content !== undefined ? content : "";
-        this.author = author !== undefined ? author : "Unknown Author";
-        this.time = time !== undefined ? time : "1970-01-01T00:00:00";
-        this.tags = tags !== undefined ? tags : "";
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.time = time;
+        this.tags = tags;
     }
 
     public static clone(post: Post): Post {
@@ -23,15 +23,23 @@ export class Post {
     }
 
     public getFormattedTags(): string[] {
+        if (this.tags === undefined || this.tags === null || this.tags.length === 0) return [];
         return this.tags.split(',');
     }
 
     public getFormattedTime() {
+        if (this.time === undefined) return null;
         let postTime: Date = new Date(this.time);
         return postTime.toLocaleString();
     }
 
+    public getContentPreview() {
+        let lines: string[] = this.content?.split('\n') ?? [];
+        return lines[0];
+    }
+
     public getTimeElapsed(): string {
+        if (this.time === undefined) return "No Time";
         let postTime: Date = new Date(this.time);
         let relativeTime: Date = new Date(Date.now() - postTime.getTime());
         // check if it's in the future

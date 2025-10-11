@@ -8,6 +8,11 @@
 </section>
 <p-divider></p-divider>
 <div class="flex flex-col justify-center px-64 gap-4">
+    @if (this.session.admin) {
+        <p-button [rounded]="true" [routerLink]="'/admin/blog/new-post'">
+            <span class="px-1">Create New Post</span>
+        </p-button>
+    }
     @if (posts !== undefined) {
         @for (post of posts; track post.id) {
             <p-panel>
@@ -23,16 +28,31 @@
                         </ng-template>
                     </div>
                 </ng-template>
+                <ng-template #icons>
+                    <p-button icon="pi pi-cog" severity="secondary" rounded text (click)="menu.toggle($event)" />
+                    <p-menu #menu id="config_menu" [model]="menuItems" [popup]="true">
+                        <ng-template #item let-item>
+                            <a pRipple class="flex items-center p-menu-item-link" (click)="item.action(post.id)">
+                                <span [class]="item.icon"></span>
+                                <span class="ml-2">{{ item.label }}</span>
+                            </a>
+                        </ng-template>
+                    </p-menu>
+                </ng-template>
                 <div class="flex flex-col m-0 gap-3">
-                    <h2 class="text-xl font-bold">{{ post.title }}</h2>
-                    <p class="m-0">
-                        {{ post.content }}
+                    <h2 class="text-2xl font-black">{{ post.title }}</h2>
+                    <p>
+                        {{ post.getContentPreview() }}
                     </p>
                 </div>
                 <ng-template #footer>
                     <div class="flex flex-wrap items-center justify-between gap-4">
                         <div class="flex items-center gap-2">
-                            <p-button icon="pi pi-arrow-circle-right" rounded text label="Read more" [routerLink]="post.id.toString()"></p-button>
+                            @if (post.id === null) {
+                                <p-button icon="pi pi-arrow-circle-right" rounded text label="Read more" disabled></p-button>
+                            } @else {
+                                <p-button icon="pi pi-arrow-circle-right" rounded text label="Read more" [routerLink]="post.id.toString()"></p-button>
+                            }
                         </div>
                         <div class="flex gap-2">
                             @for (tag of post.getFormattedTags(); track tag) {
@@ -75,3 +95,11 @@
         }
     }
 </div>
+<!-- confirm dialog for when Delete is clicked -->
+<p-dialog header="Delete Post" [modal]="true" [(visible)]="this.deleteDialogVisible" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-8">Are you sure you want to <b>PERMANENTLY DELETE</b> this post? This action is irreversible.</span>
+    <div class="flex justify-end gap-2">
+        <p-button rounded label="Back" severity="secondary" (click)="this.deleteDialogVisible = false" />
+        <p-button rounded label="DELETE" severity="danger" (click)="this.deleteSelectedPost()" />
+    </div>
+</p-dialog>
