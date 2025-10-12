@@ -1,5 +1,5 @@
 export class Track {
-    public id!: number;
+    public id!: number | undefined;
     public title?: string;
     public artist?: string;
     public album?: string;
@@ -12,8 +12,8 @@ export class Track {
 }
 
 export class Chart {
-    public id!: number;
-    public track!: Track;
+    public id!: number | undefined;
+    public track!: Track | undefined;
     public variants!: Variant[];
     public releaseDate?: string;
     public downloadLink?: string;
@@ -26,7 +26,7 @@ export class Chart {
     public bandcampLink?: string;
 
     public public!: boolean;
-    public tags?: string[];
+    public tags?: string;
 
     public static cloneWithoutVariants(chart: Chart): Chart {
         let output: Chart = new Chart();
@@ -60,11 +60,12 @@ export class Chart {
 }
 
 export class Variant {
+    public id!: number | undefined;
     public charter?: string;
     public gamemode?: string;
     public difficulty?: string;
     public intensity?: number;
     public difficultyCode!: number;
 
-    public tags?: string[];
+    public tags?: string;
 }

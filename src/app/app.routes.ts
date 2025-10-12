@@ -16,7 +16,8 @@ import { authGuard } from './services/guard/auth.guard';
 import { FourOhFourComponent } from './pages/404/404.component';
 import { adminGuard } from './services/guard/admin.guard';
 import { AdminConsoleComponent } from './pages/admin/admin-console/admin-console.component';
-import { BlogNewPostComponent } from './pages/admin/blog/blog-edit-post/blog-new-post.component';
+import { BlogEditPostComponent } from './pages/admin/blog/blog-edit-post/blog-edit-post.component';
+import { GhrbEditChartComponent } from './pages/admin/ghrb/ghrb-edit-chart/ghrb-edit-chart.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -39,7 +40,9 @@ export const routes: Routes = [
     // admin pages
     {path: 'admin', canActivateChild: [adminGuard], children: [
         {path: 'console', component: AdminConsoleComponent},
-        {path: 'blog/new-post', component: BlogNewPostComponent}
+        {path: 'blog/new', component: BlogEditPostComponent},
+        {path: 'blog/edit/:id', component: BlogEditPostComponent},
+        {path: 'projects/ghrb/charts/new', component: GhrbEditChartComponent}
     ]},
 
     // add 404 page

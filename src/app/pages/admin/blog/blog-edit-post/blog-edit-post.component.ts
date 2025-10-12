@@ -10,12 +10,12 @@ import { Post } from '../../../../model/blog';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-blog-new-post',
+  selector: 'app-blog-edit-post',
   imports: [FormsModule, DividerModule, ButtonModule, TooltipModule, TextareaModule, ReactiveFormsModule],
-  templateUrl: './blog-new-post.component.html',
-  styleUrl: './blog-new-post.component.scss',
+  templateUrl: './blog-edit-post.component.html',
+  styleUrl: './blog-edit-post.component.scss',
 })
-export class BlogNewPostComponent {
+export class BlogEditPostComponent {
 
   public id!: number;
   public user!: UserDetails | null;
@@ -36,6 +36,20 @@ export class BlogNewPostComponent {
 
   async ngOnInit() {
     this.user = await this.auth.getUserDetails();
+    // get the ID, if there is one
+    this.route.params.subscribe(p => this.id = parseInt(p['id']));
+    // load the selected post if an ID was provided
+    if (!Number.isNaN(this.id)) {
+      let post: Post | null = await this.blog.getPost(this.id);
+      if (post !== null) {
+        this.buildForm(
+          post.id ?? 0,
+          post.title ?? '',
+          post.content ?? '',
+          post.tags ?? ''
+        );
+      }
+    }
   }
 
   public async confirmPost() {
@@ -57,7 +71,10 @@ export class BlogNewPostComponent {
   }
 
   private createPost(form: FormGroup): Post {
-    let post: Post = new Post(null);
+    let post: Post = new Post();
+    post.id = form.get('id')?.value;
+    // if the ID is 0, set to undefined, just in case
+    if (post.id === 0) post.id = undefined;
     post.title = form.get('title')?.value;
     post.author = this.user?.login;
     post.tags = form.get('tags')?.value;

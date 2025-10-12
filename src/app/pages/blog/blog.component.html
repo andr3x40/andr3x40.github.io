@@ -9,9 +9,7 @@
 <p-divider></p-divider>
 <div class="flex flex-col justify-center px-64 gap-4">
     @if (this.session.admin) {
-        <p-button [rounded]="true" [routerLink]="'/admin/blog/new-post'">
-            <span class="px-1">Create New Post</span>
-        </p-button>
+        <p-button [rounded]="true" [routerLink]="'/admin/blog/new'" label="Create New Post"/>
     }
     @if (posts !== undefined) {
         @for (post of posts; track post.id) {
@@ -29,15 +27,17 @@
                     </div>
                 </ng-template>
                 <ng-template #icons>
-                    <p-button icon="pi pi-cog" severity="secondary" rounded text (click)="menu.toggle($event)" />
-                    <p-menu #menu id="config_menu" [model]="menuItems" [popup]="true">
-                        <ng-template #item let-item>
-                            <a pRipple class="flex items-center p-menu-item-link" (click)="item.action(post.id)">
-                                <span [class]="item.icon"></span>
-                                <span class="ml-2">{{ item.label }}</span>
-                            </a>
-                        </ng-template>
-                    </p-menu>
+                    @if (this.session.admin) {
+                        <p-button icon="pi pi-cog" severity="secondary" rounded text (click)="menu.toggle($event)" />
+                        <p-menu #menu id="config_menu" [model]="menuItems" [popup]="true">
+                            <ng-template #item let-item>
+                                <a pRipple class="flex items-center p-menu-item-link" (click)="item.action(post.id)">
+                                    <span [class]="item.icon"></span>
+                                    <span class="ml-2">{{ item.label }}</span>
+                                </a>
+                            </ng-template>
+                        </p-menu>
+                    }
                 </ng-template>
                 <div class="flex flex-col m-0 gap-3">
                     <h2 class="text-2xl font-black">{{ post.title }}</h2>
@@ -51,7 +51,7 @@
                             @if (post.id === null) {
                                 <p-button icon="pi pi-arrow-circle-right" rounded text label="Read more" disabled></p-button>
                             } @else {
-                                <p-button icon="pi pi-arrow-circle-right" rounded text label="Read more" [routerLink]="post.id.toString()"></p-button>
+                                <p-button icon="pi pi-arrow-circle-right" rounded text label="Read more" [routerLink]="post.id?.toString()"></p-button>
                             }
                         </div>
                         <div class="flex gap-2">

@@ -10,6 +10,11 @@
 </div>
 <!-- dataview -->
 <div class="px-64">
+    <div class="my-4">
+        @if (this.session.admin) {
+            <p-button [rounded]="true" [routerLink]="'/admin/projects/ghrb/charts/new'" label="Create New Chart"/>
+        }
+    </div>
     @if (this.items !== undefined) {
         <p-dataview #dv [value]="getFilteredItems()" [rows]="10" [paginator]="true">
             <ng-template #list let-items>
@@ -169,28 +174,30 @@
     <p-dialog header="Chart Info" [modal]="true" [(visible)]="infoDialogVisible" [style]="{ width: '50rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
         @if (itemSelected !== undefined) {
             <div class="flex flex-row gap-4 items-center">
-                @if (itemSelected.track.albumLink === undefined) {
-                    <img
+                @if (itemSelected.track !== undefined) {
+                    @if (itemSelected.track.albumLink === undefined) {
+                        <img
                         class="block xl:block mx-auto rounded-border w-1/6"
                         src="../../../../assets/placeholder.jpg"
                         [alt]="itemSelected.track.album"
-                    />
-                } @else {
-                    <img
-                        class="block xl:block mx-auto rounded-border w-1/6"
-                        [src]="itemSelected.track.albumLink"
-                        [alt]="itemSelected.track.album"
-                    />
-                }
-                <div class="flex flex-col w-5/6">
-                    <div>
-                        <div class="text-xl font-bold text-surface-900 dark:text-surface-0">{{ itemSelected.track.title }}</div>
-                        <div class="font-lg text-secondary text-m mb-2">{{ itemSelected.track.artist }}</div>
-                        <div class="font-light text-secondary text-m mb-2">{{ itemSelected.track.album }} ({{ itemSelected.track.year }}) - {{ itemSelected.track.genre }}</div>
-                        <div class="font-light text-secondary text-m">From {{ itemSelected.source !== undefined ? (itemSelected.source !== null ? itemSelected.source : "No Source") : "Unknown Source" }}</div>
+                        />
+                    } @else {
+                        <img
+                            class="block xl:block mx-auto rounded-border w-1/6"
+                            [src]="itemSelected.track.albumLink"
+                            [alt]="itemSelected.track.album"
+                            />
+                    }
+                    <div class="flex flex-col w-5/6">
+                        <div>
+                            <div class="text-xl font-bold text-surface-900 dark:text-surface-0">{{ itemSelected.track.title }}</div>
+                            <div class="font-lg text-secondary text-m mb-2">{{ itemSelected.track.artist }}</div>
+                            <div class="font-light text-secondary text-m mb-2">{{ itemSelected.track.album }} ({{ itemSelected.track.year }}) - {{ itemSelected.track.genre }}</div>
+                            <div class="font-light text-secondary text-m">From {{ itemSelected.source !== undefined ? (itemSelected.source !== null ? itemSelected.source : "No Source") : "Unknown Source" }}</div>
+                        </div>
                     </div>
+                }
                 </div>
-            </div>
             <p-divider/>
             <p>{{ itemSelected.description !== undefined ? itemSelected.description : "No Description" }}</p>
             <p-divider/>

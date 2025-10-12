@@ -82,8 +82,8 @@ export class BlogComponent {
         }
     }
 
-    editPost() {
-        // WIP
+    private editPost() {
+        this.router.navigate([`/admin/blog/edit/${this.selectedItemId}`])
     }
 
 }

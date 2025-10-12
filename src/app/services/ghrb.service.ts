@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Chart } from '../model/ghrb';
 import { HttpService } from './http.service';
+import { Post } from '../model/blog';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { HttpService } from './http.service';
 export class GhrbService {
 
   private chartUrl: string = 'http://localhost:8080/api/ghrb/charts';
+  private chartAdminUrl: string = 'http://localhost:8080/api/admin/ghrb/charts';
 
   constructor(private http: HttpService) { }
 
@@ -19,6 +21,20 @@ export class GhrbService {
       output.push(Chart.clone(c));
     }
     return output;
+  }
+
+  public async getChart(id: number): Promise<Chart | null> {
+      const output: Chart | null = await this.http.getRequestBody<Chart>(this.chartUrl + '/' + id);
+      if (output === null) return null;
+      return Chart.clone(output);
+  }
+
+  public async saveChart(chart: Chart) {
+    this.http.postRequestBody<Chart>(this.chartAdminUrl, chart);
+  }
+
+  public async deleteChart(id: number) {
+    this.http.deleteRequestBody<Chart>(this.chartAdminUrl + '/' + id);
   }
 
 }

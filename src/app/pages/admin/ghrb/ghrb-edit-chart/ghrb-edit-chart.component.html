@@ -1,0 +1,207 @@
+<div class="flex flex-col m-0 px-96 mt-32">
+    <h2 class="text-4xl font-black mb-2">Create Chart</h2>
+    <p-stepper [value]="1">
+        <p-step-item [value]="1">
+            <p-step>Track Details</p-step>
+            <p-step-panel>
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-120">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            <form [formGroup]="trackForm" class="grid grid-cols-12 gap-6 w-full m-6">
+                                <div class="flex flex-col col-span-6">
+                                    <span>Title</span>
+                                    <input pInputText formControlName="title"/>
+                                </div>
+                                <div class="flex flex-col col-span-6">
+                                    <span>Artist</span>
+                                    <input pInputText formControlName="artist"/>
+                                </div>
+                                <div class="flex flex-col col-span-4">
+                                    <span>Album</span>
+                                    <input pInputText formControlName="album"/>
+                                </div>
+                                <div class="flex flex-col col-span-4">
+                                    <span>Genre</span>
+                                    <input pInputText formControlName="genre"/>
+                                </div>
+                                <div class="flex flex-col col-span-4">
+                                    <span>Year of Release</span>
+                                    <input pInputText formControlName="year"/>
+                                </div>
+                                <div class="flex flex-col col-span-4">
+                                    <span>Length</span>
+                                    <p-inputgroup>
+                                        <p-inputnumber formControlName="length">
+                                        </p-inputnumber>
+                                        <p-inputgroup-addon>seconds</p-inputgroup-addon>
+                                    </p-inputgroup>
+                                </div>
+                                <div class="flex flex-col col-span-4">
+                                    <span>Minimum BPM</span>
+                                    <p-inputgroup>
+                                        <p-inputnumber formControlName="minimumBpm">
+                                        </p-inputnumber>
+                                        <p-inputgroup-addon>BPM</p-inputgroup-addon>
+                                    </p-inputgroup>
+                                </div>
+                                <div class="flex flex-col col-span-4">
+                                    <span>Maximum BPM</span>
+                                    <p-inputgroup>
+                                        <p-inputnumber formControlName="maximumBpm">
+                                        </p-inputnumber>
+                                        <p-inputgroup-addon>BPM</p-inputgroup-addon>
+                                    </p-inputgroup>
+                                </div>
+                                <div class="flex flex-col col-span-12">
+                                    <div class="grid grid-cols-12 gap-6 items-center">
+                                        <div class="flex flex-col col-span-2">
+                                            <img
+                                            class="block xl:block mx-auto rounded-border w-full"
+                                            src="{{this.albumCoverPreview !== undefined ? this.albumCoverPreview : '../../../../assets/placeholder.jpg'}}"
+                                            />
+                                        </div>
+                                        <div class="flex flex-col col-span-10">
+                                            <p-inputgroup>
+                                                <input pInputText formControlName="albumLink" placeholder="Cover Link"/>
+                                                <p-inputgroup-addon>
+                                                    <p-button icon="pi pi-sync" severity="secondary" (click)="this.reloadAlbumCoverImage()"/>
+                                                </p-inputgroup-addon>
+                                            </p-inputgroup>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-end">
+                        <p-button rounded label="Next" icon="pi pi-arrow-down" iconPos="right" (onClick)="activateCallback(2)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+        </p-step-item>
+
+        <p-step-item [value]="2">
+            <p-step>Track Links</p-step>
+            <p-step-panel>
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-120">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            <form [formGroup]="chartForm" class="grid grid-cols-12 gap-6 w-full m-6">
+                                <div class="flex flex-col col-span-12">
+                                    <span>Spotify</span>
+                                    <input pInputText formControlName="spotifyLink"/>
+                                </div>
+                                <div class="flex flex-col col-span-12">
+                                    <span>YouTube</span>
+                                    <input pInputText formControlName="youtubeLink"/>
+                                </div>
+                                <div class="flex flex-col col-span-12">
+                                    <span>Soundcloud</span>
+                                    <input pInputText formControlName="soundcloudLink"/>
+                                </div>
+                                <div class="flex flex-col col-span-12">
+                                    <span>Bandcamp</span>
+                                    <input pInputText formControlName="bandcampLink"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                        <p-button rounded label="Back" icon="pi pi-arrow-up" severity="secondary" iconPos="left" (onClick)="activateCallback(1)" />
+                        <p-button rounded label="Next" icon="pi pi-arrow-down" iconPos="right" (onClick)="activateCallback(3)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+        </p-step-item>
+
+        <p-step-item [value]="3">
+            <p-step>Chart Details</p-step>
+            <p-step-panel>
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-120">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            <form [formGroup]="chartForm" class="grid grid-cols-12 gap-6 w-full m-6">
+                                <div class="flex flex-col col-span-4">
+                                    <span>Source</span>
+                                    <input pInputText formControlName="source"/>
+                                </div>
+                                <div class="flex flex-col col-span-8">
+                                    <span>Download Link</span>
+                                    <input pInputText formControlName="downloadLink"/>
+                                </div>
+                                <div class="flex flex-col col-span-12">
+                                    <span>Description</span>
+                                    <textarea pTextarea formControlName="description" rows="7" style="resize: none"></textarea>
+                                </div>
+                                <div class="flex flex-col col-span-8">
+                                    <span>Tags</span>
+                                    <input pInputText formControlName="tags"/>
+                                </div>
+                                <div class="flex flex-row gap-1 items-center justify-center col-span-4">
+                                    <p-checkbox formControlName="public" [binary]="true"/>
+                                    <label>Make Public</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                        <p-button rounded label="Back" icon="pi pi-arrow-up" severity="secondary" iconPos="left" (onClick)="activateCallback(2)" />
+                        <p-button rounded label="Next" icon="pi pi-arrow-down" iconPos="right" (onClick)="activateCallback(4)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+        </p-step-item>
+
+        <p-step-item [value]="4">
+            <p-step>Variants</p-step>
+            <p-step-panel>
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-120">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            <div class="flex flex-col w-full m-2 gap-2">
+                                <div class="grid grid-cols-30 w-full gap-2">
+                                    <span class="col-span-6">Charter</span>
+                                    <span class="col-span-6">Gamemode</span>
+                                    <span class="col-span-6">Difficulty</span>
+                                    <span class="col-span-3">Intensity</span>
+                                    <span class="col-span-3">Diff. Code</span>
+                                    <span class="col-span-6">Tags</span>
+                                </div>
+                                @for (variantForm of variantForms; track $index) {
+                                    <form [formGroup]="variantForm" class="grid grid-cols-30 w-full gap-2">
+                                        <input pInputText class="col-span-6" formControlName="charter"/>
+                                        <input pInputText class="col-span-6" formControlName="gamemode"/>
+                                        <input pInputText class="col-span-6" formControlName="difficulty"/>
+                                        <input pInputText class="col-span-3" formControlName="intensity"/>
+                                        <input pInputText class="col-span-3" formControlName="difficultyCode"/>
+                                        <input pInputText class="col-span-6" formControlName="tags"/>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                        <p-button rounded label="Back" icon="pi pi-arrow-up" severity="secondary" iconPos="left" (onClick)="activateCallback(3)" />
+                        <p-button-group>
+                            <p-button rounded label="Add" icon="pi pi-plus" severity="primary" iconPos="left" (onClick)="addNewVariantForm()" />
+                            <p-button rounded label="Remove Last" icon="pi pi-minus" severity="danger" iconPos="right" (onClick)="removeLastVariantForm()" />
+                        </p-button-group>
+                        <p-button rounded label="Save" icon="pi pi-check" severity="success" iconPos="right" (onClick)="confirmChart()"/>
+                    </div>
+                </ng-template>
+            </p-step-panel>
+        </p-step-item>
+    </p-stepper>
+    <p-divider/>
+    <div class="flex gap-2 justify-between text-surface-600 text-xs">
+        <p-button rounded icon="pi pi-minus-circle" label="Cancel" severity="danger" (click)="confirmCancel()"></p-button>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 export class Post {
 
-    public id!: number | null;
+    public id!: number | undefined;
     public title?: string;
     public content?: string;
 
@@ -9,7 +9,7 @@ export class Post {
 
     public tags?: string;
 
-    public constructor(id: number | null, title?: string, content?: string, author?: string, time?: string, tags?: string) {
+    public constructor(id?: number, title?: string, content?: string, author?: string, time?: string, tags?: string) {
         this.id = id;
         this.title = title;
         this.content = content;

@@ -81,6 +81,15 @@ export const HumandroidTheme = definePreset(Aura, {
                     }
                 }
             }
+        },
+        stepper: {
+            colorScheme: {
+                dark: {
+                    steppanel: {
+                        background: '{surface.950}'
+                    }
+                }
+            }
         }
     }
 });

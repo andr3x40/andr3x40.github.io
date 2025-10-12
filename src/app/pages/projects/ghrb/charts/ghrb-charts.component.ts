@@ -20,14 +20,20 @@ import { SiSoundcloudIcon } from '@semantic-icons/simple-icons';
 import { SiBandcampIcon } from '@semantic-icons/simple-icons';
 import { GhrbService } from '../../../../services/ghrb.service';
 import { SkeletonModule } from 'primeng/skeleton';
+import { AuthService, AuthSession } from '../../../../services/auth.service';
+import { RouterLink } from '@angular/router';
+import { TextareaModule } from 'primeng/textarea';
+import { InputText, InputTextModule } from 'primeng/inputtext';
 
 @Component({
     selector: 'app-ghrb-charts',
     templateUrl: './ghrb-charts.component.html',
     styleUrl: './ghrb-charts.component.scss',
-    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, ToggleButtonModule, DialogModule, Dialog, TooltipModule, PaginatorModule, SiSpotifyIcon, SiYoutubeIcon, SiSoundcloudIcon, SiBandcampIcon, SkeletonModule],
+    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, ToggleButtonModule, DialogModule, Dialog, TooltipModule, PaginatorModule, SiSpotifyIcon, SiYoutubeIcon, SiSoundcloudIcon, SiBandcampIcon, SkeletonModule, RouterLink, TextareaModule, InputTextModule, InputText],
 })
 export class GhrbChartsComponent {
+
+    public session!: AuthSession;
 
     public items!: Chart[];
     public placeholders: number[] = [0, 1, 2];
@@ -82,9 +88,10 @@ export class GhrbChartsComponent {
     public infoDialogVisible: boolean = false;
     public itemSelected!: Chart;
 
-    constructor(public service: GhrbService) { }
+    constructor(public service: GhrbService, public auth: AuthService) { }
 
     async ngOnInit() {
+        this.session = await this.auth.getUserSession();
         setTimeout(async () => {
             this.items = await this.service.getAllCharts();
         }, 100);
@@ -138,7 +145,7 @@ export class GhrbChartsComponent {
 
     private matchesFilter(chart: Chart) {
         if (chart.variants === undefined) return false;
-        let artistTitle: string = chart.track.artist + " - " + chart.track.title;
+        let artistTitle: string = chart.track?.artist + " - " + chart.track?.title;
         let filter = chart.variants.find(x => x.gamemode === this.gamemodeFilter)
             && artistTitle.toLowerCase().includes(this.chartFilter.toLowerCase())
         if (this.releasedFilter) return filter && chart.downloadLink !== undefined
