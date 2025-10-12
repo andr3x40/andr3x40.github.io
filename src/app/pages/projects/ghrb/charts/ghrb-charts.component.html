@@ -15,73 +15,73 @@
             <p-button [rounded]="true" [routerLink]="'/admin/projects/ghrb/charts/new'" label="Create New Chart"/>
         }
     </div>
-    @if (this.items !== undefined) {
+    @if (this.charts !== undefined) {
         <p-dataview #dv [value]="getFilteredItems()" [rows]="10" [paginator]="true">
             <ng-template #list let-items>
                 <div class="grid grid-cols-12 grid-nogutter">
-                    @for (item of items; track item.id) {
+                    @for (chart of charts; track chart.id) {
                         <div class="col-span-12 border-1 border-surface-800 bg-surface-900 rounded-xl m-1">
                             <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4">
                                 <div class="md:w-40 relative">
-                                    @if (item.track.albumLink === undefined) {
+                                    @if (chart.track?.albumLink === undefined) {
                                         <img
                                         class="block xl:block mx-auto rounded-border w-full"
                                         src="../../../../assets/placeholder.jpg"
-                                        [alt]="item.track.album"
+                                        [alt]="chart.track?.album"
                                         />
                                     } @else {
                                         <img
                                         class="block xl:block mx-auto rounded-border w-full"
-                                        [src]="item.track.albumLink"
-                                        [alt]="item.track.album"
+                                        [src]="chart.track?.albumLink"
+                                        [alt]="chart.track?.album"
                                         />
                                     }
                                     <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
-                                    @if (getAbsoluteDifficulty(item.variants).name === 'Beginner') {
+                                    @if (getAbsoluteDifficulty(chart.variants).name === 'Beginner') {
                                         <p-tag
-                                            [value]="getAbsoluteDifficulty(item.variants).name"
+                                            [value]="getAbsoluteDifficulty(chart.variants).name"
                                             class="absolute dark:!bg-surface-900 dark:!text-sky-300"
                                             [style.right.px]="4"
                                             [style.bottom.px]="4"
                                         />
-                                    } @else if (getAbsoluteDifficulty(item.variants).name === 'Intermediate') {
+                                    } @else if (getAbsoluteDifficulty(chart.variants).name === 'Intermediate') {
                                         <p-tag
-                                            [value]="getAbsoluteDifficulty(item.variants).name"
+                                            [value]="getAbsoluteDifficulty(chart.variants).name"
                                             class="absolute dark:!bg-surface-900 dark:!text-emerald-300"
                                             [style.right.px]="4"
                                             [style.bottom.px]="4"
                                         />
-                                    } @else if (getAbsoluteDifficulty(item.variants).name === 'Advanced') {
+                                    } @else if (getAbsoluteDifficulty(chart.variants).name === 'Advanced') {
                                         <p-tag
-                                            [value]="getAbsoluteDifficulty(item.variants).name"
+                                            [value]="getAbsoluteDifficulty(chart.variants).name"
                                             class="absolute dark:!bg-surface-900 dark:!text-yellow-300"
                                             [style.right.px]="4"
                                             [style.bottom.px]="4"
                                         />
-                                    } @else if (getAbsoluteDifficulty(item.variants).name === 'Expert') {
+                                    } @else if (getAbsoluteDifficulty(chart.variants).name === 'Expert') {
                                         <p-tag
-                                            [value]="getAbsoluteDifficulty(item.variants).name"
+                                            [value]="getAbsoluteDifficulty(chart.variants).name"
                                             class="absolute dark:!bg-surface-900 dark:!text-red-300"
                                             [style.right.px]="4"
                                             [style.bottom.px]="4"
                                         />
-                                    } @else if (getAbsoluteDifficulty(item.variants).name === 'Grandmaster') {
+                                    } @else if (getAbsoluteDifficulty(chart.variants).name === 'Grandmaster') {
                                         <p-tag
-                                            [value]="getAbsoluteDifficulty(item.variants).name"
+                                            [value]="getAbsoluteDifficulty(chart.variants).name"
                                             class="absolute dark:!bg-surface-900 dark:!text-violet-300"
                                             [style.right.px]="4"
                                             [style.bottom.px]="4"
                                             />
-                                    } @else if (getAbsoluteDifficulty(item.variants).name === 'Super Grandmaster') {
+                                    } @else if (getAbsoluteDifficulty(chart.variants).name === 'Super Grandmaster') {
                                         <p-tag
-                                            [value]="getAbsoluteDifficulty(item.variants).name"
+                                            [value]="getAbsoluteDifficulty(chart.variants).name"
                                             class="absolute dark:!bg-surface-900 dark:!text-indigo-300"
                                             [style.right.px]="4"
                                             [style.bottom.px]="4"
                                         />
-                                    } @else if (getAbsoluteDifficulty(item.variants).name === 'None') {
+                                    } @else if (getAbsoluteDifficulty(chart.variants).name === 'None') {
                                         <p-tag
-                                            [value]="getAbsoluteDifficulty(item.variants).name"
+                                            [value]="getAbsoluteDifficulty(chart.variants).name"
                                             class="absolute dark:!bg-surface-900 dark:!text-neutral-300"
                                             [style.right.px]="4"
                                             [style.bottom.px]="4"
@@ -91,27 +91,40 @@
                                 <div class="flex flex-row justify-between md:items-center flex-1 gap-6">
                                     <div class="flex flex-col justify-between items-start gap-10">
                                         <div>
-                                            <span class="text-lg font-bold text-surface-900 dark:text-surface-0 text-clip">{{ item.track.title }}</span>
-                                            <div class="font-medium text-secondary text-m mb-2">{{ item.track.artist }}</div>
-                                            <div class="font-light text-secondary text-m">{{ item.track.album }} ({{ item.track.year }}) - {{ item.track.genre }}</div>
+                                            <span class="text-lg font-bold text-surface-900 dark:text-surface-0 text-clip">{{ chart.track?.title }}</span>
+                                            <div class="font-medium text-secondary text-m mb-2">{{ chart.track?.artist }}</div>
+                                            <div class="font-light text-secondary text-m">{{ chart.track?.album }} ({{ chart.track?.year }}) - {{ chart.track?.genre }}</div>
                                         </div>
                                         <div>
                                             <p-buttongroup>
-                                                @if (item.downloadLink === undefined) {
+                                                @if (chart.downloadLink === undefined) {
                                                     <p-button label="Coming Soon" severity="contrast" disabled="true"/>
                                                 } @else {
                                                     <p-button>
-                                                        <a href="{{ item.downloadLink }}" class="font-medium">
+                                                        <a href="{{ chart.downloadLink }}" class="font-medium">
                                                             Download
                                                         </a>
                                                     </p-button>
                                                 }
-                                                <p-button label="Info" severity="secondary" [outlined]="true" (click)="showChartInfo(item.id)"/>
+                                                @if (chart.id !== undefined) {
+                                                    <p-button label="Info" severity="secondary" [outlined]="true" (click)="showChartInfo(chart.id)"/>
+                                                }
                                             </p-buttongroup>
+                                            @if (this.session.admin) {
+                                                <p-button class="ml-1" icon="pi pi-cog" severity="secondary" rounded text (click)="menu.toggle($event)" />
+                                                <p-menu #menu id="config_menu" [model]="menuItems" [popup]="true">
+                                                    <ng-template #item let-item>
+                                                        <a pRipple class="flex items-center p-menu-item-link" (click)="item.action(chart.id)">
+                                                            <span [class]="item.icon"></span>
+                                                            <span class="ml-2">{{ item.label }}</span>
+                                                        </a>
+                                                    </ng-template>
+                                                </p-menu>
+                                            }
                                         </div>
                                     </div>
                                     <div class="flex flex-col md:items-end gap-1 text-m font-bold">
-                                        @for (variant of orderByDifficulty(item.variants, true); track variant) {
+                                        @for (variant of orderByDifficulty(chart.variants, true); track variant) {
                                             <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
                                             @if (variant.difficultyCode === 1) {
                                                 <span class="text-sky-600 dark:text-sky-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
@@ -290,3 +303,11 @@
         }
     </p-dialog>
 </div>
+<!-- confirm dialog for when Delete is clicked -->
+<p-dialog header="Delete Chart" [modal]="true" [(visible)]="this.deleteDialogVisible" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-8">Are you sure you want to <b>PERMANENTLY DELETE</b> this chart? This action is irreversible.</span>
+    <div class="flex justify-end gap-2">
+        <p-button rounded label="Back" severity="secondary" (click)="this.deleteDialogVisible = false" />
+        <p-button rounded label="DELETE" severity="danger" (click)="this.deleteSelectedChart()" />
+    </div>
+</p-dialog>

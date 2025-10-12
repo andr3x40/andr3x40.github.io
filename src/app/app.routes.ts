@@ -42,7 +42,8 @@ export const routes: Routes = [
         {path: 'console', component: AdminConsoleComponent},
         {path: 'blog/new', component: BlogEditPostComponent},
         {path: 'blog/edit/:id', component: BlogEditPostComponent},
-        {path: 'projects/ghrb/charts/new', component: GhrbEditChartComponent}
+        {path: 'projects/ghrb/charts/new', component: GhrbEditChartComponent},
+        {path: 'projects/ghrb/charts/edit/:id', component: GhrbEditChartComponent}
     ]},
 
     // add 404 page

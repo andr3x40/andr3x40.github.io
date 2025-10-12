@@ -15,7 +15,6 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { AuthService, AuthSession } from '../../services/auth.service';
 import { MenuItem } from 'primeng/api';
 import { DialogModule } from "primeng/dialog";
-import { HttpService } from '../../services/http.service';
 
 @Component({
     selector: 'app-blog',
@@ -30,9 +29,9 @@ export class BlogComponent {
 
     public session!: AuthSession;
 
-    public menuItems: MenuItem[] = [];
-
     public deleteDialogVisible: boolean = false;
+    
+    public menuItems: MenuItem[] = [];
     public selectedItemId: number | undefined;
 
     showConfirmDeleteDialog() {

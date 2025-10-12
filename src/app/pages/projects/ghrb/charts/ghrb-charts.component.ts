@@ -21,21 +21,23 @@ import { SiBandcampIcon } from '@semantic-icons/simple-icons';
 import { GhrbService } from '../../../../services/ghrb.service';
 import { SkeletonModule } from 'primeng/skeleton';
 import { AuthService, AuthSession } from '../../../../services/auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TextareaModule } from 'primeng/textarea';
 import { InputText, InputTextModule } from 'primeng/inputtext';
+import { MenuModule } from "primeng/menu";
+import { MenuItem } from 'primeng/api';
 
 @Component({
     selector: 'app-ghrb-charts',
     templateUrl: './ghrb-charts.component.html',
     styleUrl: './ghrb-charts.component.scss',
-    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, ToggleButtonModule, DialogModule, Dialog, TooltipModule, PaginatorModule, SiSpotifyIcon, SiYoutubeIcon, SiSoundcloudIcon, SiBandcampIcon, SkeletonModule, RouterLink, TextareaModule, InputTextModule, InputText],
+    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, ToggleButtonModule, DialogModule, Dialog, TooltipModule, PaginatorModule, SiSpotifyIcon, SiYoutubeIcon, SiSoundcloudIcon, SiBandcampIcon, SkeletonModule, RouterLink, TextareaModule, InputTextModule, InputText, MenuModule],
 })
 export class GhrbChartsComponent {
 
     public session!: AuthSession;
 
-    public items!: Chart[];
+    public charts!: Chart[];
     public placeholders: number[] = [0, 1, 2];
 
     public chartFilter: string = "";
@@ -86,19 +88,45 @@ export class GhrbChartsComponent {
     public standardDifficulties: any[] = ["Easy", "Medium", "Hard", "Expert"];
 
     public infoDialogVisible: boolean = false;
-    public itemSelected!: Chart;
+    public deleteDialogVisible: boolean = false;
 
-    constructor(public service: GhrbService, public auth: AuthService) { }
+    public itemSelected!: Chart;
+    
+    public menuItems: MenuItem[] = [];
+    public selectedItemId: number | undefined;
+
+    constructor(public service: GhrbService, public auth: AuthService, public router: Router) { }
 
     async ngOnInit() {
         this.session = await this.auth.getUserSession();
+        this.menuItems = [
+            {
+                label: 'Edit',
+                icon: 'pi pi-pencil',
+                action: (id: number) => {
+                    this.selectedItemId = id;
+                    this.editChart();
+                }
+            },
+            {
+                separator: true
+            },
+            {
+                label: 'Delete',
+                icon: 'pi pi-times',
+                action: (id: number) => {
+                    this.selectedItemId = id;
+                    this.showConfirmDeleteDialog();
+                }
+            }
+        ];
         setTimeout(async () => {
-            this.items = await this.service.getAllCharts();
+            this.charts = await this.service.getAllCharts();
         }, 100);
     }
 
     showChartInfo(chartID: number) {
-        let chart: Chart | undefined = this.items.find(x => x.id == chartID);
+        let chart: Chart | undefined = this.charts.find(x => x.id == chartID);
         if (chart !== undefined) {
             this.infoDialogVisible = true;
             this.itemSelected = chart;
@@ -154,7 +182,7 @@ export class GhrbChartsComponent {
 
     getFilteredItems(): Chart[] {
         let output: Chart[] = [];
-        for (let chart of this.items) {
+        for (let chart of this.charts) {
             if (chart.variants !== undefined && this.matchesFilter(chart)) {
                 let c: Chart = Chart.cloneWithoutVariants(chart)
                 c.variants = chart.variants.filter(x => x.gamemode === this.gamemodeFilter)
@@ -188,6 +216,25 @@ export class GhrbChartsComponent {
             return indexA - indexB;
         });
         return output;
+    }
+
+    public editChart() {
+        this.router.navigate(['/admin/projects/ghrb/charts/edit/' + this.selectedItemId]);
+    }
+
+    public showConfirmDeleteDialog() {
+        this.deleteDialogVisible = true;
+    }
+
+    public async deleteSelectedChart() {
+        this.deleteDialogVisible = false;
+        if (this.selectedItemId !== undefined) {
+            // delete the post
+            this.service.deleteChart(this.selectedItemId);
+            // reload the page
+            await this.router.navigate(['/']);
+            this.router.navigate(['/projects/ghrb/charts']);
+        } 
     }
 
 }
