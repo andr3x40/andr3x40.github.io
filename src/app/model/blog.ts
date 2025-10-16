@@ -14,7 +14,7 @@ export class Post {
         this.title = title;
         this.content = content;
         this.author = author;
-        this.time = time;
+        this.time = time + "Z"; // add Z to indicate it's UTC time
         this.tags = tags;
     }
 
@@ -40,19 +40,20 @@ export class Post {
 
     public getTimeElapsed(): string {
         if (this.time === undefined) return "No Time";
-        let postTime: Date = new Date(this.time);
-        let relativeTime: Date = new Date(Date.now() - postTime.getTime());
+        let postTime: number = new Date(this.time).getTime();
+        let currentTime: number = Date.now();
+        let relativeDate: Date = new Date(currentTime - postTime);
+        let relativeTime: number = relativeDate.getTime() / 1000;
         // check if it's in the future
-        if (relativeTime.getFullYear() < 1970) return "In the future";
+        if (relativeTime < 0) return "In the future";
         let time = {
-            s: relativeTime.getSeconds(),
-            min: relativeTime.getMinutes(),
-            h: relativeTime.getHours(),
-            d: relativeTime.getDate() - 1,
-            mon: relativeTime.getMonth(),
-            y: relativeTime.getFullYear() - 1970
+            s: Math.floor(relativeTime) % 60,
+            min: Math.floor(relativeTime / 60) % 60,
+            h: Math.floor(relativeTime / (60 * 60)) % 24,
+            d: Math.floor(relativeTime / (60 * 60 * 24)) % 30,
+            mon: Math.floor(relativeTime / (60 * 60 * 24 * 30)) % 12,
+            y: Math.floor(relativeTime / (60 * 60 * 24 * 30 * 12)),
         }
-
         if (time.y > 0) {
             return time.y + (time.y === 1 ? " year " : " years ") + "ago";
         } else if (time.mon > 0) {

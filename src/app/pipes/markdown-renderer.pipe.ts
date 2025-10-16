@@ -14,25 +14,25 @@ marked.use({
 
         switch (depth) {
           case 1: return `
-                <h1 class="text-3xl font-black">
+                <h1 class="text-3xl font-black mt-6 mb-1">
                   ${text}
                 </h1>`;
           case 2: return `
-                <h2 class="text-2xl font-bold">
+                <h2 class="text-2xl font-bold mt-4 mb-1">
                   ${text}
                 </h2>`;
           case 3: return `
-                <h3 class="text-xl font-bold">
+                <h3 class="text-xl font-bold mt-3 mb-1">
                   ${text}
                 </h3>`;
           case 4:
           case 5:
           case 6: return `
-                <h${depth} class="text-lg font-bold">
+                <h${depth} class="text-lg font-bold mt-2 mb-1">
                   ${text}
                 </h${depth}>`;
           default: return `
-                <p class="text-lg font-bold">
+                <p class="text-lg font-bold mb-1">
                   ${text}
                 </p>`;
         }
@@ -43,7 +43,7 @@ marked.use({
       renderer({ tokens }: any) {
         const text = this.parser.parseInline(tokens);
         return `
-                <p>
+                <p class="mb-2">
                   ${text}
                 </p>`;
       },
