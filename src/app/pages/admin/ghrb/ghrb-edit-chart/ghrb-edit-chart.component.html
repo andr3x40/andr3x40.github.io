@@ -12,28 +12,28 @@
                             <form [formGroup]="trackForm" class="grid grid-cols-12 gap-6 w-full m-6">
                                 <div class="flex flex-col col-span-6">
                                     <span>Title</span>
-                                    <input pInputText formControlName="title"/>
+                                    <input pInputText formControlName="title" [invalid]="!this.checkFieldValidity(trackForm, 'title')"/>
                                 </div>
                                 <div class="flex flex-col col-span-6">
                                     <span>Artist</span>
-                                    <input pInputText formControlName="artist"/>
+                                    <input pInputText formControlName="artist" [invalid]="!this.checkFieldValidity(trackForm, 'artist')"/>
                                 </div>
                                 <div class="flex flex-col col-span-4">
                                     <span>Album</span>
-                                    <input pInputText formControlName="album"/>
+                                    <input pInputText formControlName="album" [invalid]="!this.checkFieldValidity(trackForm, 'album')"/>
                                 </div>
                                 <div class="flex flex-col col-span-4">
                                     <span>Genre</span>
-                                    <input pInputText formControlName="genre"/>
+                                    <input pInputText formControlName="genre" [invalid]="!this.checkFieldValidity(trackForm, 'genre')"/>
                                 </div>
                                 <div class="flex flex-col col-span-4">
                                     <span>Year of Release</span>
-                                    <input pInputText formControlName="year"/>
+                                    <input pInputText formControlName="year" [invalid]="!this.checkFieldValidity(trackForm, 'year')"/>
                                 </div>
                                 <div class="flex flex-col col-span-4">
                                     <span>Length</span>
                                     <p-inputgroup>
-                                        <p-inputnumber formControlName="length">
+                                        <p-inputnumber formControlName="length" [invalid]="!this.checkFieldValidity(trackForm, 'length')">
                                         </p-inputnumber>
                                         <p-inputgroup-addon>seconds</p-inputgroup-addon>
                                     </p-inputgroup>
@@ -41,7 +41,7 @@
                                 <div class="flex flex-col col-span-4">
                                     <span>Minimum BPM</span>
                                     <p-inputgroup>
-                                        <p-inputnumber formControlName="minimumBpm">
+                                        <p-inputnumber formControlName="minimumBpm" [invalid]="!this.checkFieldValidity(trackForm, 'minimumBpm')">
                                         </p-inputnumber>
                                         <p-inputgroup-addon>BPM</p-inputgroup-addon>
                                     </p-inputgroup>
@@ -49,7 +49,7 @@
                                 <div class="flex flex-col col-span-4">
                                     <span>Maximum BPM</span>
                                     <p-inputgroup>
-                                        <p-inputnumber formControlName="maximumBpm">
+                                        <p-inputnumber formControlName="maximumBpm" [invalid]="!this.checkFieldValidity(trackForm, 'maximumBpm')">
                                         </p-inputnumber>
                                         <p-inputgroup-addon>BPM</p-inputgroup-addon>
                                     </p-inputgroup>
@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="flex flex-col col-span-10">
                                             <p-inputgroup>
-                                                <input pInputText formControlName="albumLink" placeholder="Cover Link"/>
+                                                <input pInputText formControlName="albumLink" placeholder="Cover Link" [invalid]="!this.checkFieldValidity(trackForm, 'albumLink')"/>
                                                 <p-inputgroup-addon>
                                                     <p-button icon="pi pi-sync" severity="secondary" (click)="this.reloadAlbumCoverImage()"/>
                                                 </p-inputgroup-addon>
@@ -93,19 +93,19 @@
                             <form [formGroup]="chartForm" class="grid grid-cols-12 gap-6 w-full m-6">
                                 <div class="flex flex-col col-span-12">
                                     <span>Spotify</span>
-                                    <input pInputText formControlName="spotifyLink"/>
+                                    <input pInputText formControlName="spotifyLink" [invalid]="!this.checkFieldValidity(chartForm, 'spotifyLink')"/>
                                 </div>
                                 <div class="flex flex-col col-span-12">
                                     <span>YouTube</span>
-                                    <input pInputText formControlName="youtubeLink"/>
+                                    <input pInputText formControlName="youtubeLink" [invalid]="!this.checkFieldValidity(chartForm, 'youtubeLink')"/>
                                 </div>
                                 <div class="flex flex-col col-span-12">
                                     <span>Soundcloud</span>
-                                    <input pInputText formControlName="soundcloudLink"/>
+                                    <input pInputText formControlName="soundcloudLink" [invalid]="!this.checkFieldValidity(chartForm, 'soundcloudLink')"/>
                                 </div>
                                 <div class="flex flex-col col-span-12">
                                     <span>Bandcamp</span>
-                                    <input pInputText formControlName="bandcampLink"/>
+                                    <input pInputText formControlName="bandcampLink" [invalid]="!this.checkFieldValidity(chartForm, 'bandcampLink')"/>
                                 </div>
                             </form>
                         </div>
@@ -129,22 +129,22 @@
                             <form [formGroup]="chartForm" class="grid grid-cols-12 gap-6 w-full m-6">
                                 <div class="flex flex-col col-span-4">
                                     <span>Source</span>
-                                    <input pInputText formControlName="source"/>
+                                    <input pInputText formControlName="source" [invalid]="!this.checkFieldValidity(chartForm, 'source')"/>
                                 </div>
                                 <div class="flex flex-col col-span-8">
                                     <span>Download Link</span>
-                                    <input pInputText formControlName="downloadLink"/>
+                                    <input pInputText formControlName="downloadLink" [invalid]="!this.checkFieldValidity(chartForm, 'downloadLink')"/>
                                 </div>
                                 <div class="flex flex-col col-span-12">
                                     <span>Description</span>
-                                    <textarea pTextarea formControlName="description" rows="7" style="resize: none"></textarea>
+                                    <textarea pTextarea formControlName="description" rows="7" style="resize: none" [invalid]="!this.checkFieldValidity(chartForm, 'description')"></textarea>
                                 </div>
                                 <div class="flex flex-col col-span-8">
                                     <span>Tags</span>
-                                    <input pInputText formControlName="tags"/>
+                                    <input pInputText formControlName="tags" [invalid]="!this.checkFieldValidity(chartForm, 'tags')"/>
                                 </div>
                                 <div class="flex flex-row gap-1 items-center justify-center col-span-4">
-                                    <p-checkbox formControlName="public" [binary]="true"/>
+                                    <p-checkbox formControlName="public" [binary]="true" [invalid]="!this.checkFieldValidity(chartForm, 'public')"/>
                                     <label>Make Public</label>
                                 </div>
                             </form>
@@ -177,12 +177,12 @@
                                 </div>
                                 @for (variantForm of variantForms; track $index) {
                                     <form [formGroup]="variantForm" class="grid grid-cols-30 w-full gap-2">
-                                        <input pInputText class="col-span-6" formControlName="charter"/>
-                                        <input pInputText class="col-span-6" formControlName="gamemode"/>
-                                        <input pInputText class="col-span-6" formControlName="difficulty"/>
-                                        <input pInputText class="col-span-3" formControlName="intensity"/>
-                                        <input pInputText class="col-span-3" formControlName="difficultyCode"/>
-                                        <input pInputText class="col-span-6" formControlName="tags"/>
+                                        <input pInputText class="col-span-6" formControlName="charter" [invalid]="!this.checkFieldValidity(variantForm, 'charter')"/>
+                                        <input pInputText class="col-span-6" formControlName="gamemode" [invalid]="!this.checkFieldValidity(variantForm, 'gamemode')"/>
+                                        <input pInputText class="col-span-6" formControlName="difficulty" [invalid]="!this.checkFieldValidity(variantForm, 'difficulty')"/>
+                                        <input pInputText class="col-span-3" formControlName="intensity" [invalid]="!this.checkFieldValidity(variantForm, 'intensity')"/>
+                                        <input pInputText class="col-span-3" formControlName="difficultyCode" [invalid]="!this.checkFieldValidity(variantForm, 'difficultyCode')"/>
+                                        <input pInputText class="col-span-6" formControlName="tags" [invalid]="!this.checkFieldValidity(variantForm, 'tags')"/>
                                     </form>
                                 }
                             </div>
@@ -194,6 +194,7 @@
                             <p-button rounded label="Add" icon="pi pi-plus" severity="primary" iconPos="left" (onClick)="addNewVariantForm()" />
                             <p-button rounded label="Remove Last" icon="pi pi-minus" severity="danger" iconPos="right" (onClick)="removeLastVariantForm()" />
                         </p-button-group>
+                        <p-toast position="bottom-center" key="bottom"/>
                         <p-button rounded label="Save" icon="pi pi-check" severity="success" iconPos="right" (onClick)="confirmChart()"/>
                     </div>
                 </ng-template>

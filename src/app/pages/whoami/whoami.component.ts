@@ -20,8 +20,6 @@ export class WhoamiComponent {
     ngOnInit() {
         let birthday = new Date("2002-12-17");
         let now = new Date(Date.now());
-        console.log(now);
-        console.log(birthday);
         this.myAge = this.getDateDistance(birthday, now);
     }
 

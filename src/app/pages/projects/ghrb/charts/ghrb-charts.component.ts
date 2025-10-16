@@ -35,14 +35,14 @@ import { MenuItem } from 'primeng/api';
 })
 export class GhrbChartsComponent {
 
-    public session!: AuthSession;
+    public session: AuthSession = {details: {authenticated: false}, admin: false};
 
     public charts!: Chart[];
     public placeholders: number[] = [0, 1, 2];
 
     public chartFilter: string = "";
     public releasedFilter: boolean = true;
-    public gamemodeFilter: string = "5 Fret Lead Guitar";
+    public gamemodeFilter: string | null = "5 Fret Lead Guitar";
     public gamemodeOptions: any[] = [
         { label: '5 Fret Lead Guitar', value: '5 Fret Lead Guitar' },
         { label: '5 Fret Bass Guitar', value: '5 Fret Bass Guitar' },
@@ -130,7 +130,6 @@ export class GhrbChartsComponent {
         if (chart !== undefined) {
             this.infoDialogVisible = true;
             this.itemSelected = chart;
-            console.log(this.itemSelected);
         }
     }
 
@@ -181,6 +180,8 @@ export class GhrbChartsComponent {
     }
 
     getFilteredItems(): Chart[] {
+        // return all charts if the gamemode filter is not set
+        if (this.gamemodeFilter === null) return this.charts;
         let output: Chart[] = [];
         for (let chart of this.charts) {
             if (chart.variants !== undefined && this.matchesFilter(chart)) {

@@ -1,15 +1,15 @@
 <div class="flex flex-col m-0 px-96 mt-32">
     <form [formGroup]="postForm">
-        <input pInputText class="text-4xl font-black" placeholder="Untitled Post" formControlName="title"/>
+        <input pInputText pSize="large" [dt]="titleInput" class="text-4xl w-full font-black" placeholder="Untitled Post" formControlName="title" [invalid]="!this.checkFieldValidity(postForm, 'title')"/>
         <div class="flex flex-col my-2">
-            Separate tags using commas
-            <input class="w-full" pInputText formControlName="tags"/>
+            <input class="w-full mt-2" pInputText formControlName="tags" placeholder="Separate tags with commas" [invalid]="!this.checkFieldValidity(postForm, 'tags')"/>
         </div>
         <div class="flex font-mono">
-            <textarea class="w-full" rows="18" pTextarea formControlName="content"></textarea>
+            <textarea class="content-area w-full" rows="18" pTextarea formControlName="content" placeholder="Write here (Markdown syntax supported)" [invalid]="!this.checkFieldValidity(postForm, 'content')"></textarea>
         </div>
         <p-divider/>
         <div class="flex gap-2 justify-between text-surface-600 text-xs">
+            <p-toast position="bottom-center" key="bottom"/>
             <p-button rounded icon="pi pi-arrow-circle-right" label="Post" (click)="confirmPost()"></p-button>
             <p-button rounded icon="pi pi-minus-circle" label="Cancel" severity="danger" (click)="confirmCancel()"></p-button>
         </div>

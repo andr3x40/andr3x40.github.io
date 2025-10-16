@@ -27,7 +27,7 @@ export class BlogComponent {
     public posts!: Post[];
     public placeholders: number[] = [0, 1, 2];
 
-    public session!: AuthSession;
+    public session: AuthSession = {details: {authenticated: false}, admin: false};
 
     public deleteDialogVisible: boolean = false;
     
