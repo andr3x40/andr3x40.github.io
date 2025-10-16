@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { AuthService, UserDetails } from '../../../../services/auth.service';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DividerModule } from "primeng/divider";
 import { ButtonModule } from "primeng/button";
 import { GhrbService } from '../../../../services/ghrb.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Chart, Track, Variant } from '../../../../model/ghrb';
+import { Chart, ChartFile, ChartFileData, ChartFileReader, IniFile, IniFileData, IniFileReader, Track, Variant } from '../../../../model/ghrb';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonGroupModule } from "primeng/buttongroup";
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -17,14 +17,16 @@ import { TextareaModule } from 'primeng/textarea';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TableModule } from 'primeng/table';
 import { MessageService } from 'primeng/api';
-import { Toast, ToastModule} from 'primeng/toast';
+import { Toast, ToastModule } from 'primeng/toast';
 import { FormService } from '../../../../services/form.service';
+import { FileSelectEvent, FileUpload } from 'primeng/fileupload';
+import { BadgeModule } from "primeng/badge";
+import { PrimeNG } from 'primeng/config';
 
 @Component({
   selector: 'app-ghrb-edit-chart',
-  imports: [ReactiveFormsModule, DividerModule, ButtonModule, StepperModule, ButtonGroupModule, FloatLabelModule, InputText, InputNumber
-    ,InputGroupModule, InputGroupAddonModule, TextareaModule, CheckboxModule, TableModule, Toast, ToastModule
-  ],
+  imports: [ReactiveFormsModule, DividerModule, ButtonModule, StepperModule, ButtonGroupModule, FloatLabelModule, InputText, InputNumber,
+    InputGroupModule, InputGroupAddonModule, TextareaModule, CheckboxModule, TableModule, Toast, ToastModule, FileUpload, BadgeModule],
   providers: [MessageService],
   templateUrl: './ghrb-edit-chart.component.html',
   styleUrl: './ghrb-edit-chart.component.scss'
@@ -37,6 +39,9 @@ export class GhrbEditChartComponent {
   public chartForm!: FormGroup;
   public variantForms: FormGroup[] = [];
   public albumCoverPreview: string | undefined = undefined;
+
+  public chartFile!: File | undefined;
+  public iniFile!: File | undefined;
 
   private buildTrackForm(
     id: number | null,
@@ -55,7 +60,7 @@ export class GhrbEditChartComponent {
       title: new FormControl(title, [Validators.required]),
       artist: new FormControl(artist, [Validators.required]),
       album: new FormControl(album, Validators.required),
-      albumLink: new FormControl(albumLink, Validators.required),
+      albumLink: new FormControl(albumLink),
       year: new FormControl(year, Validators.required),
       genre: new FormControl(genre, Validators.required),
       length: new FormControl(length, Validators.required),
@@ -119,7 +124,8 @@ export class GhrbEditChartComponent {
   }
 
   constructor(private formBuilder: FormBuilder, public auth: AuthService, public ghrb: GhrbService,
-    public router: Router, public route: ActivatedRoute, public messageService: MessageService, public formService: FormService) {
+      public router: Router, public route: ActivatedRoute, public messageService: MessageService, public formService: FormService,
+      public config: PrimeNG) {
     this.buildTrackForm(0, null, null, null, null, null, null, 0, 0, 0);
     this.buildChartForm(0, null, null, null, null, null, null, null, false, null);
   }
@@ -284,4 +290,117 @@ export class GhrbEditChartComponent {
     return this.formService.checkFormsValidity(forms);
   }
 
+  public onSelect(event: FileSelectEvent) {
+    let files: File[] = event.currentFiles;
+    this.chartFile = files.find(f => f.name.endsWith('.chart'));
+    this.iniFile = files.find(f => f.name.endsWith('.ini'));
+  }
+
+  public choose(event: MouseEvent, callback: any) {
+    callback();
+  }
+
+  public removeFile(event: MouseEvent, file: any, removeFileCallback: any, index: any) {
+    removeFileCallback(event, index);
+  }
+
+  public formatSize(bytes: number) {
+    const k = 1024;
+    const dm = 3;
+    const sizes = this.config.translation.fileSizeTypes;
+    if (sizes === undefined) return '';
+    if (bytes === 0) {
+        return `0 ${sizes[0]}`;
+    }
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
+
+    return `${formattedSize} ${sizes[i]}`;
+  }
+
+  public async readFiles() {
+    // read the chart file
+    if (this.chartFile !== undefined) {
+      let reader: ChartFileReader = new ChartFileReader();
+      let file: ChartFile = await reader.read(this.chartFile);
+      let data: ChartFileData = file.data;
+      
+      this.trackForm.controls['title'].setValue(data.song.find(x => x.key === 'Name')?.value);
+      this.trackForm.controls['artist'].setValue(data.song.find(x => x.key === 'Artist')?.value);
+      this.trackForm.controls['album'].setValue(data.song.find(x => x.key === 'Album')?.value);
+      this.trackForm.controls['year'].setValue(data.song.find(x => x.key === 'Year')?.value);
+      this.trackForm.controls['genre'].setValue(data.song.find(x => x.key === 'Genre')?.value);
+
+      // read minimum and maximum BPM
+      let minimumBpm: number | undefined = undefined;
+      let maximumBpm: number | undefined = undefined;
+      for (let tempo of data.syncTrack.filter(x => x.value.startsWith("B"))) {
+        if (tempo.position === '0') continue; // skip the first one 
+        let values: string[] = tempo.value.split(" ");
+        let bpm: number = parseInt(values[1]) / 1000;
+        if (minimumBpm === undefined || bpm < minimumBpm) minimumBpm = bpm;
+        if (maximumBpm === undefined || bpm > maximumBpm) maximumBpm = bpm;
+      }
+
+      this.trackForm.controls['minimumBpm'].setValue(minimumBpm);
+      this.trackForm.controls['maximumBpm'].setValue(maximumBpm);
+
+      let charter: string | undefined = data.song.find(x => x.key === 'Charter')?.value;
+      let intensity: string | undefined = data.song.find(x => x.key === 'Difficulty')?.value;
+
+      for (let variant of file.variants) {
+        let difficultyCode: number = 0;
+        switch (variant.difficulty) {
+          case 'Easy': difficultyCode = 1; break;
+          case 'Medium': difficultyCode = 2; break;
+          case 'Hard': difficultyCode = 3; break;
+          case 'Expert': difficultyCode = 4; break;
+          default: break;
+        }
+        if (variant.difficulty === 'Easy') difficultyCode = 1;
+        this.addVariantForm(
+          0,
+          charter ?? null,
+          variant.gamemode,
+          variant.difficulty,
+          intensity !== undefined ? parseInt(intensity) : null,
+          difficultyCode,
+          null
+        );
+      }
+    }
+    // read the info file
+    if (this.iniFile !== undefined) {
+      let reader: IniFileReader = new IniFileReader();
+      let readFile: IniFile = await reader.read(this.iniFile);
+      let data: IniFileData = readFile.data;
+      // this file has priority over the chart file
+      this.trackForm.controls['title'].setValue(data.name);
+      this.trackForm.controls['artist'].setValue(data.artist);
+      this.trackForm.controls['album'].setValue(data.album);
+      this.trackForm.controls['year'].setValue(data.year);
+      this.trackForm.controls['genre'].setValue(data.genre);
+      this.trackForm.controls['length'].setValue(Math.floor(parseInt(data.songLength) / 1000));
+      
+      this.chartForm.controls['source'].setValue(data.icon);
+      this.chartForm.controls['description'].setValue(data.loadingPhrase);
+
+      for (let variantForm of this.variantForms) {
+        switch (variantForm.controls['gamemode'].value) {
+          case '5 Fret Lead Guitar': variantForm.controls['intensity'].setValue(data.diffGuitar); break;
+          case '5 Fret Bass Guitar': variantForm.controls['intensity'].setValue(data.diffBass); break;
+          case '5 Fret Co-op Guitar': variantForm.controls['intensity'].setValue(data.diffGuitarCoop); break;
+          case '5 Fret Rhythm Guitar': variantForm.controls['intensity'].setValue(data.diffRhythm); break;
+          case '6 Fret Lead Guitar': variantForm.controls['intensity'].setValue(data.diffGuitarGhl); break;
+          case '6 Fret Bass Guitar': variantForm.controls['intensity'].setValue(data.diffBassGhl); break;
+          case '6 Fret Co-op Guitar': variantForm.controls['intensity'].setValue(data.diffGuitarCoopGhl); break;
+          case '6 Fret Rhythm Guitar': variantForm.controls['intensity'].setValue(data.diffRhythmGhl); break;
+          case 'Drums': variantForm.controls['intensity'].setValue(data.diffDrums); break;
+          case 'Keyboard': variantForm.controls['intensity'].setValue(data.diffKeys); break;
+        }
+      }
+    }
+  }
+  
 }

@@ -23,7 +23,7 @@
                         <div class="col-span-12 border-1 border-surface-800 bg-surface-900 rounded-xl m-1">
                             <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4">
                                 <div class="md:w-40 relative">
-                                    @if (chart.track?.albumLink === undefined) {
+                                    @if (chart.track?.albumLink === undefined || chart.track?.albumLink === null || chart.track?.albumLink === '') {
                                         <img
                                         class="block xl:block mx-auto rounded-border w-full"
                                         src="../../../../assets/placeholder.jpg"
@@ -197,7 +197,7 @@
         @if (itemSelected !== undefined) {
             <div class="flex flex-row gap-4 items-center">
                 @if (itemSelected.track !== undefined) {
-                    @if (itemSelected.track.albumLink === undefined) {
+                    @if (itemSelected.track.albumLink === undefined || itemSelected.track.albumLink === null || itemSelected.track.albumLink === '') {
                         <img
                         class="block xl:block mx-auto rounded-border w-1/6"
                         src="../../../../assets/placeholder.jpg"
