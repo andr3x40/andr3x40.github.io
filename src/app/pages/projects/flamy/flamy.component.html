@@ -5,6 +5,122 @@
 <p-divider></p-divider>
 <section class="main-section">
     <strong>Flamy</strong> is an advanced chart editor for Guitar Hero and Rock Band clone games.<br>
-    Created with the intent of being powerful, yet intuitive.
+    Created with the intent of being powerful, yet intuitive. Made in Java.
 </section>
 <p-divider></p-divider>
+<div class="px-48 flex flex-col gap-36">
+    <section class="flex flex-col items-center gap-2 mb-16">
+        <span>Place here an example of Flamy</span>
+        <p-skeleton width="60rem" height="30rem"/>
+    </section>
+    <section class="flex flex-col items-center">
+        <h2 class="font-black text-3xl">For charters, by a charter</h2>
+        <span class="mb-4">A feature-rich chart editor with what you need (or what you used but you needed 15 different applications for), powered by Java.</span>
+        <div class="grid grid-cols-3 w-full gap-2">
+            <p-card header="Tempomap Helper">
+                <p class="m-0">
+                    A dedicated tool just for tempomapping, with a comprehensive user interface.
+                </p>
+            </p-card>
+            <p-card header="Chart Analyzer">
+                <p class="m-0">
+                    Analyzes your charts, finds errors and helps you polish your charts.
+                </p>
+            </p-card>
+            <p-card header="Chart Generator">
+                <p class="m-0">
+                    From charts you already made, you can generate lower difficulty charts or for other similar gamemodes.
+                </p>
+            </p-card>
+            <p-card header="Quick Lyric Editor">
+                <p class="m-0">
+                    A dedicated interface just for lyrics, to place them quickly and time them perfectly.
+                </p>
+            </p-card>
+            <p-card header="Export to different formats">
+                <p class="m-0">
+                    Charts can be exported to other formats other than the default way.
+                </p>
+            </p-card>
+            <p-card header="Better Collaborations">
+                <p class="m-0">
+                    Every single variant of a chart can be signed by a single charter to better show who made what!
+                </p>
+            </p-card>
+            <p-card header="Infinite Gamemodes*">
+                <p class="m-0">
+                    What if you wanted to do an "Expert+" variant of a chart? Now you can without borrowing a different variant!
+                </p>
+            </p-card>
+            <p-card header="Optimal Score">
+                <p class="m-0">
+                    Check the optimal score of your chart and (if you want to) share the optimal strategy to the players.
+                </p>
+            </p-card>
+            <p-card header="Other Nerdy Stats">
+                <p class="m-0">
+                    If you're curious or obsessed with data, you can check other different statistics in the editor.
+                </p>
+            </p-card>
+        </div>
+        <span class="mt-2 text-sm text-surface-300">*inside the editor, some exporting formats don't have this feature</span>
+    </section>
+    <section class="flex flex-col items-center">
+        <h2 class="font-black text-3xl">Download</h2>
+        <span class="mb-4 text-center">
+            This project is made in Java. You need the Java Virtual Machine installed in your computer.
+        </span>
+        <div class="items-center">
+            <div class="flex flex-row w-full gap-5">
+                <p-splitbutton [model]="jvms" rounded size="large">
+                    <ng-template #content>
+                        <div class="font-black text-xl">
+                            <h2>Get a JVM</h2>
+                        </div>
+                    </ng-template>
+                </p-splitbutton>
+                <p-button rounded size="large">
+                    <div class="font-black text-xl px-6">
+                        <h2>Download</h2>
+                    </div>
+                </p-button>
+            </div>
+        </div>
+    </section>
+    <section class="flex flex-col items-center">
+        <h2 class="font-black text-3xl">Open source!</h2>
+        <span class="mb-4 text-center">
+            This project is fully covered under the MIT License.<br>
+            As long as the copyright is intact and these parts remain under the same license, you can do whatever you want.
+        </span>
+        <div class="grid grid-cols-3 w-full gap-2">
+            <p-card header="Contribute to Flamy">
+                <p class="m-0">
+                    If you know how to use Java 21 and JavaFX, you can help! Just clone the repository, make your modifications, send a
+                    pull request and I'll review it as soon as possible.<br>
+                    All contributors will be properly credited, don't worry.
+                </p>
+            </p-card>
+            <p-card header="Make your own modification">
+                <p class="m-0">
+                    If your contribution is a big, new, cool feature that doesn't really fit with the "chart editor" thing, there's a good chance
+                    that I won't approve your pull request. But you can simply fork the project and release your own modification.
+                    It will be your separate project.
+                </p>
+            </p-card>
+            <p-card header="Read the manual!">
+                <p class="m-0">
+                    Whatever you plan to do with this project, remember to <b>carefully read the documentation and all the given guidelines</b>.
+                    Every single class and method has its own purpose.
+                </p>
+            </p-card>
+        </div>
+        <span class="mb-4 text-center mt-2">
+            If you're interested in expanding or forking this project, you can check the repository <a href="https://github.com/andr3x40/flamy">here</a>.
+        </span>
+    </section>
+    <section class="flex flex-col items-center">
+        <h2 class="font-black text-3xl">Roadmap</h2>
+        <span class="mt-4">If you're interested in the development of this project, I keep a roadmap <a>here</a>.</span>
+    </section>
+</div>

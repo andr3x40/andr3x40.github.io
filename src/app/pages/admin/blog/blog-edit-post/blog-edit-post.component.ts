@@ -8,10 +8,15 @@ import { AuthService, UserDetails } from '../../../../services/auth.service';
 import { BlogService } from '../../../../services/blog.service';
 import { Post } from '../../../../model/blog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { InputText, InputTextModule } from 'primeng/inputtext';
+import { FormService } from '../../../../services/form.service';
+import { ToastModule } from "primeng/toast";
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-blog-edit-post',
-  imports: [FormsModule, DividerModule, ButtonModule, TooltipModule, TextareaModule, ReactiveFormsModule],
+  imports: [FormsModule, DividerModule, ButtonModule, TooltipModule, TextareaModule, ReactiveFormsModule, InputTextModule, InputText, ToastModule],
+  providers: [MessageService],
   templateUrl: './blog-edit-post.component.html',
   styleUrl: './blog-edit-post.component.scss',
 })
@@ -20,17 +25,26 @@ export class BlogEditPostComponent {
   public id!: number;
   public user!: UserDetails | null;
   public postForm!: FormGroup;
+
+  titleInput = {
+    root: {
+      lg: {
+        fontSize: '2rem'
+      }
+    }
+  }
   
   private buildForm(id: number, title: string, content: string, tags: string) {
     this.postForm = this.formBuilder.group({
       id: [id, Validators.required],
       title: [title, Validators.required],
       content: [content, Validators.required],
-      tags: [tags, Validators.required]
+      tags: [tags]
     })
   }
 
-  constructor(private formBuilder: FormBuilder, public auth: AuthService, public blog: BlogService, public router: Router, public route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, public auth: AuthService, public blog: BlogService, public router: Router,
+    public route: ActivatedRoute, public formService: FormService, public messageService: MessageService) {
     this.buildForm(0, '', '', '');
   }
 
@@ -53,11 +67,11 @@ export class BlogEditPostComponent {
   }
 
   public async confirmPost() {
-    // check if the post is new or not
-    this.saveNewPost();
-  }
-
-  private async saveNewPost() {
+    // check if the post is valid
+    if (!this.checkFormValidity()) {
+      this.messageService.add({ severity: 'error', summary: 'Invalid Input', detail: 'Make sure to fill all mandatory fields.', key: 'bottom', life: 3000 });
+      return;
+    }
     // create a new post to save
     let post: Post = this.createPost(this.postForm);
     // and save it
@@ -81,6 +95,34 @@ export class BlogEditPostComponent {
     post.content = form.get('content')?.value;
     post.time = new Date(Date.now()).toISOString();
     return post;
+  }
+
+  /**
+   * Checks the validity of a field in a form.
+   * @param form the form to check in
+   * @param field the field of the given form to check
+   * @returns `false` if it's invalid, `true` in all other cases
+   */
+  public checkFieldValidity(form: FormGroup, field: string) : boolean {
+    return this.formService.checkFieldValidity(form, field);
+  }
+
+  /**
+   * Checks if a field in a form is disabled.
+   * @param form the form to check in
+   * @param field the field of the given form to check
+   * @returns `true` if it's disabled, `false` otherwise
+   */
+  public checkFieldDisable(form: FormGroup, field: string) : boolean {
+    return this.formService.checkFieldDisable(form, field);
+  }
+
+  /**
+   * Checks the validity of the post form.
+   * @returns `true` if the post form is valid, `false` if at least one control is invalid
+   */
+  private checkFormValidity(): boolean {
+    return this.formService.checkFormValidity(this.postForm);
   }
 
 }

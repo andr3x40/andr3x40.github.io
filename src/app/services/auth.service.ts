@@ -33,7 +33,7 @@ export class AuthService {
     let admin: boolean = await this.isAdminUser();
     return {
       details: details ?? {authenticated: false, },
-      admin: admin
+      admin: admin ?? false
     };
   }
 

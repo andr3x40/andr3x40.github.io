@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService, UserDetails } from '../../../../services/auth.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { DividerModule } from "primeng/divider";
 import { ButtonModule } from "primeng/button";
 import { GhrbService } from '../../../../services/ghrb.service';
@@ -16,12 +16,16 @@ import { InputGroupAddonModule } from "primeng/inputgroupaddon";
 import { TextareaModule } from 'primeng/textarea';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TableModule } from 'primeng/table';
+import { MessageService } from 'primeng/api';
+import { Toast, ToastModule} from 'primeng/toast';
+import { FormService } from '../../../../services/form.service';
 
 @Component({
   selector: 'app-ghrb-edit-chart',
   imports: [ReactiveFormsModule, DividerModule, ButtonModule, StepperModule, ButtonGroupModule, FloatLabelModule, InputText, InputNumber
-    ,InputGroupModule, InputGroupAddonModule, TextareaModule, CheckboxModule, TableModule
+    ,InputGroupModule, InputGroupAddonModule, TextareaModule, CheckboxModule, TableModule, Toast, ToastModule
   ],
+  providers: [MessageService],
   templateUrl: './ghrb-edit-chart.component.html',
   styleUrl: './ghrb-edit-chart.component.scss'
 })
@@ -34,61 +38,90 @@ export class GhrbEditChartComponent {
   public variantForms: FormGroup[] = [];
   public albumCoverPreview: string | undefined = undefined;
 
-  private buildTrackForm(id: number, title: string, artist: string, album: string, albumLink: string,
-    year: string, genre: string, length: number, minimumBpm: number, maximumBpm: number
+  private buildTrackForm(
+    id: number | null,
+    title: string | null,
+    artist: string | null,
+    album: string | null,
+    albumLink: string | null,
+    year: string | null,
+    genre: string | null,
+    length: number | null,
+    minimumBpm: number | null,
+    maximumBpm: number | null
   ) {
     this.trackForm = this.formBuilder.group({
-      id: [id, Validators.required],
-      title: [title, Validators.required],
-      artist: [artist, Validators.required],
-      album: [album, Validators.required],
-      albumLink: [albumLink, Validators.required],
-      year: [year, Validators.required],
-      genre: [genre, Validators.required],
-      length: [length, Validators.required],
-      minimumBpm: [minimumBpm, Validators.required],
-      maximumBpm: [maximumBpm, Validators.required]
-    })
+      id: new FormControl(id, Validators.required),
+      title: new FormControl(title, [Validators.required]),
+      artist: new FormControl(artist, [Validators.required]),
+      album: new FormControl(album, Validators.required),
+      albumLink: new FormControl(albumLink, Validators.required),
+      year: new FormControl(year, Validators.required),
+      genre: new FormControl(genre, Validators.required),
+      length: new FormControl(length, Validators.required),
+      minimumBpm: new FormControl(minimumBpm, Validators.required),
+      maximumBpm: new FormControl(maximumBpm, Validators.required),
+    });
   }
 
-  private buildChartForm(id: number, downloadLink: string, source: string, description: string, youtubeLink: string, spotifyLink: string, soundcloudLink: string, bandcampLink: string, pub: boolean, tags: string) {
+  private buildChartForm(
+    id: number,
+    downloadLink: string | null,
+    source: string | null,
+    description: string | null,
+    youtubeLink: string | null,
+    spotifyLink: string | null,
+    soundcloudLink: string | null,
+    bandcampLink: string | null,
+    pub: boolean,
+    tags: string | null
+  ) {
     this.chartForm = this.formBuilder.group({
-      id: [id, Validators.required],
-      downloadLink: [downloadLink, Validators.required],
-      source: [source, Validators.required],
-      description: [description, Validators.required],
-      youtubeLink: [youtubeLink],
-      spotifyLink: [spotifyLink],
-      soundcloudLink: [soundcloudLink],
-      bandcampLink: [bandcampLink],
-      public: [pub, Validators.required],
-      tags: [tags, Validators.required]
-    })
+      id: new FormControl(id, Validators.required),
+      downloadLink: new FormControl(downloadLink),
+      source: new FormControl(source),
+      description: new FormControl(description),
+      youtubeLink: new FormControl(youtubeLink),
+      spotifyLink: new FormControl(spotifyLink),
+      soundcloudLink: new FormControl(soundcloudLink),
+      bandcampLink: new FormControl(bandcampLink),
+      public: new FormControl(pub, Validators.required),
+      tags: new FormControl(tags)
+    });
   }
 
-  public addVariantForm(id: number, charter: string, gamemode: string, difficulty: string, intensity: number, difficultyCode: number, tags: string) {
+  public addVariantForm(
+    id: number,
+    charter: string | null,
+    gamemode: string | null,
+    difficulty: string | null,
+    intensity: number | null,
+    difficultyCode: number | null,
+    tags: string | null
+  ) {
     this.variantForms.push(this.formBuilder.group({
-      id: [id, Validators.required],
-      charter: [charter, Validators.required],
-      gamemode: [gamemode, Validators.required],
-      difficulty: [difficulty, Validators.required],
-      intensity: [intensity, Validators.required],
-      difficultyCode: [difficultyCode, Validators.required],
-      tags: [tags]
+      id: new FormControl(id, Validators.required),
+      charter: new FormControl(charter),
+      gamemode: new FormControl(gamemode, Validators.required),
+      difficulty: new FormControl(difficulty, Validators.required),
+      intensity: new FormControl(intensity, Validators.required),
+      difficultyCode: new FormControl(difficultyCode, Validators.required),
+      tags: new FormControl(tags)
     }));
   }
 
   public addNewVariantForm() {
-    this.addVariantForm(0, '', '', '', 0, 0, '');
+    this.addVariantForm(0, null, null, null, 0, 0, null);
   }
   
   public removeLastVariantForm() {
     this.variantForms.pop();
   }
 
-  constructor(private formBuilder: FormBuilder, public auth: AuthService, public ghrb: GhrbService, public router: Router, public route: ActivatedRoute) {
-    this.buildTrackForm(0, '', '', '', '', '', '', 0, 0, 0);
-    this.buildChartForm(0, '', '', '', '', '', '', '', false, '');
+  constructor(private formBuilder: FormBuilder, public auth: AuthService, public ghrb: GhrbService,
+    public router: Router, public route: ActivatedRoute, public messageService: MessageService, public formService: FormService) {
+    this.buildTrackForm(0, null, null, null, null, null, null, 0, 0, 0);
+    this.buildChartForm(0, null, null, null, null, null, null, null, false, null);
   }
 
   async ngOnInit() {
@@ -100,49 +133,55 @@ export class GhrbEditChartComponent {
       let chart: Chart | null = await this.ghrb.getChart(this.id);
       if (chart !== null) {
         let track: Track | undefined = chart.track;
-        let variants: Variant[] = chart.variants;
         if (track !== undefined) {
           this.buildTrackForm(
             track.id ?? 0,
-            track.title ?? '',
-            track.artist ?? '',
-            track.album ?? '',
-            track.albumLink ?? '',
-            track.year ?? '',
-            track.genre ?? '',
+            track.title ?? null,
+            track.artist ?? null,
+            track.album ?? null,
+            track.albumLink ?? null,
+            track.year ?? null,
+            track.genre ?? null,
             track.length ?? 0,
             track.minimumBpm ?? 0,
             track.maximumBpm ?? 0
           );
         }
-        for (let variant of variants) {
+        for (let variant of chart.variants) {
           this.addVariantForm(
             variant.id ?? 0,
-            variant.charter ?? '',
-            variant.gamemode ?? '',
-            variant.difficulty ?? '',
+            variant.charter ?? null,
+            variant.gamemode ?? null,
+            variant.difficulty ?? null,
             variant.intensity ?? 0,
             variant.difficultyCode ?? 0,
-            variant.tags ?? ''
+            variant.tags ?? null
           );
         }
         this.buildChartForm(
           chart.id ?? 0,
-          chart.downloadLink ?? '',
-          chart.source ?? '',
-          chart.description ?? '',
-          chart.youtubeLink ?? '',
-          chart.spotifyLink ?? '',
-          chart.soundcloudLink ?? '',
-          chart.bandcampLink ?? '',
+          chart.downloadLink ?? null,
+          chart.source ?? null,
+          chart.description ?? null,
+          chart.youtubeLink ?? null,
+          chart.spotifyLink ?? null,
+          chart.soundcloudLink ?? null,
+          chart.bandcampLink ?? null,
           chart.public ?? false,
-          chart.tags ?? ''
+          chart.tags ?? null
         );
       }
     }
   }
 
   public async confirmChart() {
+    // before, check the validity of the forms
+    let valid: boolean = this.checkFormsValidity([this.trackForm, this.trackForm, ...this.variantForms]);
+    // if it's not valid, show an error message
+    if (!valid) {
+      this.messageService.add({ severity: 'error', summary: 'Invalid Input', detail: 'Make sure to fill all mandatory fields.', key: 'bottom', life: 3000 });
+      return;
+    }
     // create the chart from the form
     let chart: Chart = this.createChart(this.chartForm);
     // add the track
@@ -215,6 +254,35 @@ export class GhrbEditChartComponent {
 
   public reloadAlbumCoverImage() {
     this.albumCoverPreview = this.trackForm.get('albumLink')?.value;
+  }
+
+  /**
+   * Checks the validity of a field in a form.
+   * @param form the form to check in
+   * @param field the field of the given form to check
+   * @returns `false` if it's invalid, `true` in all other cases
+   */
+  public checkFieldValidity(form: FormGroup, field: string) : boolean {
+    return this.formService.checkFieldValidity(form, field);
+  }
+
+  /**
+   * Checks if a field in a form is disabled.
+   * @param form the form to check in
+   * @param field the field of the given form to check
+   * @returns `true` if it's disabled, `false` otherwise
+   */
+  public checkFieldDisable(form: FormGroup, field: string) : boolean {
+    return this.formService.checkFieldDisable(form, field);
+  }
+
+  /**
+   * Checks the validity of a group of forms
+   * @param forms the forms to check
+   * @returns `true` if all given forms are valid, `false` if at least one control in these forms is invalid
+   */
+  private checkFormsValidity(forms: FormGroup<any>[]): boolean {
+    return this.formService.checkFormsValidity(forms);
   }
 
 }
