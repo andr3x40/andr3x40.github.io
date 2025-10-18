@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Chart } from '../model/ghrb';
 import { HttpService } from './http.service';
 import { Post } from '../model/blog';
+import { ValidationError } from '../model/validation';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,8 @@ export class GhrbService {
       return Chart.clone(output);
   }
 
-  public async saveChart(chart: Chart) {
-    this.http.postRequestBody<Chart>(this.chartAdminUrl, chart);
+  public async saveChart(chart: Chart): Promise<ValidationError[] | null> {
+    return this.http.postRequestBody<ValidationError[]>(this.chartAdminUrl, chart);
   }
 
   public async deleteChart(id: number) {

@@ -22,6 +22,7 @@ import { FormService } from '../../../../services/form.service';
 import { FileSelectEvent, FileUpload } from 'primeng/fileupload';
 import { BadgeModule } from "primeng/badge";
 import { PrimeNG } from 'primeng/config';
+import { ValidationError } from '../../../../model/validation';
 
 @Component({
   selector: 'app-ghrb-edit-chart',
@@ -197,8 +198,23 @@ export class GhrbEditChartComponent {
       chart.variants.push(this.createVariant(variantForm));
     }
     // and save it
-    await this.ghrb.saveChart(chart);
-    this.router.navigate(['/projects/ghrb/charts']);
+    let errors: ValidationError[] | null = await this.ghrb.saveChart(chart);
+    if (errors !== null) {
+      if (errors.length == 0) {
+        this.router.navigate(['/projects/ghrb/charts']);
+      } else {
+        // send error messages
+        for (let error of errors) {
+          this.messageService.add({
+            severity: 'error',
+            summary: `Invalid Input (${error.rejectedValue})`,
+            detail: error.code,
+            key: 'bottom',
+            life: 3000
+          });
+        }
+      }
+    }
   }
 
   public confirmCancel() {

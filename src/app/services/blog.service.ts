@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Post } from '../model/blog';
+import { ValidationError } from '../model/validation';
 
 @Injectable({
   providedIn: 'root'
@@ -49,8 +50,8 @@ export class BlogService {
         return output;
     }
 
-    public async savePost(post: Post) {
-        this.http.postRequestBody<Post>(this.postAdminUrl, post);
+    public async savePost(post: Post): Promise<ValidationError[] | null> {
+        return this.http.postRequestBody<ValidationError[]>(this.postAdminUrl, post);
     }
 
     public async deletePost(id: number) {

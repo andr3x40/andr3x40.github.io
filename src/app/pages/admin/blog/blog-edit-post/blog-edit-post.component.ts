@@ -12,6 +12,7 @@ import { InputText, InputTextModule } from 'primeng/inputtext';
 import { FormService } from '../../../../services/form.service';
 import { ToastModule } from "primeng/toast";
 import { MessageService } from 'primeng/api';
+import { ValidationError } from '../../../../model/validation';
 
 @Component({
   selector: 'app-blog-edit-post',
@@ -75,8 +76,23 @@ export class BlogEditPostComponent {
     // create a new post to save
     let post: Post = this.createPost(this.postForm);
     // and save it
-    await this.blog.savePost(post);
-    this.router.navigate(['/blog']);
+    let errors: ValidationError[] | null = await this.blog.savePost(post);
+    if (errors !== null) {
+      if (errors.length == 0) {
+        this.router.navigate(['/blog']);
+      } else {
+        // send error messages
+        for (let error of errors) {
+          this.messageService.add({
+            severity: 'error',
+            summary: `Invalid Input (${error.rejectedValue})`,
+            detail: error.code,
+            key: 'bottom',
+            life: 3000
+          });
+        }
+      }
+    }
   }
 
   public confirmCancel() {
