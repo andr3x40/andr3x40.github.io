@@ -51,7 +51,14 @@ export class WhoamiComponent {
         {
             name: "Instagram",
             link: "https://instagram.com/andr3x40",
-            tip: "i only watch reels here",
+            tip: "i only watch reels here for now",
+            nickname: "@andr3x40",
+            important: false
+        },
+        {
+            name: "Twitch",
+            link: "https://www.twitch.tv/andr3x40",
+            tip: "...what if i livestream",
             nickname: "@andr3x40",
             important: false
         }

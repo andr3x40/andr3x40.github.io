@@ -79,8 +79,8 @@ export class HeaderComponent {
                 label: 'Projects',
                 items: [
                     {
-                        label: 'Flamy',
-                        routerLink: 'projects/flamy'
+                        label: 'Flame Editor',
+                        routerLink: 'projects/flame'
                     },
                     {
                         label: 'Project R',

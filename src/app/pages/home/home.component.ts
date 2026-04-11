@@ -86,6 +86,7 @@ export class HomeComponent {
             new Splash("Must be the water.", 1),
             new Splash("Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy?-", 1),
             new Splash("Crazy? I was crazy once. They put me in a club. A stripped club. In the stripped club. Straight up \"jorking it\". And by \"it\", haha, well. Let's justr say. My Vaporeon. Vaporeon? Did you know that in terms of-", 1),
+            new Splash("Mikudayo!", 1),
         ]
         this.splashList = new SplashList(splashes);
         this.loadSplashText();
