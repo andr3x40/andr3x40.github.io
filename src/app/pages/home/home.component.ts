@@ -10,6 +10,9 @@ import { Button, ButtonModule } from 'primeng/button';
 import { SiThreadsIcon, SiInstagramIcon, SiGithubIcon, SiBlueskyIcon } from '@semantic-icons/simple-icons';
 import { TooltipModule } from 'primeng/tooltip';
 import { Splash, SplashList, SplashSpecialRules } from '../../model/splash';
+import { HttpClient } from '@angular/common/http';
+
+import splashesFile from '../../../assets/splashes.json';
 
 @Component({
     selector: 'app-home',
@@ -34,7 +37,7 @@ export class HomeComponent {
 
     private splashAnimationTimeouts: number[] = [];
 
-    constructor(private router: Router) { }
+    constructor(private router: Router, private httpClient: HttpClient) { }
 
     ngOnInit() {
         this.items = [
@@ -61,34 +64,8 @@ export class HomeComponent {
                 url: "https://bsky.app/profile/andr3x40.bsky.social",
             }
         ]
-        let splashes: Splash[] = [
-            new Splash("Yet Another Personal Website", 1),
-            new Splash("A website of some dude who likes to create things", 1),
-            new Splash("Also known as andr120's lab", 1),
-            new Splash("This is a long splash text I wrote with the only purpose of testing this splash system and to make sure the text is correctly displayed on the website", 1),
-            new Splash("I like Minecraft splashes, how could you tell?", 1),
-            new Splash("Slow ride, take it easy", 1),
-            new Splash("Imagine the nerves...", 1),
-            new Splash("smots gaming", 1),
-            new Splash("Be proud of your death count!", 1),
-            new Splash("The first step of healing is confronting the problem. It's never easy.", 1),
-            new Splash("YOUR TAKING TOO LONG", 1),
-            new Splash("He's groovy and NEVER glooby!", 1),
-            new Splash("The king's chariot cannot be stopped.", 1),
-            new Splash("Despite everything, it's still you.", 1),
-            new Splash("SHAW!", 1),
-            new Splash("Sale balatrito?", 1),
-            new Splash("Balatro Balatrez está jugando a Balatro", 1),
-            new Splash("me when the me when when the me when the when uhhhhhhhhhhhhhhhhh", 1),
-            new Splash("oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah", 1),
-            new Splash("g", 1),
-            new Splash("Do you have any games on your phone?", 1),
-            new Splash("Must be the water.", 1),
-            new Splash("Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy?-", 1),
-            new Splash("Crazy? I was crazy once. They put me in a club. A stripped club. In the stripped club. Straight up \"jorking it\". And by \"it\", haha, well. Let's justr say. My Vaporeon. Vaporeon? Did you know that in terms of-", 1),
-            new Splash("Mikudayo!", 1),
-        ]
-        this.splashList = new SplashList(splashes);
+        this.splashList = new SplashList(splashesFile.splashes);
+        console.info(`Loaded ${this.splashList.count()} splashes.`);
         this.loadSplashText();
     }
 

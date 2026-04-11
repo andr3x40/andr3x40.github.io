@@ -1,0 +1,133 @@
+{
+    "splashes": [
+        {
+            "text": "Yet Another Personal Website",
+            "weight": 1
+        },
+        {
+            "text": "A website of some dude who likes to create things",
+            "weight": 1
+        },
+        {
+            "text": "Also known as andr120's lab",
+            "weight": 1
+        },
+        {
+            "text": "This is a long splash text I wrote with the only purpose of testing this splash system and to make sure the text is correctly displayed on the website",
+            "weight": 1
+        },
+        {
+            "text": "I like Minecraft splashes, how could you tell?",
+            "weight": 1
+        },
+        {
+            "text": "Slow ride, take it easy",
+            "weight": 1
+        },
+        {
+            "text": "Imagine the nerves...",
+            "weight": 1
+        },
+        {
+            "text": "smots gaming",
+            "weight": 1
+        },
+        {
+            "text": "Be proud of your death count!",
+            "weight": 1
+        },
+        {
+            "text": "The first step of healing is confronting the problem. It's never easy.",
+            "weight": 1
+        },
+        {
+            "text": "YOUR TAKING TOO LONG",
+            "weight": 1
+        },
+        {
+            "text": "He's groovy and NEVER glooby!",
+            "weight": 1
+        },
+        {
+            "text": "The king's chariot cannot be stopped.",
+            "weight": 1
+        },
+        {
+            "text": "Despite everything, it's still you.",
+            "weight": 1
+        },
+        {
+            "text": "SHAW!",
+            "weight": 1
+        },
+        {
+            "text": "Sale balatrito?",
+            "weight": 1
+        },
+        {
+            "text": "Balatro Balatrez está jugando a Balatro",
+            "weight": 1
+        },
+        {
+            "text": "me when the me when when the me when the when uhhhhhhhhhhhhhhhhh",
+            "weight": 1
+        },
+        {
+            "text": "oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah oh yeah woo yeah",
+            "weight": 1
+        },
+        {
+            "text": "g",
+            "weight": 1
+        },
+        {
+            "text": "Do you have any games on your phone?",
+            "weight": 1
+        },
+        {
+            "text": "Must be the water.",
+            "weight": 1
+        },
+        {
+            "text": "This is the part where I run",
+            "weight": 1
+        },
+        {
+            "text": "This is the part where I stop",
+            "weight": 1
+        },
+        {
+            "text": "Crazy? I was crazy once. They locked me in a room. A rubber room. A rubber room with rats. And rats make me crazy. Crazy?-",
+            "weight": 1
+        },
+        {
+            "text": "Crazy? I was crazy once. They put me in a club. A stripped club. In the stripped club. Straight up \"jorking it\". And by \"it\", haha, well. Let's justr say. My Vaporeon. Vaporeon? Did you know that in terms of-",
+            "weight": 1
+        },
+        {
+            "text": "Mikudayo!",
+            "weight": 10,
+            "specialRules": { "month": 3, "day": 9 }
+        },
+        {
+            "text": "Happy birthday to me!",
+            "weight": 10,
+            "specialRules": { "month": 12, "day": 17 }
+        },
+        {
+            "text": "Make an entire community go crazy today by just looking at your calendar.",
+            "weight": 10,
+            "specialRules": { "month": 7, "day": 27 }
+        },
+        {
+            "text": "SPREAD MISINFORMATION ON THE INTERNET MORE THAN EVER!!!!",
+            "weight": 10,
+            "specialRules": { "month": 4, "day": 1 }
+        },
+        {
+            "text": "A birdbrain was born today.",
+            "weight": 10,
+            "specialRules": { "month": 4, "day": 1 }
+        }
+    ]
+}

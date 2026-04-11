@@ -1,7 +1,7 @@
 export class SplashSpecialRules {
 
-    public month?: number; // undefined means this rule doesn't apply
-    public day?: number; // undefined means this rule doesn't apply
+    public month?: number; // 1-12, undefined means this rule doesn't apply
+    public day?: number; // 1-31, undefined means this rule doesn't apply
 
 }
 
@@ -31,12 +31,13 @@ export class SplashList {
      * @returns a random splash
      */
     public roll(): string {
+        // filter the splashes based on special rules
         let currentSplashes: Splash[] = this.splashes.filter((splash) => {
             if (splash.specialRules === undefined) return true; // skip it
             // get the current date
             let today: Date = new Date(Date.now());
             let thisDay: boolean = splash.specialRules.day === undefined ? true : today.getDate() === splash.specialRules.day;
-            let thisMonth: boolean = splash.specialRules.month === undefined ? true : today.getMonth() === splash.specialRules.month;
+            let thisMonth: boolean = splash.specialRules.month === undefined ? true : today.getMonth() === (splash.specialRules.month - 1); // getMonth() returns 0 for January, when on specialRules is 1
             return thisDay && thisMonth;
         });
         let rollableSplashes: string[] = [];
@@ -45,7 +46,16 @@ export class SplashList {
                 rollableSplashes.push(splash.text);
             }
         }
+        console.debug(`Rolling among ${rollableSplashes.length} splashes.`);
         return rollableSplashes[this.rollNumber(rollableSplashes.length)];
+    }
+
+    /**
+     * Gets the number of loaded splashes.
+     * @returns the amount of loaded splashes
+     */
+    public count(): number {
+        return this.splashes.length;
     }
 
     private rollNumber(max: number): number {
