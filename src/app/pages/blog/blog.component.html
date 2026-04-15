@@ -9,7 +9,10 @@
 <p-divider></p-divider>
 <div class="flex flex-col justify-center px-64 gap-4">
     @if (this.session.admin) {
-        <p-button [rounded]="true" [routerLink]="'/admin/blog/new'" label="Create New Post"/>
+        <p-speeddial [model]="adminActions" direction="right"
+                     [style]="{ position: 'fixed', left: '30px', bottom: '30px' }"
+                     [buttonProps]="{ rounded: true }"
+                     [tooltipOptions]="{ tooltipPosition: 'top' }"/>
     }
     
     @if (posts !== undefined) {

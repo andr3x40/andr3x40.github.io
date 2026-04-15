@@ -1,0 +1,191 @@
+<app-section-title
+    title="Project R Tiering & Difficulty"
+    description="or how can you see how hard a chart is across different games"
+></app-section-title>
+<p-divider/>
+<section class="main-section">
+    The problem of charting for different rhythm games is using the right difficulty meter.<br>
+    Some games go from 1 to 10, others from 1 to 20, or even beyond. And it's... kinda hard to figure out how something is hard.
+    <br>
+    <br>So, I created a tiering system to better know how these different games think.
+</section>
+<p-divider/>
+<section class="flex flex-col gap-3 px-96 mt-18">
+    <h2 class="text-3xl font-bold">Tiers</h2>
+    <p>
+        Each difficulty is assigned a different <strong>tier</strong> that roughly indicates how hard the patterns are.<br>
+    </p>
+    <p>There's <em>five</em> different main tiers:</p>
+    <div class="flex flex-col gap-3 px-20">
+        <p-card>
+            <div class="flex flex-row items-center">
+                <div class="flex flex-col gap-0 w-1/4 text-2xl text-right dark:!bg-surface-900 dark:!text-sky-300">
+                    <span class="text-2xl font-bold font-mono">BEGINNER</span>
+                </div>
+                <p-divider layout="vertical" class="h-full" />
+                <div class="w-3/4">
+                    For newbies.<br>Charts are easy to follow, with very simple patterns.
+                </div>
+            </div>
+        </p-card>
+        <p-card>
+            <div class="flex flex-row items-center">
+                <div class="w-1/4 text-right dark:!bg-surface-900 dark:!text-emerald-300">
+                    <span class="text-2xl font-bold font-mono">INTERMEDIATE</span>
+                </div>
+                <p-divider layout="vertical" class="h-full" />
+                <div class="w-3/4">
+                    A first challenge for new players.<br>Tricky patterns to help you understand the movements of the game.
+                </div>
+            </div>
+        </p-card>
+        <p-card>
+            <div class="flex flex-row items-center">
+                <div class="w-1/4 text-right dark:!bg-surface-900 dark:!text-yellow-300">
+                    <span class="text-2xl font-bold font-mono">ADVANCED</span>
+                </div>
+                <p-divider layout="vertical" class="h-full" />
+                <div class="w-3/4">
+                    For seasoned players.<br>Hard charts, dense patterns, challenging moves.
+                </div>
+            </div>
+        </p-card>
+        <p-card>
+            <div class="flex flex-row items-center">
+                <div class="w-1/4 text-right dark:!bg-surface-900 dark:!text-red-300">
+                    <span class="text-2xl font-bold font-mono">EXPERT</span>
+                </div>
+                <p-divider layout="vertical" class="h-full" />
+                <div class="w-3/4">
+                    For expert players.<br>Fast charts with complicated patterns. A proper challenge.
+                </div>
+            </div>
+        </p-card>
+        <p-card>
+            <div class="flex flex-row items-center">
+                <div class="w-1/4 text-right dark:!bg-surface-900 dark:!text-violet-300">
+                    <span class="text-2xl font-bold font-mono">GRANDMASTER</span>
+                </div>
+                <p-divider layout="vertical" class="h-full" />
+                <div class="w-3/4">
+                    For who has mastered the game. Crazy fast charts and techy patterns that are almost impossible to read without increasing the scroll speed.
+                </div>
+            </div>
+        </p-card>
+    </div>
+    To which we can add these special tiers:
+    <div class="flex flex-col gap-3 px-20">
+        <p-card>
+            <div class="flex flex-row items-center">
+                <div class="flex flex-col gap-0 w-1/3 text-2xl text-right dark:!bg-surface-900 dark:!text-indigo-300">
+                    <span class="text-2xl font-bold font-mono">SUPER GRANDMASTER</span>
+                </div>
+                <p-divider layout="vertical" class="h-full" />
+                <div class="w-2/3">
+                    Barely doable. Only for top players.<br>
+                    This describes every difficulty beyond Grandmaster Tier.
+                </div>
+            </div>
+        </p-card>
+        <p-card>
+            <div class="flex flex-row items-center">
+                <div class="flex flex-col gap-0 w-1/3 text-2xl text-right dark:!bg-surface-900 dark:!text-neutral-300">
+                    <span class="text-2xl font-bold font-mono">FREEBIE</span>
+                </div>
+                <p-divider layout="vertical" class="h-full" />
+                <div class="w-2/3">
+                    Just an easy chart anyone can full combo.<br>
+                    It's always Difficulty 0.
+                </div>
+            </div>
+        </p-card>
+    </div>
+    <h2 class="text-3xl font-bold">Compare</h2>
+    <p>
+        You can compare here the different meters from many, many different rhythm games, and see how they fit inside this tiering system of mine.
+    </p>
+    <p-tabs value="0">
+        <p-tablist>
+            <p-tab value="0">Guitar Hero / Rock Band</p-tab>
+            <p-tab value="1">Pump It Up</p-tab>
+            <p-tab value="2">Beatblock</p-tab>
+        </p-tablist>
+        <p-tabpanels>
+            <p-tabpanel value="0" class="flex flex-col gap-3">
+                <p>
+                    This is the tiering subdivision:
+                </p>
+                <p-table [value]="tiers" [tableStyle]="{ 'min-width': '50rem' }">
+                    <ng-template #header>
+                        <tr>
+                            <th>Tier</th>
+                            <th>Difficulty Range</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template #body let-product>
+                        <tr>
+                            <td>{{ product.tier }}</td>
+                            <td>{{ product.ghrbRange }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p>
+                    Guitar Hero uses a meter that goes from 1 to 5, Rock Band from 0 to 6.
+                    The main problem with Guitar Hero and Rock Band is that the intensity is given to <i>all</i> variants, and that can be pretty confusing.<br>
+                    The given intensity usually describes the Hard difficulty better, except everyone uses it to describe the Expert variant. This means that
+                    an Intensity 0 variant can <i>still</i> be challenging, and that's BS.
+                </p>
+                <p>
+                    The system used in Project R:\GHRB follows the same standards given by Custom Songs Central, except all the intensities have been raised<br>by <b>4</b>.
+                    This means that something like One by Metallica (Expert Intensity 6), known for being pretty hard, would be Expert Intensity 10.
+                </p>
+            </p-tabpanel>
+            <p-tabpanel value="1" class="flex flex-col gap-3">
+                <p>
+                    This is the tiering subdivision:
+                </p>
+                <p-table [value]="tiers" [tableStyle]="{ 'min-width': '50rem' }">
+                    <ng-template #header>
+                        <tr>
+                            <th>Tier</th>
+                            <th>Difficulty Range</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template #body let-product>
+                        <tr>
+                            <td>{{ product.tier }}</td>
+                            <td>{{ product.piuRange }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p>
+                    Pump It Up always used a meter that goes from 1 without an upper limit. This means boss tracks are perfectly visible, and that's a
+                    good thing when it comes to spending 1 euro for just three matches.
+                </p>
+            </p-tabpanel>
+            <p-tabpanel value="2" class="flex flex-col gap-3">
+                <p>
+                    This is the tiering subdivision:
+                </p>
+                <p-table [value]="tiers" [tableStyle]="{ 'min-width': '50rem' }">
+                    <ng-template #header>
+                        <tr>
+                            <th>Tier</th>
+                            <th>Difficulty Range</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template #body let-product>
+                        <tr>
+                            <td>{{ product.tier }}</td>
+                            <td>{{ product.bbRange }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p>
+                    Although it's in early access, Beatblock is supposed to use difficulties from 1 to 15.
+                    <br>Custom levels go even further, though, reaching Difficulty 20 with The Empress.
+                </p>
+            </p-tabpanel>
+        </p-tabpanels>
+    </p-tabs>
+</section>

@@ -1,0 +1,73 @@
+<app-section-title
+    title="Project R"
+    description="damn I love rhythm games"
+></app-section-title>
+<p-divider></p-divider>
+<section class="main-section">
+    I'm a young veteran of this genre. And I like creating challenges for these kind of games.<br>
+    And that's also another way of mine to share music I like. Have fun!
+</section>
+<p-divider></p-divider>
+<section class="flex flex-col gap-3 px-96">
+    <p-card [dt]="projectCard">
+        <ng-template #title>Project R:\GHRB</ng-template>
+        <ng-template #subtitle>Rock on!</ng-template>
+        <div class="flex flex-row">
+            <div class="w-2/3">
+                I started doing this in 2020 out of boredom and loved it, so I kept going. And this is where everything began.<br>
+                Quality content for Guitar Hero and Rock Band clone games, such as Clone Hero, YARG or Fret Smasher.
+            </div>
+            <p-divider layout="vertical" />
+            <div class="w-1/3">
+                @for (item of ghrbLinks; track item) {
+                    <div class="flex gap-4 mt-1">
+                        @if (item.link !== undefined) {
+                            <p-button [label]="item.text" class="w-full" styleClass="w-full" [routerLink]="item.link" [pTooltip]="item.tooltip" tooltipPosition="right"/>
+                        } @else {
+                            <p-button [label]="item.text" severity="secondary" class="w-full" styleClass="w-full" [disabled]="true" [pTooltip]="item.tooltip" tooltipPosition="right"/>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </p-card>
+    <p-card [dt]="projectCard">
+        <ng-template #title>Project R:\PIU</ng-template>
+        <ng-template #subtitle>Why don't you just get up and dance?</ng-template>
+        <div class="flex flex-row">
+            <div class="w-2/3">
+                This project was born just because I wanted to have silly tunes to play with friends. Also because there's no Miku on Pump It Up and that's a crime. There's Rin though.<br>
+                Quality content compatible with Pump It Up arcade machines and emulators such as Stepmania.
+            </div>
+            <p-divider layout="vertical" />
+            <div class="w-1/3">
+                @for (item of piuLinks; track item) {
+                    <div class="flex gap-4 mt-1">
+                        @if (item.link !== undefined) {
+                            <p-button [label]="item.text" class="w-full" styleClass="w-full" [routerLink]="item.link" [pTooltip]="item.tooltip" tooltipPosition="right"/>
+                        } @else {
+                            <p-button [label]="item.text" severity="secondary" class="w-full" styleClass="w-full" [disabled]="true" [pTooltip]="item.tooltip" tooltipPosition="right"/>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </p-card>
+    <p-card [dt]="projectCard">
+        <ng-template #title>FNF PoldHub</ng-template>
+        <ng-template #subtitle>gettin' funky on a friday night yeah</ng-template>
+        <div class="flex flex-row">
+            <div class="w-2/3">
+                A Friday Night Funkin' mod about an Italian content creator doing... things, I guess. We've been doing this for so long the main game stagnated so much that it died.
+                <br>
+                Yeah, I'm basically the game director of this thing. I made maps for it.
+            </div>
+            <p-divider layout="vertical" />
+            <div class="w-1/3">
+                <a href="https://poldhub.github.io/">
+                    <p-button label="View" class="w-full" styleClass="w-full"/>
+                </a>
+            </div>
+        </div>
+    </p-card>
+</section>

@@ -26,14 +26,12 @@ export class ProjectsComponent {
             },
             {
                 header: "Project R",
-                text: `This is not related to coding, but rhythm games. I like music, I like videogames, so I like rhythm games as well.`,
-                link: "ghrb"
+                text: `A collection of charts I made for a bunch of rhythm games. Because I like challenges and I like creating them.`,
+                link: "/project-r"
             },
             {
                 header: "FNF PoldHub",
-                text: `A Friday Night Funkin' mod about an Italian content creator doing... things, I guess. We've been doing this for so long the main game stagnated so much that it died.
-                Still WIP, but I created and I'm still creating the charts for this mod. As I said, "I break your arms and fingers".
-                ...I actually stole that from Camellia, but who cares.`,
+                text: `A Friday Night Funkin' mod about an Italian content creator doing... things, I guess. We've been doing this for so long the main game stagnated so much that it died.`,
                 externalLink: "https://poldhub.github.io/"
             },
         ]

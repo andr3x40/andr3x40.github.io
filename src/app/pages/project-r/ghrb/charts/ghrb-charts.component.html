@@ -1,6 +1,6 @@
 <app-section-title
     title="Project R:\GHRB Charts"
-    description="All the charts created for Project R:\GHRB"
+    [description]="'Browse through ' + chartCount + ' charts and ' + variantCount + ' variants'"
 ></app-section-title>
 <p-divider></p-divider>
 <div class="card flex justify-between mb-2">
@@ -12,7 +12,10 @@
 <div class="px-64">
     <div class="my-4">
         @if (this.session.admin) {
-            <p-button [rounded]="true" [routerLink]="'/admin/projects/ghrb/charts/new'" label="Create New Chart"/>
+            <p-speeddial [model]="adminActions" direction="right"
+                         [style]="{ position: 'fixed', left: '30px', bottom: '30px' }"
+                         [buttonProps]="{ rounded: true }"
+                         [tooltipOptions]="{ tooltipPosition: 'top' }"/>
         }
     </div>
     @if (this.charts !== undefined) {
@@ -92,11 +95,16 @@
                                     }
                                 </div>
                                 <div class="flex flex-row justify-between md:items-center flex-1 gap-6">
-                                    <div class="flex flex-col justify-between items-start gap-10">
+                                    <div class="flex flex-col justify-between items-start gap-5">
                                         <div>
-                                            <span class="text-lg font-bold text-surface-900 dark:text-surface-0 text-clip">{{ chart.track?.title }}</span>
+                                            <span class="text-xl font-bold text-surface-900 dark:text-surface-0 text-clip">{{ chart.track?.title }}</span>
                                             <div class="font-medium text-secondary text-m mb-2">{{ chart.track?.artist }}</div>
                                             <div class="font-light text-secondary text-m">{{ chart.track?.album }} ({{ chart.track?.year }}) - {{ chart.track?.genre }}</div>
+                                            @if (chart.track?.minimumBpm == chart.track?.maximumBpm ) {
+                                                <div class="font-light text-secondary text-m">{{ chart.track?.maximumBpm }} BPM</div>
+                                            } @else {
+                                                <div class="font-light text-secondary text-m">{{ chart.track?.minimumBpm }}-{{ chart.track?.maximumBpm }} BPM</div>
+                                            }
                                         </div>
                                         <div>
                                             <p-buttongroup>
@@ -135,15 +143,15 @@
                                             @for (variant of orderByDifficulty(chart.variants, true); track variant) {
                                                 <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
                                                 @if (variant.difficultyCode === 1) {
-                                                    <span class="text-sky-600 dark:text-sky-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                                    <span class="text-sky-600 dark:text-sky-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity }}</span>
                                                 } @else if (variant.difficultyCode === 2) {
-                                                    <span class="text-emerald-600 dark:text-emerald-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                                    <span class="text-emerald-600 dark:text-emerald-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity }}</span>
                                                 } @else if (variant.difficultyCode === 3) {
-                                                    <span class="text-amber-600 dark:text-amber-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                                    <span class="text-amber-600 dark:text-amber-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity }}</span>
                                                 } @else if (variant.difficultyCode === 4) {
-                                                    <span class="text-red-600 dark:text-red-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                                    <span class="text-red-600 dark:text-red-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity }}</span>
                                                 } @else {
-                                                    <span class="text-surface-600 dark:text-surface-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                                    <span class="text-surface-600 dark:text-surface-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity }}</span>
                                                 }
                                             }
                                         }
@@ -223,6 +231,23 @@
             <p-divider/>
             <p>{{ itemSelected.description !== undefined ? itemSelected.description : "No Description" }}</p>
             <p-divider/>
+            <div class="flex flex-row items-center justify-center mb-2">
+                <div class="flex flex-col items-end font-medium w-1/2">
+                    @if (itemSelected.track?.length! > 3600) {
+                        {{ itemSelected.track?.length! * 1000 | date:'hh:mm:ss' }} seconds
+                    } @else {
+                        {{ itemSelected.track?.length! * 1000 | date:'mm:ss' }} seconds
+                    }
+                </div>
+                <p-divider layout="vertical" class="h-10"/>
+                <div class="flex flex-col items-start font-medium w-1/2">
+                    @if (itemSelected.track?.minimumBpm == itemSelected.track?.maximumBpm) {
+                        <span>{{ itemSelected.track?.maximumBpm }} BPM</span>
+                    } @else {
+                        <span>{{ itemSelected.track?.minimumBpm }}-{{ itemSelected.track?.maximumBpm }} BPM</span>
+                    }
+                </div>
+            </div>
             <div class="flex flex-col gap-6">
                 @for (sameGamemodeVariants of variantsByGamemode(itemSelected.variants); track sameGamemodeVariants.gamemode) {
                     <div class="flex flex-row items-center justify-center">
@@ -231,8 +256,10 @@
                                 {{ sameGamemodeVariants.gamemode }}
                             </p>
                             <div class="flex flex-row items-center gap-2">
-                                <span class="pi pi-question-circle" style="font-size: 0.85rem; color: var(--p-surface-500)"
-                                [pTooltip]="gamemodeTooltip" tooltipPosition="left"></span>
+                                <a routerLink="/project-r/difficulty">
+                                    <span class="pi pi-question-circle" style="font-size: 0.85rem; color: var(--p-surface-500)"
+                                    [pTooltip]="gamemodeTooltip" tooltipPosition="left"></span>
+                                </a>
                                 <ng-template #gamemodeTooltip>
                                     <div class="w-full flex flex-col items-center text-sm">
                                         <span>{{ getAbsoluteDifficulty(sameGamemodeVariants.variants).tip }}</span>

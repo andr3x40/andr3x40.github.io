@@ -10,6 +10,7 @@ import { ValidationError } from '../model/validation';
 export class GhrbService {
 
   private chartUrl: string = 'http://localhost:8080/api/ghrb/charts';
+  private variantUrl: string = 'http://localhost:8080/api/ghrb/variants';
   private chartAdminUrl: string = 'http://localhost:8080/api/admin/ghrb/charts';
 
   constructor(private http: HttpService) { }
@@ -36,6 +37,14 @@ export class GhrbService {
 
   public async deleteChart(id: number) {
     this.http.deleteRequestBody<Chart>(this.chartAdminUrl + '/' + id);
+  }
+
+  public async countCharts(): Promise<number> {
+    return await this.http.getRequestBody<number>(this.chartUrl + '/count') ?? 0;
+  }
+
+  public async countVariants(): Promise<number> {
+    return await this.http.getRequestBody<number>(this.variantUrl + '/count') ?? 0;
   }
 
 }

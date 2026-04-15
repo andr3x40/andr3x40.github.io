@@ -2,9 +2,8 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { FlameComponent } from './pages/projects/flame/flame.component';
-import { GhrbChartsComponent } from './pages/projects/ghrb/charts/ghrb-charts.component';
+import { GhrbChartsComponent } from './pages/project-r/ghrb/charts/ghrb-charts.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
-import { GhrbComponent } from './pages/projects/ghrb/ghrb.component';
 import { WhoamiComponent } from './pages/whoami/whoami.component';
 import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -18,6 +17,8 @@ import { adminGuard } from './services/guard/admin.guard';
 import { AdminConsoleComponent } from './pages/admin/admin-console/admin-console.component';
 import { BlogEditPostComponent } from './pages/admin/blog/blog-edit-post/blog-edit-post.component';
 import { GhrbEditChartComponent } from './pages/admin/ghrb/ghrb-edit-chart/ghrb-edit-chart.component';
+import { ProjectRComponent } from './pages/project-r/project-r.component';
+import { PJRDifficultyComponent } from './pages/project-r/difficulty/difficulty.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -25,8 +26,9 @@ export const routes: Routes = [
     {path: 'blog/:id', component: BlogPostComponent},
     {path: 'projects', component: ProjectsComponent},
     {path: 'projects/flame', component: FlameComponent},
-    {path: 'projects/ghrb', component: GhrbComponent},
-    {path: 'projects/ghrb/charts', component: GhrbChartsComponent},
+    {path: 'project-r', component: ProjectRComponent},
+    {path: 'project-r/difficulty', component: PJRDifficultyComponent},
+    {path: 'project-r/ghrb/charts', component: GhrbChartsComponent},
     {path: 'whoami', component: WhoamiComponent},
 
     {path: 'login', component: LoginComponent},

@@ -27,11 +27,13 @@ import { InputText, InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from "primeng/menu";
 import { MenuItem } from 'primeng/api';
 
+import { SpeedDialModule, SpeedDial } from 'primeng/speeddial';
+
 @Component({
     selector: 'app-ghrb-charts',
     templateUrl: './ghrb-charts.component.html',
     styleUrl: './ghrb-charts.component.scss',
-    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, ToggleButtonModule, DialogModule, Dialog, TooltipModule, PaginatorModule, SiSpotifyIcon, SiYoutubeIcon, SiSoundcloudIcon, SiBandcampIcon, SkeletonModule, RouterLink, TextareaModule, InputTextModule, InputText, MenuModule],
+    imports: [DataView, ButtonModule, Tag, CommonModule, Divider, SectionTitleComponent, ButtonGroupModule, SelectButton, FormsModule, ToggleButtonModule, DialogModule, Dialog, TooltipModule, PaginatorModule, SiSpotifyIcon, SiYoutubeIcon, SiSoundcloudIcon, SiBandcampIcon, SkeletonModule, RouterLink, TextareaModule, InputTextModule, InputText, MenuModule, SpeedDial],
 })
 export class GhrbChartsComponent {
 
@@ -39,6 +41,9 @@ export class GhrbChartsComponent {
 
     public charts!: Chart[];
     public placeholders: number[] = [0, 1, 2];
+
+    public chartCount: number = 0;
+    public variantCount: number = 0;
 
     public chartFilter: string = "";
     public releasedFilter: boolean = true;
@@ -53,6 +58,15 @@ export class GhrbChartsComponent {
         { label: 'Drums', value: 'Drums' },
         { label: 'Keyboard', value: 'Keyboard' },
     ];
+    public adminActions: MenuItem[] = [
+        {
+            label: "Add",
+            icon: "pi pi-pencil",
+            command: () => {
+                this.router.navigate(['/admin/projects/ghrb/charts/new'])
+            }
+        }
+    ]
 
     public absoluteGamemodes: AbsoluteDifficulty[] = [
         {
@@ -121,6 +135,8 @@ export class GhrbChartsComponent {
             }
         ];
         setTimeout(async () => {
+            this.chartCount = await this.service.countCharts();
+            this.variantCount = await this.service.countVariants();
             this.charts = await this.service.getAllCharts();
         }, 100);
     }

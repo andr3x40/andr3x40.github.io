@@ -105,6 +105,10 @@
             "weight": 1
         },
         {
+            "text": "Why don't you just get up and dance, man?",
+            "weight": 1
+        },
+        {
             "text": "Mikudayo!",
             "weight": 10,
             "specialRules": { "month": 3, "day": 9 }

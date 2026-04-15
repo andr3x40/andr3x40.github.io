@@ -87,9 +87,14 @@ export class HeaderComponent {
                         items: [
                             {
                                 label: 'R:/GHRB',
-                                routerLink: 'projects/ghrb',
+                                routerLink: 'project-r/ghrb/charts',
+                            },
+                            {
+                                label: 'R:/PIU',
+                                routerLink: 'project-r/piu/maps',
                             }
-                        ]
+                        ],
+                        routerLink: 'project-r'
                     },
                     {
                         separator: true

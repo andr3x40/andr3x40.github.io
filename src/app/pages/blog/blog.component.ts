@@ -15,10 +15,11 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { AuthService, AuthSession } from '../../services/auth.service';
 import { MenuItem } from 'primeng/api';
 import { DialogModule } from "primeng/dialog";
+import { SpeedDial } from "primeng/speeddial";
 
 @Component({
     selector: 'app-blog',
-    imports: [SectionTitleComponent, Divider, FieldsetModule, Avatar, PanelModule, ButtonModule, MenuModule, TagModule, Tooltip, RouterLink, SkeletonModule, DialogModule],
+    imports: [SectionTitleComponent, Divider, FieldsetModule, Avatar, PanelModule, ButtonModule, MenuModule, TagModule, Tooltip, RouterLink, SkeletonModule, DialogModule, SpeedDial],
     templateUrl: './blog.component.html',
     styleUrl: './blog.component.scss'
 })
@@ -33,6 +34,16 @@ export class BlogComponent {
     
     public menuItems: MenuItem[] = [];
     public selectedItemId: number | undefined;
+
+    public adminActions: MenuItem[] = [
+        {
+            label: "Add",
+            icon: "pi pi-pencil",
+            command: () => {
+                this.router.navigate(['/admin/blog/new'])
+            }
+        }
+    ]
 
     showConfirmDeleteDialog() {
         this.deleteDialogVisible = true;

@@ -201,7 +201,7 @@ export class GhrbEditChartComponent {
     let errors: ValidationError[] | null = await this.ghrb.saveChart(chart);
     if (errors !== null) {
       if (errors.length == 0) {
-        this.router.navigate(['/projects/ghrb/charts']);
+        this.router.navigate(['/project-r/ghrb/charts']);
       } else {
         // send error messages
         for (let error of errors) {
@@ -218,7 +218,7 @@ export class GhrbEditChartComponent {
   }
 
   public confirmCancel() {
-    this.router.navigate(['/projects/ghrb/charts']);
+    this.router.navigate(['/project-r/ghrb/charts']);
   }
 
   private createTrack(form: FormGroup): Track {
