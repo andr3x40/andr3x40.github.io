@@ -51,12 +51,6 @@ export class Chart {
         return output;
     }
 
-    public getFormattedTime(): string | undefined {
-        if (this.releaseDate === undefined) return undefined;
-        let postTime: Date = new Date(this.releaseDate);
-        return postTime.toLocaleDateString();
-    }
-
 }
 
 export class Variant {

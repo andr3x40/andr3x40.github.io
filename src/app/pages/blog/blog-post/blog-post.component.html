@@ -3,15 +3,14 @@
         <h2 class="text-4xl font-black">{{ this.post !== null ? this.post.title : "No Post Available" }}</h2>
         <div class="flex items-center gap-3 my-2">
             <div class="flex items-center gap-2">
-                <p-avatar image="../../assets/mylogo.png" shape="circle" />
                 <span class="font-bold">{{ this.post !== null ? this.post.author : "No Author" }}</span>
             </div>
-            <span class="font-light text-surface-400 pr-1" [pTooltip]="dateTooltip" tooltipPosition="right">{{ this.post !== null ? post.getTimeElapsed() : "Never" }}</span>
+            <span class="font-light text-surface-400 pr-1" [pTooltip]="dateTooltip" tooltipPosition="right">{{ this.post !== null ? (post.time | timeElapsed) : "Never" }}</span>
             <ng-template #dateTooltip>
-                <span class="text-small">{{ this.post !== null ? post.getFormattedTime() : "It was never posted." }}</span>
+                <span class="text-small">{{ this.post !== null ? (post.time | date:'dd/MM/yyyy HH:mm') : "It was never posted." }}</span>
             </ng-template>
             @if (this.post !== null) {
-                @for (tag of this.post.getFormattedTags(); track tag) {
+                @for (tag of this.post.tags | split:','; track tag) {
                     <p-tag class="text-xs" value="{{ tag }}" [rounded]="true"/>
                 }
             }
@@ -31,7 +30,6 @@
         <p-skeleton width="15rem" height="2rem" borderRadius="16px"/>
         <div class="flex items-center gap-3 my-2">
             <div class="flex items-center gap-2">
-                <p-skeleton shape="circle" size="2rem" />
                 <p-skeleton width="5rem" borderRadius="16px"/>
             </div>
             <p-skeleton width="5rem" borderRadius="16px"/>

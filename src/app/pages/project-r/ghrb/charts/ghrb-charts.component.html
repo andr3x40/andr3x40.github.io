@@ -332,7 +332,7 @@
                 </div>
                 <div class="flex flex-col items-end">
                     <p class="font-light text-sm">
-                        {{ itemSelected.releaseDate !== undefined ? "Chart Released " + itemSelected.getFormattedTime() : "" }}
+                        {{ itemSelected.releaseDate !== undefined ? "Chart Released " + (itemSelected.releaseDate | date:'dd/MM/yyyy') : "" }}
                     </p>
                 </div>
             </div>

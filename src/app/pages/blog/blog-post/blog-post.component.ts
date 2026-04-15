@@ -8,12 +8,15 @@ import { Tag } from "primeng/tag";
 import { BlogService } from '../../../services/blog.service';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ButtonModule } from 'primeng/button';
+import { DatePipe } from '@angular/common';
 
 import { MarkdownRendererPipe } from '../../../pipes/markdown-renderer.pipe';
+import { SplitPipe } from '../../../pipes/split.pipe';
+import { TimeElapsedPipe } from "../../../pipes/time-elapsed.pipe";
 
 @Component({
     selector: 'app-blog-post',
-    imports: [Avatar, Tooltip, Divider, Tag, SkeletonModule, ButtonModule, MarkdownRendererPipe],
+    imports: [Avatar, Tooltip, Divider, Tag, SkeletonModule, ButtonModule, MarkdownRendererPipe, DatePipe, SplitPipe, TimeElapsedPipe],
     templateUrl: './blog-post.component.html',
     styleUrl: './blog-post.component.scss',
     schemas: [CUSTOM_ELEMENTS_SCHEMA], // suppress warnings for custom blocks

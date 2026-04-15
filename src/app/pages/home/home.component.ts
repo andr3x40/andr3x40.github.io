@@ -7,7 +7,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { CardModule } from 'primeng/card';
 import { Button, ButtonModule } from 'primeng/button';
 
-import { SiThreadsIcon, SiInstagramIcon, SiGithubIcon, SiBlueskyIcon } from '@semantic-icons/simple-icons';
+import { SiThreadsIcon, SiInstagramIcon, SiGithubIcon, SiBlueskyIcon, SiTwitchIcon } from '@semantic-icons/simple-icons';
 import { TooltipModule } from 'primeng/tooltip';
 import { Splash, SplashList, SplashSpecialRules } from '../../model/splash';
 import { HttpClient } from '@angular/common/http';
@@ -17,7 +17,7 @@ import splashesFile from '../../../assets/splashes.json';
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [Divider, PanelModule, CommonModule, RouterLink, CarouselModule, CardModule, Button, ButtonModule, SiThreadsIcon, SiInstagramIcon, SiGithubIcon, SiBlueskyIcon, TooltipModule],
+    imports: [Divider, PanelModule, CommonModule, RouterLink, CarouselModule, CardModule, Button, ButtonModule, SiThreadsIcon, SiInstagramIcon, SiGithubIcon, SiBlueskyIcon, SiTwitchIcon, TooltipModule],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })

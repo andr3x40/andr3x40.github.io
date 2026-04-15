@@ -21,12 +21,11 @@
                 <ng-template #header>
                     <div class="flex items-center gap-3">
                         <div class="flex items-center gap-2">
-                            <p-avatar image="../../assets/mylogo.png" shape="circle" />
                             <span class="font-bold">{{ post.author }}</span>
                         </div>
-                        <span class="font-light text-surface-400 pr-1" [pTooltip]="dateTooltip" tooltipPosition="right">{{ post.getTimeElapsed() }}</span>
+                        <span class="font-light text-surface-400 pr-1" [pTooltip]="dateTooltip" tooltipPosition="right">{{ post.time | timeElapsed }}</span>
                         <ng-template #dateTooltip>
-                            <span class="text-small">{{ post.getFormattedTime() }}</span>
+                            <span class="text-small">{{ post.time | date:'dd/MM/yyyy HH:mm' }}</span>
                         </ng-template>
                     </div>
                 </ng-template>
@@ -46,7 +45,7 @@
                 <div class="flex flex-col m-0 gap-3">
                     <h2 class="text-2xl font-black">{{ post.title }}</h2>
                     <p>
-                        {{ post.getContentPreview() }}
+                        {{ post.content | textCut:1 }}
                     </p>
                 </div>
                 <ng-template #footer>
@@ -59,7 +58,7 @@
                             }
                         </div>
                         <div class="flex gap-2">
-                            @for (tag of post.getFormattedTags(); track tag) {
+                            @for (tag of post.tags | split:',' ; track tag) {
                                 <p-tag class="text-xs" value="{{ tag }}" [rounded]="true"/>
                             }
                         </div>
@@ -73,7 +72,6 @@
                 <ng-template #header>
                     <div class="flex items-center gap-3">
                         <div class="flex items-center gap-2">
-                            <p-skeleton shape="circle" size="2rem" />
                             <p-skeleton width="6rem" borderRadius="16px"/>
                         </div>
                         <p-skeleton class="mr-2" width="6rem" borderRadius="16px"/>

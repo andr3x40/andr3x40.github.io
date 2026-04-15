@@ -16,10 +16,14 @@ import { AuthService, AuthSession } from '../../services/auth.service';
 import { MenuItem } from 'primeng/api';
 import { DialogModule } from "primeng/dialog";
 import { SpeedDial } from "primeng/speeddial";
+import { SplitPipe } from "../../pipes/split.pipe";
+import { DatePipe } from '@angular/common';
+import { TimeElapsedPipe } from '../../pipes/time-elapsed.pipe';
+import { TextCutPipe } from '../../pipes/text-cut.pipe';
 
 @Component({
     selector: 'app-blog',
-    imports: [SectionTitleComponent, Divider, FieldsetModule, Avatar, PanelModule, ButtonModule, MenuModule, TagModule, Tooltip, RouterLink, SkeletonModule, DialogModule, SpeedDial],
+    imports: [SectionTitleComponent, Divider, FieldsetModule, Avatar, PanelModule, ButtonModule, MenuModule, TagModule, Tooltip, RouterLink, SkeletonModule, DialogModule, SpeedDial, SplitPipe, DatePipe, TimeElapsedPipe, TextCutPipe],
     templateUrl: './blog.component.html',
     styleUrl: './blog.component.scss'
 })

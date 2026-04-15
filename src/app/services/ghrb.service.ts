@@ -20,7 +20,7 @@ export class GhrbService {
     if (collection === null) return [];
     let output: Chart[] = [];
     for (let c of collection) {
-      output.push(Chart.clone(c));
+      output.push(c);
     }
     return output;
   }
@@ -28,7 +28,7 @@ export class GhrbService {
   public async getChart(id: number): Promise<Chart | null> {
       const output: Chart | null = await this.http.getRequestBody<Chart>(this.chartUrl + '/' + id);
       if (output === null) return null;
-      return Chart.clone(output);
+      return output;
   }
 
   public async saveChart(chart: Chart): Promise<ValidationError[] | null> {
