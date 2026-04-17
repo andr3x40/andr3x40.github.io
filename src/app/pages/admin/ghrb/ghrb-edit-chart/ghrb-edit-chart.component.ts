@@ -23,11 +23,12 @@ import { FileSelectEvent, FileUpload } from 'primeng/fileupload';
 import { BadgeModule } from "primeng/badge";
 import { PrimeNG } from 'primeng/config';
 import { ValidationError } from '../../../../model/validation';
+import { Carousel, CarouselModule } from "primeng/carousel";
 
 @Component({
   selector: 'app-ghrb-edit-chart',
   imports: [ReactiveFormsModule, DividerModule, ButtonModule, StepperModule, ButtonGroupModule, FloatLabelModule, InputText, InputNumber,
-    InputGroupModule, InputGroupAddonModule, TextareaModule, CheckboxModule, TableModule, Toast, ToastModule, FileUpload, BadgeModule],
+    InputGroupModule, InputGroupAddonModule, TextareaModule, CheckboxModule, TableModule, Toast, ToastModule, FileUpload, BadgeModule, Carousel],
   providers: [MessageService],
   templateUrl: './ghrb-edit-chart.component.html',
   styleUrl: './ghrb-edit-chart.component.scss'
@@ -43,6 +44,8 @@ export class GhrbEditChartComponent {
 
   public chartFile!: File | undefined;
   public iniFile!: File | undefined;
+
+  public currentVariantPage: number = 0;
 
   private buildTrackForm(
     id: number | null,
@@ -118,10 +121,15 @@ export class GhrbEditChartComponent {
 
   public addNewVariantForm() {
     this.addVariantForm(0, null, null, null, 0, 0, null);
+    this.currentVariantPage = this.variantForms.length - 1;
   }
   
-  public removeLastVariantForm() {
-    this.variantForms.pop();
+  public removeVariantForm(form: FormGroup) {
+    let i = this.variantForms.indexOf(form);
+    this.variantForms.splice(i, 1);
+    if (this.currentVariantPage >= this.variantForms.length) {
+      this.currentVariantPage = this.variantForms.length - 1;
+    }
   }
 
   constructor(private formBuilder: FormBuilder, public auth: AuthService, public ghrb: GhrbService,

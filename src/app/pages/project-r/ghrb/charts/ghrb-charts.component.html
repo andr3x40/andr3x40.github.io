@@ -143,15 +143,15 @@
                                             @for (variant of orderByDifficulty(chart.variants, true); track variant) {
                                                 <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
                                                 @if (variant.difficultyCode === 1) {
-                                                    <span class="text-sky-600 dark:text-sky-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                                    <span class="text-sky-600 dark:text-sky-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity | number:'2.0-0' }}</span>
                                                 } @else if (variant.difficultyCode === 2) {
-                                                    <span class="text-emerald-600 dark:text-emerald-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                                    <span class="text-emerald-600 dark:text-emerald-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity | number:'2.0-0' }}</span>
                                                 } @else if (variant.difficultyCode === 3) {
-                                                    <span class="text-amber-600 dark:text-amber-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                                    <span class="text-amber-600 dark:text-amber-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity | number:'2.0-0' }}</span>
                                                 } @else if (variant.difficultyCode === 4) {
-                                                    <span class="text-red-600 dark:text-red-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                                    <span class="text-red-600 dark:text-red-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity | number:'2.0-0' }}</span>
                                                 } @else {
-                                                    <span class="text-surface-600 dark:text-surface-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                                    <span class="text-surface-600 dark:text-surface-300 difficulty-text">{{ variant.difficulty }} {{ variant.intensity | number:'2.0-0' }}</span>
                                                 }
                                             }
                                         }
@@ -288,15 +288,15 @@
                             @for (variant of sameGamemodeVariants.variants; track variant) {
                             <!-- PrimeNG + Tailwind is broken. can't do this in any other way than the PirateSoftware way -->
                                 @if (variant.difficultyCode === 1) {
-                                    <span class="text-sky-600 dark:text-sky-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                    <span class="text-sky-600 dark:text-sky-300 difficulty-text">{{ variant.intensity | number:'2.0-0' }} {{ variant.difficulty }}</span>
                                 } @else if (variant.difficultyCode === 2) {
-                                    <span class="text-emerald-600 dark:text-emerald-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                    <span class="text-emerald-600 dark:text-emerald-300 difficulty-text">{{ variant.intensity | number:'2.0-0' }} {{ variant.difficulty }}</span>
                                 } @else if (variant.difficultyCode === 3) {
-                                    <span class="text-amber-600 dark:text-amber-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                    <span class="text-amber-600 dark:text-amber-300 difficulty-text">{{ variant.intensity | number:'2.0-0' }} {{ variant.difficulty }}</span>
                                 } @else if (variant.difficultyCode === 4) {
-                                    <span class="text-red-600 dark:text-red-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                    <span class="text-red-600 dark:text-red-300 difficulty-text">{{ variant.intensity | number:'2.0-0' }} {{ variant.difficulty }}</span>
                                 } @else {
-                                    <span class="text-surface-600 dark:text-surface-300">{{ variant.difficulty }} {{ variant.intensity }}</span>
+                                    <span class="text-surface-600 dark:text-surface-300 difficulty-text">{{ variant.intensity | number:'2.0-0' }} {{ variant.difficulty }}</span>
                                 }
                             }
                         </div>
