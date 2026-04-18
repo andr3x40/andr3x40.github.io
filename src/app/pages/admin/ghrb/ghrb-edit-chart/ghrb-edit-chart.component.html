@@ -219,54 +219,42 @@
                 <ng-template #content let-activateCallback="activateCallback">
                     <div class="flex flex-col h-120">
                         <div
-                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                            class="rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
                         >
-                            <p-carousel [value]="variantForms" [page]="currentVariantPage" [numVisible]="1" [numScroll]="1" [circular]="false">
+                            <p-carousel [value]="variantForms" [page]="currentVariantPage" [numVisible]="2" [numScroll]="2" [circular]="true">
                                 <ng-template let-form #item>
-                                    <form [formGroup]="form" class="grid grid-cols-12 w-full gap-2">
-                                        <div class="flex flex-col col-span-6">
-                                            <span>Charter</span>
-                                            <input pInputText formControlName="charter" placeholder="andr3x40" [invalid]="!this.checkFieldValidity(form, 'charter')"/>
-                                        </div>
-                                        <div class="flex flex-col col-span-3">
-                                            <span>Gamemode</span>
-                                            <input pInputText formControlName="gamemode" [invalid]="!this.checkFieldValidity(form, 'gamemode')"/>
-                                        </div>
-                                        <div class="flex flex-col col-span-3">
-                                            <span>Difficulty</span>
-                                            <input pInputText formControlName="difficulty" [invalid]="!this.checkFieldValidity(form, 'difficulty')"/>
-                                        </div>
-                                        <div class="flex flex-col col-span-2">
-                                            <span>Intensity</span>
-                                            <p-inputnumber fluid formControlName="intensity" [showButtons]="true" buttonLayout="horizontal" inputId="horizontal"
-                                                           spinnerMode="horizontal" [step]="1" [invalid]="!this.checkFieldValidity(form, 'intensity')">
-                                                <ng-template #incrementbuttonicon>
-                                                    <span class="pi pi-plus"></span>
-                                                </ng-template>
-                                                <ng-template #decrementbuttonicon>
-                                                    <span class="pi pi-minus"></span>
-                                                </ng-template>
-                                            </p-inputnumber>
-                                        </div>
-                                        <div class="flex flex-col col-span-2">
-                                            <span>Difficulty Code</span>
-                                            <p-inputnumber fluid formControlName="difficultyCode" [showButtons]="true" buttonLayout="horizontal" inputId="horizontal"
-                                                           spinnerMode="horizontal" [step]="1" [invalid]="!this.checkFieldValidity(form, 'difficultyCode')">
-                                                <ng-template #incrementbuttonicon>
-                                                    <span class="pi pi-plus"></span>
-                                                </ng-template>
-                                                <ng-template #decrementbuttonicon>
-                                                    <span class="pi pi-minus"></span>
-                                                </ng-template>
-                                            </p-inputnumber>
-                                        </div>
-                                        <div class="flex flex-col col-span-12">
-                                            <span>Tags</span>
-                                            <input pInputText formControlName="tags" [invalid]="!this.checkFieldValidity(form, 'tags')"/>
-                                        </div>
-                                    </form>
-                                    <div class="flex flex-col items-center mt-6">
-                                        <p-button rounded label="Remove" icon="pi pi-minus" severity="danger" iconPos="right" (onClick)="removeVariantForm(form)" />
+                                    <div class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded m-1 p-4">
+                                        <form [formGroup]="form" class="grid grid-cols-8 w-full gap-2">
+                                            <div class="flex flex-col col-span-4">
+                                                <span>Charter</span>
+                                                <input pInputText formControlName="charter" placeholder="andr3x40" [invalid]="!this.checkFieldValidity(form, 'charter')"/>
+                                            </div>
+                                            <div class="flex flex-col col-span-2">
+                                                <span>Intensity</span>
+                                                <p-inputnumber fluid formControlName="intensity" [showButtons]="true" [step]="1" [invalid]="!this.checkFieldValidity(form, 'intensity')">
+                                                </p-inputnumber>
+                                            </div>
+                                            <div class="flex flex-col col-span-2">
+                                                <span>Diff. Code</span>
+                                                <p-inputnumber fluid formControlName="difficultyCode" [showButtons]="true" [step]="1" [invalid]="!this.checkFieldValidity(form, 'difficultyCode')">
+                                                </p-inputnumber>
+                                            </div>
+                                            <div class="flex flex-col col-span-4">
+                                                <span>Gamemode</span>
+                                                <input pInputText formControlName="gamemode" [invalid]="!this.checkFieldValidity(form, 'gamemode')"/>
+                                            </div>
+                                            <div class="flex flex-col col-span-4">
+                                                <span>Difficulty</span>
+                                                <input pInputText formControlName="difficulty" [invalid]="!this.checkFieldValidity(form, 'difficulty')"/>
+                                            </div>
+                                            <div class="flex flex-col col-span-8">
+                                                <span>Tags</span>
+                                                <input pInputText formControlName="tags" [invalid]="!this.checkFieldValidity(form, 'tags')"/>
+                                            </div>
+                                            <div class="flex flex-col col-span-8 items-center justify-end mt-8">
+                                                <p-button rounded label="Remove" icon="pi pi-minus" severity="danger" iconPos="right" (onClick)="removeVariantForm(form)" />
+                                            </div>
+                                        </form>
                                     </div>
                                 </ng-template>
                             </p-carousel>
