@@ -109,6 +109,10 @@
             "weight": 1
         },
         {
+            "text": "Dai raga andiamo",
+            "weight": 1
+        },
+        {
             "text": "Mikudayo!",
             "weight": 10,
             "specialRules": { "month": 3, "day": 9 }
@@ -124,6 +128,26 @@
             "specialRules": { "month": 7, "day": 27 }
         },
         {
+            "text": "Make the entire world go crazy today by just looking at your calendar.",
+            "weight": 10,
+            "specialRules": { "month": 6, "day": 7 }
+        },
+        {
+            "text": "Make the entire world go crazy today by just looking at your calendar.",
+            "weight": 10,
+            "specialRules": { "month": 7, "day": 6 }
+        },
+        {
+            "text": "nice.",
+            "weight": 10,
+            "specialRules": { "month": 6, "day": 9 }
+        },
+        {
+            "text": "nice.",
+            "weight": 10,
+            "specialRules": { "month": 9, "day": 6 }
+        },
+        {
             "text": "SPREAD MISINFORMATION ON THE INTERNET MORE THAN EVER!!!!",
             "weight": 10,
             "specialRules": { "month": 4, "day": 1 }
@@ -132,6 +156,16 @@
             "text": "A birdbrain was born today.",
             "weight": 10,
             "specialRules": { "month": 4, "day": 1 }
+        },
+        {
+            "text": "Happy New Year!",
+            "weight": 25,
+            "specialRules": { "month": 1, "day": 1 }
+        },
+        {
+            "text": "It's now ILLEGAL to be STRAIGHT.",
+            "weight": 5,
+            "specialRules": { "month": 6 }
         }
     ]
 }
