@@ -17,7 +17,6 @@ export class Chart {
     public variants!: Variant[];
     public releaseDate?: string;
     public downloadLink?: string;
-    public source?: string;
     public description?: string;
 
     public youtubeLink?: string;
@@ -35,7 +34,6 @@ export class Chart {
         output.track = chart.track;
         output.releaseDate = chart.releaseDate;
         output.downloadLink = chart.downloadLink;
-        output.source = chart.source;
         output.description = chart.description;
         output.spotifyLink = chart.spotifyLink;
         output.youtubeLink = chart.youtubeLink;
@@ -62,6 +60,13 @@ export class Variant {
     public difficultyCode!: number;
 
     public tags?: string;
+}
+
+export class Pack {
+    public id!: number | undefined;
+    public charts!: Chart[];
+    public name!: string;
+    public description?: string;
 }
 
 export interface ChartFileProperty {

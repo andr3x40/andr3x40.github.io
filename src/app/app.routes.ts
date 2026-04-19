@@ -19,6 +19,7 @@ import { BlogEditPostComponent } from './pages/admin/blog/blog-edit-post/blog-ed
 import { GhrbEditChartComponent } from './pages/admin/ghrb/ghrb-edit-chart/ghrb-edit-chart.component';
 import { ProjectRComponent } from './pages/project-r/project-r.component';
 import { PJRDifficultyComponent } from './pages/project-r/difficulty/difficulty.component';
+import { GhrbPacksComponent } from './pages/project-r/ghrb/packs/ghrb-packs.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -29,6 +30,7 @@ export const routes: Routes = [
     {path: 'project-r', component: ProjectRComponent},
     {path: 'project-r/difficulty', component: PJRDifficultyComponent},
     {path: 'project-r/ghrb/charts', component: GhrbChartsComponent},
+    {path: 'project-r/ghrb/packs', component: GhrbPacksComponent},
     {path: 'whoami', component: WhoamiComponent},
 
     {path: 'login', component: LoginComponent},

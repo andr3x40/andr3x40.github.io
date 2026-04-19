@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Chart } from '../model/ghrb';
+import { Chart, Pack } from '../model/ghrb';
 import { HttpService } from './http.service';
 import { Post } from '../model/blog';
 import { ValidationError } from '../model/validation';
@@ -11,6 +11,8 @@ export class GhrbService {
 
   private chartUrl: string = 'http://localhost:8080/api/ghrb/charts';
   private variantUrl: string = 'http://localhost:8080/api/ghrb/variants';
+  private packUrl: string = 'http://localhost:8080/api/ghrb/packs';
+
   private chartAdminUrl: string = 'http://localhost:8080/api/admin/ghrb/charts';
 
   constructor(private http: HttpService) { }
@@ -18,11 +20,13 @@ export class GhrbService {
   public async getAllCharts(): Promise<Chart[]> {
     const collection: Chart[] | null = await this.http.getRequestBody<Chart[]>(this.chartUrl);
     if (collection === null) return [];
-    let output: Chart[] = [];
-    for (let c of collection) {
-      output.push(c);
-    }
-    return output;
+    return collection;
+  }
+
+  public async getAllPacks(): Promise<Pack[]> {
+    const collection: Pack[] | null = await this.http.getRequestBody<Pack[]>(this.packUrl);
+    if (collection === null) return [];
+    return collection;
   }
 
   public async getChart(id: number): Promise<Chart | null> {
@@ -45,6 +49,10 @@ export class GhrbService {
 
   public async countVariants(): Promise<number> {
     return await this.http.getRequestBody<number>(this.variantUrl + '/count') ?? 0;
+  }
+  
+  public async countPacks(): Promise<number> {
+    return await this.http.getRequestBody<number>(this.packUrl + '/count') ?? 0;
   }
 
 }

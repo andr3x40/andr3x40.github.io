@@ -60,6 +60,7 @@ export class GhrbChartsComponent {
         { label: 'Drums', value: 'Drums' },
         { label: 'Keyboard', value: 'Keyboard' },
     ];
+    
     public adminActions: MenuItem[] = [
         {
             label: "Add",

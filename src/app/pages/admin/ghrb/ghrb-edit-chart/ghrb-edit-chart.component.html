@@ -182,11 +182,7 @@
                             class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
                         >
                             <form [formGroup]="chartForm" class="grid grid-cols-12 gap-6 w-full m-6">
-                                <div class="flex flex-col col-span-4">
-                                    <span>Source</span>
-                                    <input pInputText formControlName="source" [invalid]="!this.checkFieldValidity(chartForm, 'source')"/>
-                                </div>
-                                <div class="flex flex-col col-span-8">
+                                <div class="flex flex-col col-span-12">
                                     <span>Download Link</span>
                                     <input pInputText formControlName="downloadLink" [invalid]="!this.checkFieldValidity(chartForm, 'downloadLink')"/>
                                 </div>

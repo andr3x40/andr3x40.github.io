@@ -1,0 +1,112 @@
+<app-section-title
+    title="Project R:\GHRB Packs"
+    [description]="'Giving you ' + packCount + ' packs to choose from'"
+></app-section-title>
+<p-divider></p-divider>
+<!-- dataview -->
+<div class="px-64">
+    <div class="my-4">
+        @if (this.session.admin) {
+            <p-speeddial [model]="adminActions" direction="right"
+                         [style]="{ position: 'fixed', left: '30px', bottom: '30px' }"
+                         [buttonProps]="{ rounded: true }"
+                         [tooltipOptions]="{ tooltipPosition: 'top' }"/>
+        }
+    </div>
+    @if (this.packs !== undefined) {
+        <p-dataview #dv [value]="packs" [rows]="10" [paginator]="true">
+            <ng-template #list let-packs>
+                <div class="grid grid-cols-12 grid-nogutter">
+                    @for (pack of packs; track pack.id) {
+                        <div class="col-span-12 border-1 border-surface-800 bg-surface-900 rounded-xl m-1">
+                            <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4">
+                                <div class="md:w-40 relative">
+                                    <img
+                                        class="block xl:block mx-auto rounded-border w-full"
+                                        src="../../../../assets/placeholder.jpg"
+                                        alt="nothing"
+                                        />
+                                    <p-tag
+                                        [value]="pack.charts.length + ' Charts'"
+                                        class="absolute dark:!bg-surface-900 dark:!text-surface-100"
+                                        [style.right.px]="4"
+                                        [style.bottom.px]="4"
+                                    />
+                                </div>
+                                <div class="flex flex-row justify-between md:items-center flex-1 gap-6">
+                                    <div class="flex flex-col justify-between items-start gap-5">
+                                        <div>
+                                            <span class="text-3xl uppercase font-bold font-mono text-surface-900 dark:text-surface-0 text-clip">{{ pack.name }}</span>
+                                            <div class="font-medium text-secondary text-m mb-2">{{ pack.description }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row md:items-end gap-1 text-m font-bold">
+                                        @if (this.session.admin) {
+                                            <p-button class="ml-1" icon="pi pi-cog" severity="secondary" rounded text (click)="menu.toggle($event)" />
+                                            <p-menu #menu id="config_menu" [model]="menuItems" [popup]="true">
+                                                <ng-template #item let-item>
+                                                    <a pRipple class="flex items-center p-menu-item-link" (click)="item.action(pack.id)">
+                                                        <span [class]="item.icon"></span>
+                                                        <span class="ml-2">{{ item.label }}</span>
+                                                    </a>
+                                                </ng-template>
+                                            </p-menu>
+                                        }
+                                        <p-buttongroup>
+                                            @if (pack.name === undefined) {
+                                                <p-button label="Coming Soon" severity="contrast" disabled="true"/>
+                                            } @else {
+                                                <p-button>
+                                                    <a class="font-medium">
+                                                        Download
+                                                    </a>
+                                                </p-button>
+                                            }
+                                            @if (pack.id !== undefined) {
+                                                <p-button label="Info" severity="secondary" [outlined]="true"/>
+                                            }
+                                        </p-buttongroup>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </ng-template>
+        </p-dataview>
+    } @else { <!-- show a placeholder if the list is not loaded yet -->
+        <p-dataview #dv [value]="placeholders" [rows]="10" [paginator]="true">
+            <ng-template #list let-items>
+                <div class="grid grid-cols-12 grid-nogutter">
+                    @for (x of items; track x) {
+                        <div class="col-span-12 border-1 border-surface-800 bg-surface-900 rounded-xl m-1">
+                            <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4">
+                                <div class="md:w-40 relative">
+                                    <p-skeleton class="block xl:block mx-auto rounded-border w-full" size="10rem" />
+                                </div>
+                                <div class="flex flex-row justify-between md:items-center flex-1 gap-6">
+                                    <div class="flex flex-col justify-between items-start gap-10">
+                                        <div>
+                                            <p-skeleton class="mb-2" width="15rem" borderRadius="16px" />
+                                            <p-skeleton class="mb-2" width="7rem" borderRadius="16px" />
+                                            <p-skeleton width="5rem" borderRadius="16px" />
+                                        </div>
+                                        <div>
+                                            <p-skeleton width="10rem" height="3.5rem" borderRadius="6px" />
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col md:items-end gap-2 text-m font-bold">
+                                        <p-skeleton width="4rem" borderRadius="16px" />
+                                        <p-skeleton width="4rem" borderRadius="16px" />
+                                        <p-skeleton width="4rem" borderRadius="16px" />
+                                        <p-skeleton width="4rem" borderRadius="16px" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </ng-template>
+        </p-dataview>
+    }
+</div>

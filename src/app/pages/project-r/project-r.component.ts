@@ -28,8 +28,9 @@ export class ProjectRComponent {
             tooltip: "Browse through all the charts released"
         },
         {
-            text: "Bundles",
-            tooltip: "Download full bundles of charts"
+            text: "Packs",
+            link: "ghrb/packs",
+            tooltip: "Download full packs of charts"
         },
         {
             text: "Setlists",
@@ -44,8 +45,8 @@ export class ProjectRComponent {
             tooltip: "Browse through all the maps released"
         },
         {
-            text: "Bundles",
-            tooltip: "Download full map bundles"
+            text: "Packs",
+            tooltip: "Download full map packs"
         }
     ]
 

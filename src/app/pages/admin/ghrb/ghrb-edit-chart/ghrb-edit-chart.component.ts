@@ -76,7 +76,6 @@ export class GhrbEditChartComponent {
   private buildChartForm(
     id: number,
     downloadLink: string | null,
-    source: string | null,
     description: string | null,
     youtubeLink: string | null,
     spotifyLink: string | null,
@@ -88,7 +87,6 @@ export class GhrbEditChartComponent {
     this.chartForm = this.formBuilder.group({
       id: new FormControl(id, Validators.required),
       downloadLink: new FormControl(downloadLink),
-      source: new FormControl(source),
       description: new FormControl(description),
       youtubeLink: new FormControl(youtubeLink),
       spotifyLink: new FormControl(spotifyLink),
@@ -136,7 +134,7 @@ export class GhrbEditChartComponent {
       public router: Router, public route: ActivatedRoute, public messageService: MessageService, public formService: FormService,
       public config: PrimeNG) {
     this.buildTrackForm(0, null, null, null, null, null, null, 0, 0, 0);
-    this.buildChartForm(0, null, null, null, null, null, null, null, false, null);
+    this.buildChartForm(0, null, null, null, null, null, null, false, null);
   }
 
   async ngOnInit() {
@@ -176,7 +174,6 @@ export class GhrbEditChartComponent {
         this.buildChartForm(
           chart.id ?? 0,
           chart.downloadLink ?? null,
-          chart.source ?? null,
           chart.description ?? null,
           chart.youtubeLink ?? null,
           chart.spotifyLink ?? null,
@@ -256,7 +253,6 @@ export class GhrbEditChartComponent {
     // generate the release date
     chart.releaseDate = new Date(Date.now()).toISOString();
     chart.downloadLink = form.get('downloadLink')?.value;
-    chart.source = form.get('source')?.value;
     chart.description = form.get('description')?.value;
     chart.youtubeLink = form.get('youtubeLink')?.value;
     chart.spotifyLink = form.get('spotifyLink')?.value;
